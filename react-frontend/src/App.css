@@ -1,0 +1,18 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.App-header {
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-around;
+  padding: 1rem;
+}
+
+button {
+  margin: 0.5rem;
+}
