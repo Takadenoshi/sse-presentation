@@ -9,7 +9,7 @@ const port = process.env.PORT ? Number(process.env.port) : 3001;
 
 const app = express();
 
-app.use(compression()); // enables flushing early
+app.use(compression()); // also enables flushing early
 app.use(cors());
 
 app.use((req, res, next) => {

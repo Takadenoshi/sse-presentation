@@ -1,4 +1,4 @@
-import SSE from 'express-sse';
+import SSE from '@takadenoshi/express-sse';
 
 export const name = 'not-sse';
 
