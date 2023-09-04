@@ -475,7 +475,7 @@ Preferred approach, especially for important payloads.
 
 ---
 
-# Implementation Considerations
+# Implementation Considerations: Service Workers (Firefox)
 
 ## Firefox Service Workers 💔 EventSource
 
