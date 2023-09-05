@@ -43,7 +43,7 @@
     }
     hr {
       width: 50%;
-      color: rgba(237, 9, 143, 0.2);
+      color: rgba(237, 9, 143, 0.4);
     }
     .slide:not(.titlepage) {
       background: rgba(0,0,0,0.55) !important;
@@ -63,6 +63,7 @@
     pre {
       background: rgba(0, 0, 0, 0.5);
       border-color: rgba(0, 0, 0, 0.7);
+      font-size: 100%;
     }
     pre code {
       background: none;
@@ -273,29 +274,29 @@ data: Data Zero event\n\n</code></pre>
 &lt; HTTP/1.1 200 OK
 &lt; Content-Type: text/event-stream
 
-&lt; retry: 2000\n\n
+&lt; retry: 2000
 &lt; id: 0
 &lt; data: Hello\n\n
 
-&lt; :I am a comment line
+&lt; :I am a comment line\n\n
 
 &lt; id: 1
 &lt; event: status
-&lt; data: {&quot;level&quot;: &quot;warning&quot;, &quot;message&quot;: &quot;Service degraded&quot;}</code></pre>
+&lt; data: {&quot;L&quot;:&quot;warning&quot;,&quot;M&quot;:&quot;Service degraded&quot;}\n\n</code></pre>
 </div><div class="column" style="width:40%;">
 <pre><code>
 
 
 
 
-Sets client-side reconnect time to 2s
-
-Generic Data event, as before
-
-Comments have no client-side effect
+client-side reconnect after 2s
 
 
-Custom event named &quot;status&quot;
+
+no client-side effect
+
+
+custom event named &quot;status&quot;
 
 </code></pre>
 </div>
@@ -310,26 +311,18 @@ Custom event named &quot;status&quot;
 // [name]: triggers for custom named event, here: &quot;status&quot;
 source.addEventListener(
   &quot;status&quot;,
-  ({ data }) =&gt; {
-    try {
-      const parsed = JSON.parse(data);
-      console.log(&quot;custom event: status&quot;, parsed);
-    } catch(err) {
-      console.error(&quot;failed to parse status&quot;, err);
-    }
-  },
-  false
+  ({ data }) =&gt; console.log(&quot;custom event: status&quot;, JSON.parse(data)),
+  false,
 );
+
+// message: on generic/unnamed &quot;data&quot; events, as before
+source.addEventListener(&quot;message&quot;, (event) =&gt; { console.log(&quot;received data event&quot;, event.data); }, false);
 
 // open: on connection established
 source.addEventListener(&quot;open&quot;, (event) =&gt; { console.log(&quot;Connection opened&quot;); }, false);
 
 // error: on error/disconnection. sadly entirely devoid of detail
-source.addEventListener(&quot;error&quot;, (event) =&gt; { console.log(&quot;Connection error&quot;); }, false);
-
-// message: on generic/unnamed &quot;data&quot; events, as before
-source.addEventListener(&quot;message&quot;, (event) =&gt; { console.log(&quot;received data event&quot;, event.data); }, false);
-</code></pre>
+source.addEventListener(&quot;error&quot;, (event) =&gt; { console.log(&quot;Connection error&quot;); }, false);</code></pre>
 </div>
 <div id="the-eventsource-interface" class="slide section level1">
 <h1>The EventSource Interface</h1>
@@ -381,8 +374,8 @@ source.addEventListener(&quot;message&quot;, (event) =&gt; { console.log(&quot;r
 <div id="implementation-considerations-http1.1-connections-quota" class="slide section level1">
 <h1>Implementation Considerations: HTTP/1.1 connections quota</h1>
 <ul>
-<li><p>Browsers implement a browser-wide, per-domain connection quota (6) for HTTP/1.1</p></li>
-<li><p>SSE over HTTP/1.1 may hit this easily with multiple tabs open</p></li>
+<li>Browsers implement a <strong>per-hostname connection quota</strong> (6) for HTTP/1.1</li>
+<li>SSE over HTTP/1.1 may hit this easily with multiple tabs open</li>
 </ul>
 <p>Per <a href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#listening_for_custom_events">MDN</a>:</p>
 <blockquote>
@@ -395,7 +388,7 @@ source.addEventListener(&quot;message&quot;, (event) =&gt; { console.log(&quot;r
 <p>When using HTTP/2, the maximum number of simultaneous HTTP streams is negotiated between the server and the client (defaults to 100).</p>
 </blockquote>
 <hr />
-<p>Solutions:</p>
+<h2 id="solutions">Solutions</h2>
 <ul>
 <li><strong>Prefer HTTP/2 where available</strong> (can-i-use 96% yes)</li>
 <li>If applicable, use an EventSource within a SharedWorker
@@ -438,7 +431,7 @@ source.addEventListener(&quot;message&quot;, (event) =&gt; { console.log(&quot;r
 <p>Two approaches to fix this:</p>
 <h2 id="comment-not-client-aware">1/ Comment (not client-aware)</h2>
 <p>You can emit a comment (any line starting with a colon <code>:</code>)</p>
-<pre><code>:bump</code></pre>
+<pre><code>&lt; :bump</code></pre>
 <p>Good enough to keep connection alive.</p>
 <p>EventSource won’t emit any event.</p>
 </div>

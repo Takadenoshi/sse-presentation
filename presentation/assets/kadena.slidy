@@ -56,7 +56,7 @@ $endfor$
     }
     hr {
       width: 50%;
-      color: rgba(237, 9, 143, 0.2);
+      color: rgba(237, 9, 143, 0.4);
     }
     .slide:not(.titlepage) {
       background: rgba(0,0,0,0.55) !important;
@@ -76,6 +76,7 @@ $endfor$
     pre {
       background: rgba(0, 0, 0, 0.5);
       border-color: rgba(0, 0, 0, 0.7);
+      font-size: 100%;
     }
     pre code {
       background: none;

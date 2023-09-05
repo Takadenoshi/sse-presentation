@@ -267,15 +267,15 @@ Then the connection timeout will be 5 seconds, and when reconnecting the `Last-E
 < HTTP/1.1 200 OK
 < Content-Type: text/event-stream
 
-< retry: 2000\n\n
+< retry: 2000
 < id: 0
 < data: Hello\n\n
 
-< :I am a comment line
+< :I am a comment line\n\n
 
 < id: 1
 < event: status
-< data: {"level": "warning", "message": "Service degraded"}
+< data: {"L":"warning","M":"Service degraded"}\n\n
 ```
 
 :::
@@ -287,14 +287,14 @@ Then the connection timeout will be 5 seconds, and when reconnecting the `Last-E
 
 
 
-Sets client-side reconnect time to 2s
-
-Generic Data event, as before
-
-Comments have no client-side effect
+client-side reconnect after 2s
 
 
-Custom event named "status"
+
+no client-side effect
+
+
+custom event named "status"
 
 
 ```
@@ -316,26 +316,18 @@ const source = new EventSource('/stream/hello');
 // [name]: triggers for custom named event, here: "status"
 source.addEventListener(
   "status",
-  ({ data }) => {
-    try {
-      const parsed = JSON.parse(data);
-      console.log("custom event: status", parsed);
-    } catch(err) {
-      console.error("failed to parse status", err);
-    }
-  },
-  false
+  ({ data }) => console.log("custom event: status", JSON.parse(data)),
+  false,
 );
+
+// message: on generic/unnamed "data" events, as before
+source.addEventListener("message", (event) => { console.log("received data event", event.data); }, false);
 
 // open: on connection established
 source.addEventListener("open", (event) => { console.log("Connection opened"); }, false);
 
 // error: on error/disconnection. sadly entirely devoid of detail
 source.addEventListener("error", (event) => { console.log("Connection error"); }, false);
-
-// message: on generic/unnamed "data" events, as before
-source.addEventListener("message", (event) => { console.log("received data event", event.data); }, false);
-
 ```
 
 ---
@@ -385,8 +377,7 @@ source.addEventListener("message", (event) => { console.log("received data event
 
 # Implementation Considerations: HTTP/1.1 connections quota
 
-- Browsers implement a browser-wide, per-domain connection quota (6) for HTTP/1.1
-
+- Browsers implement a **per-hostname connection quota** (6) for HTTP/1.1
 - SSE over HTTP/1.1 may hit this easily with multiple tabs open
 
 Per [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#listening_for_custom_events):
@@ -399,7 +390,7 @@ Per [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Us
 
 <hr />
 
-Solutions:
+## Solutions
 
 - **Prefer HTTP/2 where available** (can-i-use 96% yes)
 - If applicable, use an EventSource within a SharedWorker
@@ -448,7 +439,7 @@ Two approaches to fix this:
 You can emit a comment (any line starting with a colon `:`)
 
 ```
-:bump
+< :bump
 ```
 
 Good enough to keep connection alive.
