@@ -25,9 +25,9 @@ header-includes:
 
 # Use cases
 
-Replaces polling
+Replaces polling.
 
-Streaming any kind of update from the server:
+Stream any kind of update from the server.
 
 - notifications
 - chat
@@ -210,6 +210,7 @@ Timeouts are linear.
 A server can signal "do not reconnect":
 
 - with a `2xx` response other than 200
+  - 301, 307 redirects to a 200 are OK
 - with a `Content-Type` header other than `text/event-stream`
 
 <sup>[Playground](https://github.com/takadenoshi/sse-presentation): "Not SSE" scenario</sup>
@@ -218,9 +219,9 @@ A server can signal "do not reconnect":
 
 # Reconnection (3) - Last-Event-ID
 
-Messages can also include an `id` that can be used to reconnect gracefully. IDs can be any UTF-8 string.
+Events can include an `id` field with any UTF-8 string as value.
 
-If the connection is interrupted, the last received ID is sent to the server upon reconnection under the header `Last-Event-ID`.
+If the connection is interrupted, the last received ID is sent to the server (header `Last-Event-ID`)
 
 This allows the server to resume from the client's last known message.
 
@@ -251,11 +252,11 @@ Then the connection timeout will be 5 seconds, and when reconnecting the `Last-E
 
 # Full SSE response
 
-- Unnamed events: `data: Hello\n\n`
-- Named events: `event: status\ndata: some-status-data\n\n`
-- Event identifiers: `id: some-status-id`
-- Setting client reconnection time: `retry: 1000`
-- Comment: starts with colon, ignored: `:ping`
+- Unnamed events `data: Hello\n\n`
+- Named events `event: status\ndata: some-status-data\n\n`
+- Event identifiers `id: some-status-id`
+- Setting client reconnection time `retry: 1000`
+- Comment: starts with colon `:ping`
 
 :::::::::::::: {.columns}
 ::: {.column width="60%"}
@@ -301,7 +302,7 @@ Custom event named "status"
 :::
 ::::::::::::::
 
-These 4 fields are the entire [SSE grammar](https://www.w3.org/TR/2012/WD-eventsource-20120426/#parsing-an-event-stream)
+These 4+1 fields are the entire [SSE grammar](https://www.w3.org/TR/2012/WD-eventsource-20120426/#parsing-an-event-stream)
 
 ---
 
