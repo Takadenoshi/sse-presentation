@@ -183,7 +183,8 @@ You can "namespace" your events using the `event:` field with any custom name:
 
 The `goal` and `spectator-chat` events are handled separately on the frontend
 
-Allows multiplexing / routing events without need for pattern matching on the data payload. (e.g. a `.type` field in a JSON object)
+- Allows multiplexing / routing events 
+  - no need for pattern matching on a shared data payload
 
 ---
 
@@ -592,10 +593,22 @@ Yes (96.11%)
 
 ---
 
-# References
+# Almost Done
+
+## References
 
 [§ 9.1 MessageEvent Interface - HTML Living Standard](https://html.spec.whatwg.org/multipage/comms.html)
 
 [§ 9.2 Server-Sent Events - HTML Living Standard](https://html.spec.whatwg.org/multipage/server-sent-events.html#server-sent-events)
 
-[This presentation & accompanying playground - Github](https://github.com/takadenoshi/sse-presentation)
+## Links
+
+[Presentation](https://takadenoshi.github.io/sse-presentation/#(1))
+
+[Presentation source & SSE playground - Github](https://github.com/takadenoshi/sse-presentation)
+
+## Font
+
+`Monospace font:` [Kode mono](https://kodemono.com/)
+
+By Kadena's Isa Ozler
