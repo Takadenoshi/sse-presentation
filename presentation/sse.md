@@ -23,7 +23,7 @@ header-includes:
 
 ---
 
-# Use case
+# Use cases
 
 Replaces polling
 
@@ -66,7 +66,7 @@ Play-along repository with a basic SSE server and React consumer:
 
 [https://github.com/takadenoshi/sse-presentation](https://github.com/takadenoshi/sse-presentation)
 
-Useful for examining behaviors, including browser implementation differences.
+Useful for examining behaviors, browser implementation differences.
 
 Scenarios:
 
@@ -82,7 +82,7 @@ Scenarios:
   - responds with SSE structure but incorrect Content-Type
 
 :::
-::: {.column width="40%"}
+::: {.column width="38%"}
 
 ![](assets/qr.png)
 
@@ -95,7 +95,9 @@ Scenarios:
 # Minimum Viable SSE response
 
 
-The simplest server-sent event stream specifies just "data" events.
+The simplest server-sent event stream specifies just `data` events.
+
+Example with 2 events:
 
 ```
 > GET /stream/hello HTTP/1.1
@@ -159,15 +161,19 @@ The `goal` and `spectator-chat` events are handled separately on the frontend
 
 Allows multiplexing / routing events without need for pattern matching on the data payload. (e.g. a `.type` field in a JSON object)
 
-<hr />
+---
 
-## Comments
+# Comments
 
-Any lines starting with `:` (colon) are interpreted as comments and ignored on the client-side
+Any lines starting with `:` (colon) are interpreted as comments 
 
 ```
-:TODO emit some events in the near future
+< data: this or that\n\n
+
+< :TODO emit some events in the near future
 ```
+
+These are ignored on the client-side
 
 ---
 
@@ -177,7 +183,7 @@ By default*, EventSource consumers will reconnect if the connection is interrupt
 
 <sup>\* _with implementation-specific caveats_</sup>
 
-The default reconnection timeout is up to each browser (empirically: between 3-5 seconds.)
+The default reconnection timeout is up to each browser (empirically: between 3-5 s.)
 
 ## Custom timeouts
 
@@ -189,13 +195,17 @@ data: Hello!\n\n
 
 ```
 
-The corresponding value is expected to be a number, to be interpreted as milliseconds.
+Value is in ms.
 
-Timeouts are linear - custom backoff strategies must be implemented manually.
+Timeouts are linear.
 
 <sup>[Playground](https://github.com/takadenoshi/sse-presentation): "Retry-flaky" scenario</sup>
 
-## Server can say no
+---
+
+# Reconnection (2)
+
+## Computer can say no
 
 A server can signal "do not reconnect":
 
@@ -206,7 +216,7 @@ A server can signal "do not reconnect":
 
 ---
 
-# Reconnection (2) - Last-Event-ID
+# Reconnection (3) - Last-Event-ID
 
 Messages can also include an `id` that can be used to reconnect gracefully. IDs can be any UTF-8 string.
 
@@ -276,7 +286,7 @@ Then the connection timeout will be 5 seconds, and when reconnecting the `Last-E
 
 
 
-Sets client-side reconnect time to 2 seconds
+Sets client-side reconnect time to 2s
 
 Generic Data event, as before
 
@@ -331,14 +341,14 @@ source.addEventListener("message", (event) => { console.log("received data event
 
 # The EventSource Interface
 
-- constructor(url, { withCredentials: boolean });
-  - withCredentials: instantiate with cross-origin (CORS) credentials (default: false)
+- `constructor(url, { withCredentials: boolean })`
+  - `withCredentials`: instantiate with cross-origin (CORS) credentials (default: false)
 
 - Events:
-  - open: on connection
-  - error: on error/disconnection
-  - message: on generic data: event received
-  - \<custom\>: on named event received
+  - `open`: on connection
+  - `error`: on error/disconnection
+  - `message`: on generic data: event received
+  - `<custom>:` on named event received
 
 - readyState: CONNECTING:0 | OPEN:1 | CLOSED:2
   - CONNECTING: also "waiting to reconnect"
@@ -510,7 +520,7 @@ Benefit: Doesn't hog a connection
 Client loops the GET request.
 
 :::
-::: {.column width="33%"}
+::: {.column width="32%"}
 
 ## 2/ SSE
 
@@ -521,7 +531,7 @@ Client loops the GET request.
 - Reconnecting
 
 :::
-::: {.column width="33%"}
+::: {.column width="32%"}
 
 ## 3/ Websockets
 
