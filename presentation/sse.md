@@ -8,7 +8,7 @@
 :::::::::::::: {.columns}
 ::: {.column}
 
-## `whois` Tasos Bitsios
+## `whois "Tasos Bitsios"`
 
 - Developer @ [Kadena](https://kadena.io/) Developer Experience team
 - Full stack software developer ~ 13 years
@@ -23,7 +23,7 @@
 :::
 ::: {.column}
 
-## `whois` Kadena
+## `whois Kadena`
 
 - Scalabe PoW Blockchain
   - Focus on intelligent & secure smart contracts

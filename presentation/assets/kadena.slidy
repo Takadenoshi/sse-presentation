@@ -115,6 +115,7 @@ $if(duration)$
 $for(include-before)$
 $include-before$
 $endfor$
+<video id="video-cover" loop oncanplay="showvideo()" src="assets/kd-back.webm" autoplay></video>
 $if(title)$
 <div class="slide titlepage">
   <h1 class="title">$title$</h1>
@@ -129,7 +130,6 @@ $endif$
 $if(date)$
   <p class="date">$date$</p>
 $endif$
-  <video id="video-cover" loop oncanplay="showvideo()" src="assets/kd-back.webm" autoplay />
 </div>
 $endif$
 $if(toc)$
