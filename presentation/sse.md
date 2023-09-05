@@ -1,22 +1,54 @@
 % Server-Sent Events
-% tasos@kadena.io // @Takadenoshi
+% tasos@kadena.io
 % September 29, 2023
 ---
-header-includes:
-  - \hypersetup{colorlinks=false,
-            allbordercolors={0 0 0},
-            pdfborderstyle={/S/U/W 1}}
+
+# `whoami`
+
+:::::::::::::: {.columns}
+::: {.column}
+
+## `whois` Tasos Bitsios
+
+- Developer @ [Kadena](https://kadena.io/) Developer Experience team
+- Full stack software developer ~ 13 years
+  - Somwehat backend-leaning
+  - Mostly JS/TS/node.js/React
+  - Mostly worked in startups
+  - Mostly harmless
+- Socials:
+  - [\@Takadenoshi](https://github.com/takadenoshi) on Github 
+  - [\@Takadenoshi](https://x.com/takadenoshi) on X
+
+:::
+::: {.column}
+
+## `whois` Kadena
+
+- Scalabe PoW Blockchain
+  - Focus on intelligent & secure smart contracts
+  - TODO
+  - TODO
+- Socials
+  - [\@kadena-io](https://github.com/kadena-io) and [\@kadena-community](https://github.com/kadena-community) on Github
+  - [\@kadena_io](https://x.com/kadena_io) on X
+
+
+:::
+::::::::::::::
+
 ---
 
 # Server-Sent Events (SSE)
 
-## Server-push technology
+## A server-push protocol
 
 - Unidirectional: Server -> Client
 - Essentially a streaming HTTP/1.1 GET (or HTTP/2)
   - Connection is kept open, server writes more data as it becomes available
 - (Web) Client side interacts with SSE endpoints using `EventSource`
   - Register `data` or custom `event` callbacks
+  - A MessageEvent Interface
 - With reconnection batteries included*
   - Terms and conditions may apply
 - Very simple protocol
@@ -30,7 +62,6 @@ Replaces polling.
 Stream any kind of update from the server.
 
 - notifications
-- chat
 - live ticker data
 - live sports events
 - anything that is UTF-8 suitable
@@ -39,15 +70,19 @@ Stream any kind of update from the server.
 
 # What is this ~~new~~ thing?
 
-🥳 SSE is 19 years old · 🔧 13 years of mainstream support
+🥳 SSE is 19 years old
 
-- [Server-sent DOM Events](https://web.archive.org/web/20041009144718/http://www.whatwg.org/specs/web-apps/current-work/#server-sent), Ian Hickson, Opera Software, WHATWG Web Applications 1.0, 23 Sep 2004
-- [Production] Opera browser implementation, 2006
-- [W3C Working Draft](https://www.w3.org/TR/2009/WD-eventsource-20090423/), Ian Hickson, Google Inc, 2009
-- [Production] Safari v5, Jun 2010
-- [Production] Chrome v6, Sep 2010
-- [Production] Firefox v6, Aug 2011
-- [W3C Recommendation](https://www.w3.org/TR/2015/REC-eventsource-20150203/), Feb 2015
+🔧 13 years of mainstream support
+
+<hr />
+
+- 2004 Sep 23 &middot; [Server-sent DOM Events](https://web.archive.org/web/20041009144718/http://www.whatwg.org/specs/web-apps/current-work/#server-sent), Ian Hickson, Opera Software, WHATWG Web Applications 1.0
+- 2006 &middot; [Production] Opera browser implementation
+- 2009 &middot; [W3C Working Draft](https://www.w3.org/TR/2009/WD-eventsource-20090423/), Ian Hickson, Google Inc
+- 2010 Jun &middot; [Production] Safari v5
+- 2010 Sep &middot; [Production] Chrome v6, 
+- 2011 Aug &middot; [Production] Firefox v6, 
+- 2015 Feb &middot; [W3C Recommendation](https://www.w3.org/TR/2015/REC-eventsource-20150203/)
 
 [W3C Publication History](https://www.w3.org/TR/2015/REC-eventsource-20150203/)
 
@@ -62,24 +97,13 @@ Current: [HTML Living Standard § 9.2](https://html.spec.whatwg.org/multipage/se
 :::::::::::::: {.columns}
 ::: {.column width="60%"}
 
-Play-along repository with a basic SSE server and React consumer:
+Play-along repository; basic SSE server & React app:
 
 [https://github.com/takadenoshi/sse-presentation](https://github.com/takadenoshi/sse-presentation)
 
 Useful for examining behaviors, browser implementation differences.
 
-Scenarios:
-
-- /stream/simple
-  - simplest possible event stream (only unnamed data)
-- /stream/disconnect
-  - as above but disconnects clients after 2s
-- /stream/retry-disconnect
-  - with message IDs, setting custom retry timeout
-- /stream/notifications
-  - as above, plus attempts to use lastEventID to resume gracefully
-- /stream/not-sse
-  - responds with SSE structure but incorrect Content-Type
+Repo link in QR ➡
 
 :::
 ::: {.column width="38%"}
@@ -244,8 +268,6 @@ Then the connection timeout will be 5 seconds, and when reconnecting the `Last-E
 
 <hr />
 
-**If no event is emitted in the subsequent connection's lifetime, the Last-Event-ID is reset.**
-
 <sup>[Playground](https://github.com/takadenoshi/sse-presentation): "notifications" scenario</sup>
 
 ---
@@ -322,7 +344,11 @@ source.addEventListener(
 
 // message: on generic/unnamed "data" events, as before
 source.addEventListener("message", (event) => { console.log("received data event", event.data); }, false);
+```
 
+Subscribe to `open` and `error` for connection management:
+
+```
 // open: on connection established
 source.addEventListener("open", (event) => { console.log("Connection opened"); }, false);
 
@@ -343,12 +369,12 @@ source.addEventListener("error", (event) => { console.log("Connection error"); }
   - `message`: on generic data: event received
   - `<custom>:` on named event received
 
-- readyState: CONNECTING:0 | OPEN:1 | CLOSED:2
+- `addEventListener("open"|"error"|"message"|<custom: string>, (event: Event) => void, bubbles: bool)`
+  - or: `onopen`, `operror`, `onmessage`, ...
+  -
+- readyState: `CONNECTING` (0) | `OPEN` (1) | `CLOSED`(2)
   - CONNECTING: also "waiting to reconnect"
   - CLOSED: will not attempt to reconnect
-
-- addEventListener("open"|"error"|"message"|<custom: string>, (event: Event) => void, bubbles: bool)
-  - or: onopen, operror, onmessage, ...
 
 - close()
 
@@ -489,6 +515,18 @@ Future people can track the present validity of this statement [here](https://bu
 
 ---
 
+# Implementation Considerations: Last-Event-ID detail
+
+**If no event is emitted in the subsequent connection's lifetime, the Last-Event-ID is reset.**
+
+When a reconnected session is initialized with `Last-Event-ID: X`
+
+And the connection emits no messages for its lifetime,
+
+Then the Last-Event-ID value is _reset_.
+
+---
+
 # Vs competiting options
 
 Widely supported options for polling/streaming updates:
@@ -503,7 +541,7 @@ Keep requesting new data on an interval
 - Slower
 - Usually more resource intensive than SSE
 
-Benefit: Doesn't hog a connection
+Benefit: Doesn't "hog" a connection (HTTP/1.1)
 
 ## 1b/ Long Polling
 
@@ -533,6 +571,8 @@ Client loops the GET request.
   - Routing
   - Auth
   - Error handling
+  - TLS Certs (duplicated)
+- Pain to debug
 - Bidirectional/full duplex
   - good if you need it
   - overkill for 
