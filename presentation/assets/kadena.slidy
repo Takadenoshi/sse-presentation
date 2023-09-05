@@ -104,7 +104,11 @@ $if(duration)$
   <meta name="duration" content="$duration$" />
   $endif$
   <script>
-      window.showvideo = () => document.getElementById('video-cover').style.display = 'block';
+    window.showvideo = () => {
+      const video = document.getElementById('video-cover');
+      video.playbackRate = 0.5;
+      video.style.display = 'block';
+    }
   </script>
 </head>
 <body>
@@ -125,7 +129,7 @@ $endif$
 $if(date)$
   <p class="date">$date$</p>
 $endif$
-  <video id="video-cover" oncanplay="showvideo()" src="assets/background.mp4" autoplay />
+  <video id="video-cover" loop oncanplay="showvideo()" src="assets/kd-back.webm" autoplay />
 </div>
 $endif$
 $if(toc)$
