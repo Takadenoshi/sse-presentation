@@ -59,7 +59,10 @@ $endfor$
     }
     hr {
       width: 50%;
+      border-width: 0;
+      background-color: rgba(237, 9, 143, 0.4);
       color: rgba(237, 9, 143, 0.4);
+      height: 2px;
     }
     .slide:not(.titlepage) {
       background: rgba(0,0,0,0.55) !important;
@@ -107,6 +110,7 @@ $if(duration)$
     window.showvideo = () => {
       const video = document.getElementById('video-cover');
       video.playbackRate = 0.5;
+      video.play();
       video.style.display = 'block';
     }
   </script>
@@ -115,7 +119,9 @@ $if(duration)$
 $for(include-before)$
 $include-before$
 $endfor$
-<video id="video-cover" loop oncanplay="showvideo()" src="assets/kd-back.webm" autoplay></video>
+  <video id="video-cover" loop muted oncanplay="showvideo()">
+    <source src="assets/kd-back.webm" type="video/webm" />
+  </video>
 $if(title)$
 <div class="slide titlepage">
   <h1 class="title">$title$</h1>

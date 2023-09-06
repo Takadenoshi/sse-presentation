@@ -5,9 +5,6 @@
 
 # `whoami`
 
-:::::::::::::: {.columns}
-::: {.column}
-
 ## `whois "Tasos Bitsios"`
 
 - Developer @ [Kadena](https://kadena.io/) Developer Experience team
@@ -20,8 +17,7 @@
   - [\@Takadenoshi](https://github.com/takadenoshi) on Github 
   - [\@Takadenoshi](https://x.com/takadenoshi) on X
 
-:::
-::: {.column}
+# `whoami`
 
 ## `whois Kadena`
 
@@ -32,10 +28,6 @@
 - Socials
   - [\@kadena-io](https://github.com/kadena-io) and [\@kadena-community](https://github.com/kadena-community) on Github
   - [\@kadena_io](https://x.com/kadena_io) on X
-
-
-:::
-::::::::::::::
 
 ---
 
@@ -108,7 +100,7 @@ Repo link in QR ➡
 :::
 ::: {.column width="38%"}
 
-![](assets/qr.png)
+![](assets/qr2.png)
 
 :::
 ::::::::::::::
@@ -282,7 +274,7 @@ Then the connection timeout will be 5 seconds, and when reconnecting the `Last-E
 - Comment: starts with colon `:ping`
 
 :::::::::::::: {.columns}
-::: {.column width="60%"}
+::: {.column width="50%"}
 
 ```
 > GET /stream/hello HTTP/1.1
@@ -302,7 +294,7 @@ Then the connection timeout will be 5 seconds, and when reconnecting the `Last-E
 ```
 
 :::
-::: {.column width="40%"}
+::: {.column width="50%"}
 
 ```
 
@@ -324,8 +316,6 @@ custom event named "status"
 
 :::
 ::::::::::::::
-
-These 4+1 fields are the entire [SSE grammar](https://www.w3.org/TR/2012/WD-eventsource-20120426/#parsing-an-event-stream)
 
 ---
 
