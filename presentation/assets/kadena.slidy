@@ -81,7 +81,7 @@ $endfor$
     }
     pre {
       background: rgba(0, 0, 0, 0.5);
-      border-left-width: 1px;
+      border-width: 2px;
       border-color: #580335;
       font-size: 90%;
     }
