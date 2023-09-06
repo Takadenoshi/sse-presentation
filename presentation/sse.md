@@ -298,14 +298,15 @@ Then the connection timeout will be 5 seconds, and when reconnecting the `Last-E
 
 
 
-client-side reconnect after 2s
+-> client-side reconnect after 2s
 
 
 
-no client-side effect
+-> no client-side effect
 
 
-custom event named "status"
+-> custom event named "status"
+
 
 
 ```
