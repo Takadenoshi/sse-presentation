@@ -5,22 +5,24 @@
 
 # whois "Tasos Bitsios"
 
-- Developer @ [Kadena](https://kadena.io/) Developer Experience team
 - Full stack software developer ~ 13 years
   - Somwehat backend-leaning
   - Mostly JS/TS/node.js/React
   - Mostly worked in startups
-  - Mostly harmless
+- Long time listener, first time speaker
+- Developer @ [Kadena](https://kadena.io/) Developer Experience team
 - Socials:
   - [\@Takadenoshi](https://github.com/takadenoshi) on Github 
   - [\@Takadenoshi](https://x.com/takadenoshi) on X
 
-# whois Kadena
+# whois "Kadena"
 
 - Scalabe PoW Blockchain
-  - Focus on intelligent & secure smart contracts
-  - TODO
-  - TODO
+- Focus on:
+  - scalability
+  - intelligent & secure smart contracts
+    - source available
+    - formal verification
 - Socials
   - [\@kadena-io](https://github.com/kadena-io) and [\@kadena-community](https://github.com/kadena-community) on Github
   - [\@kadena_io](https://x.com/kadena_io) on X
@@ -65,10 +67,9 @@ Replaces polling. Stream any kind of update from the server.
 - 2004 Sep 23 &middot; [Server-sent DOM Events](https://web.archive.org/web/20041009144718/http://www.whatwg.org/specs/web-apps/current-work/#server-sent), Ian Hickson, Opera Software, WHATWG Web Applications 1.0
 - 2006 &middot; [Production] Opera browser implementation
 - 2009 &middot; [W3C Working Draft](https://www.w3.org/TR/2009/WD-eventsource-20090423/), Ian Hickson, Google Inc
-- 2010 Jun &middot; [Production] Safari v5
-- 2010 Sep &middot; [Production] Chrome v6, 
-- 2011 Aug &middot; [Production] Firefox v6, 
-- 2015 Feb &middot; [W3C Recommendation](https://www.w3.org/TR/2015/REC-eventsource-20150203/)
+- 2010 &middot; [Production] Safari v5, Chrome v6
+- 2011 &middot; [Production] Firefox v6, 
+- 2015 &middot; [W3C Recommendation](https://www.w3.org/TR/2015/REC-eventsource-20150203/)
 
 [W3C Publication History](https://www.w3.org/TR/2015/REC-eventsource-20150203/)
 
@@ -83,7 +84,11 @@ Current: [HTML Living Standard § 9.2](https://html.spec.whatwg.org/multipage/se
 :::::::::::::: {.columns}
 ::: {.column width="60%"}
 
-Play-along repository; basic SSE server & React app:
+Play-along repository:
+
+- basic SSE server (express)
+- react app
+- presentation
 
 [https://github.com/takadenoshi/sse-presentation](https://github.com/takadenoshi/sse-presentation)
 
@@ -122,11 +127,9 @@ Example with 2 events:
 
 Content-Type is `text/event-stream`
 
-Data is encoded in UTF-8 (mandatory)
-
 Events separated by two newline characters `\n\n`
 
-<hr />
+Data is encoded in UTF-8 (mandatory)
 
 <sup>[Playground](https://github.com/takadenoshi/sse-presentation): "simple" scenario</sup>
 
@@ -148,16 +151,43 @@ source.addEventListener("message", (event) => console.log(++i, event.data), fals
 
 The "minimum viable response" from the previous slide would trigger the callback twice, logging:
 
+
+:::::::::::::: {.columns}
+::: {.column width="40%"}
+
 ```
+
+
+
+
+
 1 Hello
+
 2 ReactLive are you there?
 ```
+
+:::
+::: {.column width="60%"}
+
+```
+> GET /stream/hello HTTP/1.1
+
+< HTTP/1.1 200 OK
+< Content-Type: text/event-stream
+
+< data: Hello\n\n
+
+< data: ReactLive are you there?\n\n
+```
+
+:::
+::::::::::::::
 
 ---
 
 # Named Events
 
-You can "namespace" your events using the `event:` field with any custom name:
+You can "namespace" your events using the `event` field with any custom name:
 
 ```
 < event: goal
@@ -206,9 +236,7 @@ data: Hello!\n\n
 
 ```
 
-Value is in ms.
-
-Timeouts are linear.
+Value is in ms; timeouts are linear.
 
 <sup>[Playground](https://github.com/takadenoshi/sse-presentation): "Retry-flaky" scenario</sup>
 
@@ -220,9 +248,9 @@ Timeouts are linear.
 
 A server can signal "do not reconnect":
 
+- with a `Content-Type` header other than `text/event-stream`
 - with a `2xx` response other than 200
   - 301, 307 redirects to a 200 are OK
-- with a `Content-Type` header other than `text/event-stream`
 
 <sup>[Playground](https://github.com/takadenoshi/sse-presentation): "Not SSE" scenario</sup>
 
@@ -232,20 +260,20 @@ A server can signal "do not reconnect":
 
 Events can include an `id` field with any UTF-8 string as value.
 
-If the connection is interrupted, the last received ID is sent to the server (header `Last-Event-ID`)
+Connection interrupted? Reconnection header `Last-Event-ID` set to the last id received.
 
-This allows the server to resume from the client's last known message.
+This allows the server to resume gracefully.
 
 <hr />
 
 If this is the last event received in a stream that disconnects:
 ```
-id: data-0
-retry: 5000
-data: Data Zero event\n\n
+< id: data-0
+< retry: 5000
+< data: Data Zero event\n
 ```
 
-Then the connection timeout will be 5 seconds, and when reconnecting the `Last-Event-ID` header will be set to `data-0`:
+Then the connection timeout will be 5 seconds, and the `Last-Event-ID` header will be set to `data-0`.
 
 ```
 > GET /stream/notifications HTTP/1.1
@@ -253,7 +281,7 @@ Then the connection timeout will be 5 seconds, and when reconnecting the `Last-E
 > Last-Event-ID: data-0
 ```
 
-<hr />
+Minor caveat later on.
 
 <sup>[Playground](https://github.com/takadenoshi/sse-presentation): "notifications" scenario</sup>
 
@@ -261,14 +289,20 @@ Then the connection timeout will be 5 seconds, and when reconnecting the `Last-E
 
 # Full SSE response
 
-- Unnamed events `data: Hello\n\n`
-- Named events `event: status\ndata: some-status-data\n\n`
-- Event identifiers `id: some-status-id`
-- Setting client reconnection time `retry: 1000`
-- Comment: starts with colon `:ping`
-
 :::::::::::::: {.columns}
-::: {.column width="50%"}
+::: {.column width="45%"}
+
+Entire SSE gramar: 4+1 fields
+
+- Setting reconnection time `retry: 2000`
+- Event identifiers `id: 0`
+- Unnamed events `data: Hello\n\n`
+- Comment: starts with colon `:I am a ...`
+- Named events `event: status`
+
+
+:::
+::: {.column width="55%"}
 
 ```
 > GET /stream/hello HTTP/1.1
@@ -280,33 +314,11 @@ Then the connection timeout will be 5 seconds, and when reconnecting the `Last-E
 < id: 0
 < data: Hello\n\n
 
-< :I am a comment line\n\n
+< :I am a comment line
 
 < id: 1
 < event: status
-< data: {"L":"warning","M":"Service degraded"}\n\n
-```
-
-:::
-::: {.column width="50%"}
-
-```
-
-
-
-
-
--> client-side reconnect after 2s
-
-
-
--> no client-side effect
-
-
--> custom event named "status"
-
-
-
+< data: {"warn":"Service degraded"}\n\n
 ```
 
 :::
@@ -316,7 +328,7 @@ Then the connection timeout will be 5 seconds, and when reconnecting the `Last-E
 
 # More EventSource consumer
 
-You can subscribe to custom events with `.addEventListener`:
+You can subscribe to custom events (e.g. `status`) with `.addEventListener`:
 
 ```
 const source = new EventSource('/stream/hello');
@@ -328,17 +340,15 @@ source.addEventListener(
   false,
 );
 
-// message: on generic/unnamed "data" events, as before
-source.addEventListener("message", (event) => { console.log("received data event", event.data); }, false);
+// as before, un-named data events
+source.addEventListener("message", (event) => { console.log("data event", event.data); }, false);
 ```
 
 Subscribe to `open` and `error` for connection management:
 
 ```
-// open: on connection established
 source.addEventListener("open", (event) => { console.log("Connection opened"); }, false);
 
-// error: on error/disconnection. sadly entirely devoid of detail
 source.addEventListener("error", (event) => { console.log("Connection error"); }, false);
 ```
 
@@ -347,7 +357,7 @@ source.addEventListener("error", (event) => { console.log("Connection error"); }
 # The EventSource Interface
 
 - `constructor(url, { withCredentials: boolean })`
-  - `withCredentials`: instantiate with cross-origin (CORS) credentials (default: false)
+  - `withCredentials`: instantiate with CORS credentials (default: false)
 
 - Events:
   - `open`: on connection
@@ -355,9 +365,7 @@ source.addEventListener("error", (event) => { console.log("Connection error"); }
   - `message`: on generic data: event received
   - `<custom>:` on named event received
 
-- `addEventListener("open"|"error"|"message"|<custom: string>, (event: Event) => void, bubbles: bool)`
-  - or: `onopen`, `operror`, `onmessage`, ...
-  -
+- `addEventListener(event_name: string, (event: Event) => void, bubbles: boolean)`
 - readyState: `CONNECTING` (0) | `OPEN` (1) | `CLOSED`(2)
   - CONNECTING: also "waiting to reconnect"
   - CLOSED: will not attempt to reconnect
@@ -389,25 +397,22 @@ source.addEventListener("error", (event) => { console.log("Connection error"); }
 
 # Implementation Considerations: HTTP/1.1 connections quota
 
-- Browsers implement a **per-hostname connection quota** (6) for HTTP/1.1
-- SSE over HTTP/1.1 may hit this easily with multiple tabs open
+Browsers implement a **per-hostname connection quota** (6) for HTTP/1.1
+
+SSE over HTTP/1.1 may hit this easily with multiple tabs open
 
 Per [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#listening_for_custom_events):
 
-> Warning: When not used over HTTP/2, SSE suffers from a **limitation to the maximum number of open connections**, which can be especially painful when opening multiple tabs, as the limit is per browser and is set to a very low number (6). The issue has been marked as "Won't fix" in [Chrome](https://bugs.chromium.org/p/chromium/issues/detail?id=275955) and [Firefox](https://bugzilla.mozilla.org/show_bug.cgi?id=906896).
-
-> This limit is per browser + domain, which means that you can open 6 SSE connections across all of the tabs to www.example1.com and another 6 SSE connections to www.example2.com (per Stackoverflow).
+> Warning: When not used over HTTP/2, SSE suffers from a **limitation to the maximum number of open connections**, which can be especially painful when opening multiple tabs, as the limit is per browser and is set to a very low number (6). The issue has been marked as "Won't fix" in [Chrome](https://bugs.chromium.org/p/chromium/issues/detail?id=275955) and [Firefox](https://bugzilla.mozilla.org/show_bug.cgi?id=906896). This limit is per browser + domain, which means that you can open 6 SSE connections across all of the tabs to www.example1.com and another 6 SSE connections to www.example2.com (per Stackoverflow).
 
 > When using HTTP/2, the maximum number of simultaneous HTTP streams is negotiated between the server and the client (defaults to 100).
-
-<hr />
 
 ## Solutions
 
 - **Prefer HTTP/2 where available** (can-i-use 96% yes)
 - If applicable, use an EventSource within a SharedWorker
   - shared by all tabs
-- Use a subdomain for SSE endpoint(s)
+- Use subdomains for SSE endpoint(s)
 
 ---
 
@@ -415,8 +420,10 @@ Per [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Us
 
 **Default reconnection behavior implementation is not fully standardized**
 
-- Firefox: Will stop retrying when it encounters network errors (standard compliant)
-- Chrome: Will keep retrying when it encounters network errors (actually helpful)
+When a network error is encountered:
+
+- Firefox: Will **stop** retrying (standard compliant)
+- Chrome: Will **keep** retrying (actually helpful)
 
 **Consider handling reconnections yourself:**
 
@@ -427,10 +434,9 @@ Per [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Us
 
 Test it out in the [playground repo](https://github.com/takadenoshi/sse-presentation):
 
-- Start server & react-app
+- Start react-app but not the server
 - Open react-app on Firefox
 - Connect to any endpoint
-- Stop the server
 - Firefox will attempt to reconnect once, encounter a network error, then stop
   - Chrome will instead keep reconnecting
 
@@ -475,8 +481,8 @@ Two approaches to fix this:
 Emit a custom "heartbeat" or "ping" event every 15 seconds or so:
 
 ```
-event: heartbeat
-data: ""
+< event: heartbeat
+< data: ""
 ```
 
 (data field **must** be present)
@@ -495,9 +501,9 @@ Preferred approach, especially for important payloads.
 
 Firefox has yet to implement support for EventSource in its Service Worker context.
 
-✅ You can use it in a SharedWorker
-
 Future people can track the present validity of this statement [here](https://bugzilla.mozilla.org/show_bug.cgi?id=1681218).
+
+✅ But you can use it in a SharedWorker
 
 ---
 
@@ -505,7 +511,9 @@ Future people can track the present validity of this statement [here](https://bu
 
 **If no event is emitted in the subsequent connection's lifetime, the Last-Event-ID is reset.**
 
-When a reconnected session is initialized with `Last-Event-ID: X`
+<hr />
+
+When a reconnected session is initialized with `Last-Event-ID: Some-id`
 
 And the connection emits no messages for its lifetime,
 
@@ -514,8 +522,6 @@ Then the Last-Event-ID value is _reset_.
 ---
 
 # Vs competiting options
-
-Widely supported options for polling/streaming updates:
 
 :::::::::::::: {.columns}
 ::: {.column width="33%"}
@@ -552,7 +558,7 @@ Client loops the GET request.
 ## 3/ Websockets
 
 - Not HTTP/REST
-  - Websocket server usually a separate stack inside/beside your main backend
+  - Websocket server usually a separate beast
 - Must bring your own:
   - Routing
   - Auth
@@ -561,10 +567,15 @@ Client loops the GET request.
 - Pain to debug
 - Bidirectional/full duplex
   - good if you need it
-  - overkill for 
 
 :::
 ::::::::::::::
+
+---
+
+# Kadena use case
+
+
 
 ---
 
@@ -594,6 +605,4 @@ Yes (96.11%)
 
 ## Font
 
-`Monospace font:` [Kode mono](https://kodemono.com/)
-
-By Kadena's Isa Ozler
+`Monospace font:` [Kode mono](https://kodemono.com/) by Kadena's Isa Ozler

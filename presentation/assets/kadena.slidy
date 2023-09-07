@@ -54,8 +54,9 @@ $if(duration)$
   $if(title)$
   <div class="slide titlepage">
     <div class="icons">
-      <img id="logo" src="/assets/K.png" alt="logo" />
-      <img id="tasos" src="https://media.licdn.com/dms/image/C4D03AQG-vR_BsbU-Kw/profile-displayphoto-shrink_800_800/0/1542053941237?e=2147483647&v=beta&t=fPfC_ozzp8BFP136k7kv5W4_HfrVdkDolpAlvZgSHws" alt="logo" />
+      <img id="tasos" src="assets/tasos.jpeg" alt="Tasos image" />
+      <img id="logo" src="assets/K.png" alt="Kadena logo" />
+      <img id="reactlive" src="assets/logo_reactlive.svg" alt="React live logo" />
     </div>
     <div class="container">
       <h1 class="title">$title$</h1>
