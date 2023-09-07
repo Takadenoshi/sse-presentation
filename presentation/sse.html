@@ -184,20 +184,20 @@ source.addEventListener(&quot;message&quot;, (event) =&gt; console.log(++i, even
 </code></pre>
 <p>The exmaple from the previous slide would trigger the callback twice, logging:</p>
 <div class="columns">
-<div class="column" style="width:40%;">
-<pre><code>
-
-
-1 Hello
-
-2 ReactLive are you there?</code></pre>
-</div><div class="column" style="width:60%;">
+<div class="column" style="width:50%;">
 <pre><code>&lt; HTTP/1.1 200 OK
 &lt; Content-Type: text/event-stream
 
 &lt; data: Hello\n\n
 
 &lt; data: ReactLive are you there?\n\n</code></pre>
+</div><div class="column" style="width:50%;">
+<pre><code>
+
+
+1 Hello
+
+2 ReactLive are you there?</code></pre>
 </div>
 </div>
 </div>
@@ -507,6 +507,20 @@ source.addEventListener(
 </div>
 <div id="kadena-use-case" class="slide section level1">
 <h1>Kadena use case</h1>
+<p>Blockchain stuff usually comes with lots of polling.</p>
+<p>Kadena’s Chainweb is 20 “braided” chains -&gt; 20x polling threads (worst case)</p>
+<p><a href="https://github.com/kadena-io/chainweb-stream">Chainweb-stream</a>:</p>
+<ul>
+<li>SSE Server</li>
+<li>Streams transactions of a certain type (specific account or contract)</li>
+</ul>
+<p><a href="https://github.com/kadena-community/kadena.js/tree/main/packages/libs/chainweb-stream-client">Chainweb-stream-client</a>:</p>
+<ul>
+<li>Client side lib (node, browser)</li>
+<li>Detects stale connections (heartbeat events)</li>
+<li>Detects initial connection timeouts</li>
+<li>Custom reconnection (exponential backoffs)</li>
+</ul>
 </div>
 <div id="can-i-use" class="slide section level1">
 <h1>Can I use?</h1>

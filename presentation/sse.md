@@ -152,19 +152,7 @@ The exmaple from the previous slide would trigger the callback twice, logging:
 
 
 :::::::::::::: {.columns}
-::: {.column width="40%"}
-
-```
-
-
-
-1 Hello
-
-2 ReactLive are you there?
-```
-
-:::
-::: {.column width="60%"}
+::: {.column width="50%"}
 
 ```
 < HTTP/1.1 200 OK
@@ -173,6 +161,18 @@ The exmaple from the previous slide would trigger the callback twice, logging:
 < data: Hello\n\n
 
 < data: ReactLive are you there?\n\n
+```
+
+:::
+::: {.column width="50%"}
+
+```
+
+
+
+1 Hello
+
+2 ReactLive are you there?
 ```
 
 :::
@@ -579,7 +579,21 @@ Client loops the GET request.
 
 # Kadena use case
 
+Blockchain stuff usually comes with lots of polling.
 
+Kadena's Chainweb is 20 "braided" chains -> 20x polling threads (worst case)
+
+[Chainweb-stream](https://github.com/kadena-io/chainweb-stream):
+
+- SSE Server
+- Streams transactions of a certain type (specific account or contract)
+
+[Chainweb-stream-client](https://github.com/kadena-community/kadena.js/tree/main/packages/libs/chainweb-stream-client):
+
+- Client side lib (node, browser)
+- Detects stale connections (heartbeat events)
+- Detects initial connection timeouts
+- Custom reconnection (exponential backoffs)
 
 ---
 
