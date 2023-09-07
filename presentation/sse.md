@@ -41,7 +41,6 @@
   - A MessageEvent Interface
 - With reconnection batteries included*
   - Terms and conditions may apply
-- Very simple protocol
 
 ---
 
@@ -159,8 +158,6 @@ The "minimum viable response" from the previous slide would trigger the callback
 
 
 
-
-
 1 Hello
 
 2 ReactLive are you there?
@@ -170,8 +167,6 @@ The "minimum viable response" from the previous slide would trigger the callback
 ::: {.column width="60%"}
 
 ```
-> GET /stream/hello HTTP/1.1
-
 < HTTP/1.1 200 OK
 < Content-Type: text/event-stream
 
@@ -281,8 +276,6 @@ Then the connection timeout will be 5 seconds, and the `Last-Event-ID` header wi
 > Last-Event-ID: data-0
 ```
 
-Minor caveat later on.
-
 <sup>[Playground](https://github.com/takadenoshi/sse-presentation): "notifications" scenario</sup>
 
 ---
@@ -326,39 +319,6 @@ Entire SSE gramar: 4+1 fields
 
 ---
 
-# More EventSource consumer
-
-You can subscribe to custom events (e.g. `status`) with `.addEventListener`:
-
-```
-const source = new EventSource('/stream/hello');
-
-// [name]: triggers for custom named event, here: "status"
-source.addEventListener(
-  "status",
-  ({ data }) => console.log("custom event: status", JSON.parse(data)),
-  false,
-);
-
-// as before, un-named data events
-source.addEventListener("message", 
-  (event) => { console.log("data event", event.data); },
-  false,
-);
-```
-
-Subscribe to `open` and `error` for connection management:
-
-```
-source.addEventListener("open", // open | error
-  (event) => { console.log("Connection status"); },
-  false
-);
-
-```
-
----
-
 # The EventSource Interface
 
 - `constructor(url, { withCredentials: boolean })`
@@ -377,9 +337,52 @@ source.addEventListener("open", // open | error
 
 - close()
 
-[MDN Reference](https://developer.mozilla.org/en-US/docs/Web/API/EventSource)
+---
+
+# EventSource: custom events
+
+You can subscribe to custom events (e.g. `status`) with `.addEventListener`:
+
+```
+const source = new EventSource('/stream/hello');
+
+// [name]: triggers for custom named event, here: "status"
+source.addEventListener(
+  "status",
+  ({ data }) => console.log("custom event: status", JSON.parse(data)),
+  false,
+);
+
+// as before, un-named data events
+source.addEventListener(
+  "message", 
+  (event) => { console.log("data event", event.data); },
+  false,
+);
+```
 
 ---
+
+# EventSource: connection events
+
+Subscribe to `open` and `error` for connection management:
+
+```
+// on connection established
+source.addEventListener(
+  "open",
+  (event) => { console.log("Connection status"); },
+  false
+);
+
+// on disconnection
+source.addEventListener(
+  "error",
+  (event) => { console.log("Connection status"); },
+  false
+);
+```
+
 
 # Error event is a bit useless
 
