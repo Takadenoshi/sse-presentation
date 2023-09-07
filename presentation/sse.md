@@ -341,15 +341,20 @@ source.addEventListener(
 );
 
 // as before, un-named data events
-source.addEventListener("message", (event) => { console.log("data event", event.data); }, false);
+source.addEventListener("message", 
+  (event) => { console.log("data event", event.data); },
+  false,
+);
 ```
 
 Subscribe to `open` and `error` for connection management:
 
 ```
-source.addEventListener("open", (event) => { console.log("Connection opened"); }, false);
+source.addEventListener("open", // open | error
+  (event) => { console.log("Connection status"); },
+  false
+);
 
-source.addEventListener("error", (event) => { console.log("Connection error"); }, false);
 ```
 
 ---

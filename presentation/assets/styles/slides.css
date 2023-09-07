@@ -157,7 +157,7 @@ ul.task-list li input[type="checkbox"] {
 
 .slide .container header {
   display: block;
-  padding-bottom: 24px;
+  padding-bottom: 80px;
 }
 
 
@@ -224,11 +224,12 @@ ul.task-list li input[type="checkbox"] {
   font-family: Kode Mono, monospace;
   font-weight: 400;
   font-size: 90%;
+  white-space: pre;
 }
 
 .slide .container .content h1,
 .slide .container .content h2 {
-  margin-bottom: 16px;
+  margin-bottom: 40px;
   font-weight: 600;
   color: white;
 }
@@ -262,7 +263,7 @@ ul.task-list li input[type="checkbox"] {
   margin-left: unset;
   margin-right: unset;
   width: max-content;
-  max-width: 100%;
+  max-width: 80%;
 }
 
 .slide .container .content a {
