@@ -440,8 +440,8 @@ When a network error is encountered:
 Test it out in the [playground repo](https://github.com/takadenoshi/sse-presentation):
 
 - Start react-app but not the server
-- Open react-app on Firefox
-- Connect to any endpoint
+- Open react-app on Chrome and Firefox
+- Try to connect to any endpoint
 - Chrome will keep trying to reconnect vs Firefox will quit after one network error
 
 ---
