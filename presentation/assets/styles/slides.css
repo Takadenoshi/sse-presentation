@@ -53,6 +53,9 @@ pre code {
   bottom: 0;
   right: 0;
   z-index: -1;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
 }
 
 ul li {
@@ -206,8 +209,7 @@ ul.task-list li input[type="checkbox"] {
   color: #fcb0dc;
   background: rgba(0, 0, 0, 0.2);
   font-family: Kode Mono, monospace;
-  /* font-weight: 400; */
-  font-size: 1rem;
+  font-size: 100%;
   padding: 4px 8px;
   background-color: rgb(134,23,150, 0.4);
   border-radius: 8px;
@@ -218,7 +220,7 @@ ul.task-list li input[type="checkbox"] {
   background: unset;
   font-family: Kode Mono, monospace;
   font-weight: 400;
-  font-size: 0.9rem;
+  font-size: 60%;
 }
 
 .slide .container .content h1,
@@ -229,18 +231,19 @@ ul.task-list li input[type="checkbox"] {
 }
 
 .slide .container .content h1 {
-  font-size: 1.8rem;
+  font-size: 150%;
 }
 
 .slide .container .content h2 {
-  font-size: 1.6rem;
+  font-size: 120%;
   font-weight: 600;
   margin-top: 40px;
 }
 
 .slide .container .content p,
 .slide .container .content ul li {
-  font-size: 1.2rem;
+  font-size: 100%;
+  line-height: 140%;
 }
 
 .slide .container .content pre {
