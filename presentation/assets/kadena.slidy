@@ -81,7 +81,7 @@ $if(duration)$
   </div>
   $endif$
 
-  $body$
+$body$
   $for(include-after)$
   $include-after$
   $endfor$
