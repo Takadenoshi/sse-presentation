@@ -143,9 +143,9 @@
 <div class="column" style="width:60%;">
 <p>Play-along repository:</p>
 <ul>
-<li>basic SSE server (express)</li>
-<li>react app</li>
-<li>presentation</li>
+<li>SSE server (express)</li>
+<li>React app</li>
+<li>Presentation</li>
 </ul>
 <p><a href="https://github.com/takadenoshi/sse-presentation">https://github.com/takadenoshi/sse-presentation</a></p>
 <p>Useful for examining behaviors, browser implementation differences.</p>
@@ -182,7 +182,7 @@ const source = new EventSource(&quot;http://localhost:3001/stream/simple&quot;);
 // &quot;message&quot; event emitted for each &quot;data&quot; event received
 source.addEventListener(&quot;message&quot;, (event) =&gt; console.log(++i, event.data), false);
 </code></pre>
-<p>The “minimum viable response” from the previous slide would trigger the callback twice, logging:</p>
+<p>The exmaple from the previous slide would trigger the callback twice, logging:</p>
 <div class="columns">
 <div class="column" style="width:40%;">
 <pre><code>
@@ -379,7 +379,6 @@ source.addEventListener(
 <div id="implementation-considerations-http1.1-connections-quota" class="slide section level1">
 <h1>Implementation Considerations: HTTP/1.1 connections quota</h1>
 <p>Browsers implement a <strong>per-hostname connection quota</strong> (6) for HTTP/1.1</p>
-<p>SSE over HTTP/1.1 may hit this easily with multiple tabs open</p>
 <p>Per <a href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#listening_for_custom_events">MDN</a>:</p>
 <blockquote>
 <p>Warning: When not used over HTTP/2, SSE suffers from a <strong>limitation to the maximum number of open connections</strong>, which can be especially painful when opening multiple tabs, as the limit is per browser and is set to a very low number (6). The issue has been marked as “Won’t fix” in <a href="https://bugs.chromium.org/p/chromium/issues/detail?id=275955">Chrome</a> and <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=906896">Firefox</a>. This limit is per browser + domain, which means that you can open 6 SSE connections across all of the tabs to www.example1.com and another 6 SSE connections to www.example2.com (per Stackoverflow).</p>
@@ -390,10 +389,7 @@ source.addEventListener(
 <h2 id="solutions">Solutions</h2>
 <ul>
 <li><strong>Prefer HTTP/2 where available</strong> (can-i-use 96% yes)</li>
-<li>If applicable, use an EventSource within a SharedWorker
-<ul>
-<li>shared by all tabs</li>
-</ul></li>
+<li>If applicable, use an EventSource within a SharedWorker</li>
 <li>Use subdomains for SSE endpoint(s)</li>
 </ul>
 </div>
@@ -416,10 +412,7 @@ source.addEventListener(
 <li>Start react-app but not the server</li>
 <li>Open react-app on Firefox</li>
 <li>Connect to any endpoint</li>
-<li>Firefox will attempt to reconnect once, encounter a network error, then stop
-<ul>
-<li>Chrome will instead keep reconnecting</li>
-</ul></li>
+<li>Chrome will keep trying to reconnect vs Firefox will quit after one network error</li>
 </ul>
 </div>
 <div id="implementation-considerations-proxies-1" class="slide section level1">

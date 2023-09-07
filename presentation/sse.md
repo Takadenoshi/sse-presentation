@@ -85,9 +85,9 @@ Current: [HTML Living Standard § 9.2](https://html.spec.whatwg.org/multipage/se
 
 Play-along repository:
 
-- basic SSE server (express)
-- react app
-- presentation
+- SSE server (express)
+- React app
+- Presentation
 
 [https://github.com/takadenoshi/sse-presentation](https://github.com/takadenoshi/sse-presentation)
 
@@ -148,7 +148,7 @@ source.addEventListener("message", (event) => console.log(++i, event.data), fals
 
 ```
 
-The "minimum viable response" from the previous slide would trigger the callback twice, logging:
+The exmaple from the previous slide would trigger the callback twice, logging:
 
 
 :::::::::::::: {.columns}
@@ -407,8 +407,6 @@ source.addEventListener(
 
 Browsers implement a **per-hostname connection quota** (6) for HTTP/1.1
 
-SSE over HTTP/1.1 may hit this easily with multiple tabs open
-
 Per [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#listening_for_custom_events):
 
 > Warning: When not used over HTTP/2, SSE suffers from a **limitation to the maximum number of open connections**, which can be especially painful when opening multiple tabs, as the limit is per browser and is set to a very low number (6). The issue has been marked as "Won't fix" in [Chrome](https://bugs.chromium.org/p/chromium/issues/detail?id=275955) and [Firefox](https://bugzilla.mozilla.org/show_bug.cgi?id=906896). This limit is per browser + domain, which means that you can open 6 SSE connections across all of the tabs to www.example1.com and another 6 SSE connections to www.example2.com (per Stackoverflow).
@@ -419,7 +417,6 @@ Per [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Us
 
 - **Prefer HTTP/2 where available** (can-i-use 96% yes)
 - If applicable, use an EventSource within a SharedWorker
-  - shared by all tabs
 - Use subdomains for SSE endpoint(s)
 
 ---
@@ -445,8 +442,7 @@ Test it out in the [playground repo](https://github.com/takadenoshi/sse-presenta
 - Start react-app but not the server
 - Open react-app on Firefox
 - Connect to any endpoint
-- Firefox will attempt to reconnect once, encounter a network error, then stop
-  - Chrome will instead keep reconnecting
+- Chrome will keep trying to reconnect vs Firefox will quit after one network error
 
 ---
 
