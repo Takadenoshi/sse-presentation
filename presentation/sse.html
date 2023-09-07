@@ -367,12 +367,17 @@ source.addEventListener(
 );
 
 // as before, un-named data events
-source.addEventListener(&quot;message&quot;, (event) =&gt; { console.log(&quot;data event&quot;, event.data); }, false);</code></pre>
+source.addEventListener(&quot;message&quot;, 
+  (event) =&gt; { console.log(&quot;data event&quot;, event.data); },
+  false,
+);</code></pre>
   <p>Subscribe to <code>open</code> and <code>error</code> for
   connection management:</p>
-  <pre><code>source.addEventListener(&quot;open&quot;, (event) =&gt; { console.log(&quot;Connection opened&quot;); }, false);
-
-source.addEventListener(&quot;error&quot;, (event) =&gt; { console.log(&quot;Connection error&quot;); }, false);</code></pre>
+  <pre><code>source.addEventListener(&quot;open&quot;, // open | error
+  (event) =&gt; { console.log(&quot;Connection status&quot;); },
+  false
+);
+</code></pre>
   </div>
   <div id="the-eventsource-interface" class="slide section level1">
   <h1>The EventSource Interface</h1>
