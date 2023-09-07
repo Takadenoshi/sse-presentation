@@ -130,7 +130,7 @@ ul.task-list li input[type="checkbox"] {
 }
 
 .slide:not(.titlepage) {
-  background: rgba(0, 0, 0, 0.3) !important;
+  background: rgba(0, 0, 0, 0.55) !important;
 }
 
 .slide .icons img {
@@ -150,7 +150,7 @@ ul.task-list li input[type="checkbox"] {
   aspect-ratio: unset;
   height: auto;
   font-family: Arial, Helvetica, sans-serif;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .slide .container header {
@@ -160,7 +160,9 @@ ul.task-list li input[type="checkbox"] {
 
 
 .slide .container header h1 {
-  max-width: 80%;
+  max-width: 100%;
+  letter-spacing: -2px;
+  font-weight: 700;
 }
 
 .slide .container header code {
@@ -179,9 +181,8 @@ ul.task-list li input[type="checkbox"] {
   font-weight: 400;
 }
 
-.slide .container h1 {
-  letter-spacing: -2px;
-  font-weight: 700;
+.slide .container p {
+  margin-bottom: 20px;
 }
 
 .slide .container .date {
@@ -210,7 +211,7 @@ ul.task-list li input[type="checkbox"] {
   background: rgba(0, 0, 0, 0.2);
   font-family: Kode Mono, monospace;
   font-size: 100%;
-  padding: 4px 8px;
+  padding: 2px 8px;
   background-color: rgb(134,23,150, 0.4);
   border-radius: 8px;
 }
@@ -220,12 +221,12 @@ ul.task-list li input[type="checkbox"] {
   background: unset;
   font-family: Kode Mono, monospace;
   font-weight: 400;
-  font-size: 60%;
+  font-size: 90%;
 }
 
 .slide .container .content h1,
 .slide .container .content h2 {
-  margin: 16px 0;
+  margin-bottom: 16px;
   font-weight: 600;
   color: white;
 }
@@ -237,7 +238,7 @@ ul.task-list li input[type="checkbox"] {
 .slide .container .content h2 {
   font-size: 120%;
   font-weight: 600;
-  margin-top: 40px;
+  margin-top: 0px;
 }
 
 .slide .container .content p,

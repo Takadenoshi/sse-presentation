@@ -45,9 +45,7 @@
 
 # Use cases
 
-Replaces polling.
-
-Stream any kind of update from the server.
+Replaces polling. Stream any kind of update from the server.
 
 - notifications
 - live ticker data
@@ -318,7 +316,7 @@ Then the connection timeout will be 5 seconds, and when reconnecting the `Last-E
 
 # More EventSource consumer
 
-You can subscribe to custom events (e.g. `status`) with `.addEventListener`:
+You can subscribe to custom events with `.addEventListener`:
 
 ```
 const source = new EventSource('/stream/hello');
