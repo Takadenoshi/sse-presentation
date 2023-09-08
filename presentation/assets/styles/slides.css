@@ -29,6 +29,11 @@ div.slide.titlepage h1.title {
   padding: 0;
 }
 
+div.slide.titlepage p.author {
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+}
+
 div.slide.titlepage {
   display: flex;
   align-items: center;
@@ -184,14 +189,6 @@ div.slide.titlepage .icons img {
 .slide .container p {
   margin: 0;
   font-weight: 400;
-}
-
-.slide .container p {
-  margin-bottom: 20px;
-}
-
-.slide .container .date {
-  margin-top: 24px;
 }
 
 .slide .container .content {
