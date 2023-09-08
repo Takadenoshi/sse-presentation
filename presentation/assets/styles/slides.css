@@ -31,7 +31,7 @@ div.slide.titlepage h1.title {
 
 div.slide.titlepage p.author {
   margin-top: 2rem;
-  margin-bottom: 3rem;
+  margin-bottom: 5rem;
 }
 
 div.slide.titlepage {
@@ -119,8 +119,8 @@ ul.task-list li input[type="checkbox"] {
 }
 
 div.slide.titlepage .icons img {
-  width: 4em !important;
-  height: 4em !important;
+  width: 3.5em !important;
+  height: 3.5em !important;
   overflow: hidden;
   border-radius: 16px;
 }
@@ -161,6 +161,8 @@ div.slide.titlepage .icons img {
   height: auto;
   font-family: Arial, Helvetica, sans-serif;
   color: rgba(255, 255, 255, 0.9);
+  margin-top: 5rem;
+  margin-bottom: 4rem;
 }
 
 .slide .container header {
@@ -189,6 +191,10 @@ div.slide.titlepage .icons img {
 .slide .container p {
   margin: 0;
   font-weight: 400;
+}
+
+.slide .container p {
+  margin-bottom: 20px;
 }
 
 .slide .container .content {
