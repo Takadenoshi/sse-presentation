@@ -47,9 +47,13 @@ $if(duration)$
     $include-before$
   $endfor$
 
+  $if(video)$
   <video id="video-cover" loop muted oncanplay="showvideo()">
-    <source src="assets/kd-back.webm" type="video/webm" />
+    $for(video)$
+      <source src="$video.src$" type="$video.type$" />
+    $endfor$
   </video>
+  $endif$
 
   $if(title)$
   <div class="slide titlepage">

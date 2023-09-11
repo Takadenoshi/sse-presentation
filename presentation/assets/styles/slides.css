@@ -29,6 +29,10 @@ div.slide.titlepage h1.title {
   padding: 0;
 }
 
+div.slide.titlepage .subtitle {
+  font-family: Kode Mono, monospace;
+}
+
 div.slide.titlepage p.author {
   margin-top: 2rem;
   margin-bottom: 5rem;

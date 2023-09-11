@@ -6,6 +6,9 @@ icons:
   - assets/tasos.jpeg
   - assets/k-internal-icon.jpg
   - assets/logo_reactlive.svg
+video:
+  - src: assets/kd-back.webm
+    type: video/webm
 ---
 
 # whois "Tasos Bitsios"
