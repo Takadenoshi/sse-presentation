@@ -53,11 +53,13 @@ $if(duration)$
 
   $if(title)$
   <div class="slide titlepage">
+    $if(icons)$
     <div class="icons">
       $for(icons)$
         <img src="$icons$" alt="Logo" />
       $endfor$
-    </div>
+      </div>
+    $endif$
     <div class="container">
       <h1 class="title">$title$</h1>
       $if(subtitle)$
