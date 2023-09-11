@@ -39,10 +39,10 @@
 
     <div class="slide titlepage">
     <div class="icons">
-      <img id="tasos" src="assets/tasos.jpeg" alt="Tasos image" />
-      <img id="logo" src="assets/k-internal-icon.jpg" alt="Kadena logo" />
-      <img id="reactlive" src="assets/logo_reactlive.svg" alt="React live logo" />
-    </div>
+              <img src="assets/tasos.jpeg" alt="Logo" />
+              <img src="assets/k-internal-icon.jpg" alt="Logo" />
+              <img src="assets/logo_reactlive.svg" alt="Logo" />
+          </div>
     <div class="container">
       <h1 class="title">Server-Sent Events</h1>
                   <p class="author">
@@ -231,11 +231,15 @@ source.addEventListener(&quot;message&quot;, (event) =&gt; console.log(++i, even
 <p><sup>* <em>with implementation-specific caveats</em></sup></p>
 <p>The default reconnection timeout is up to each browser (empirically: between 3-5 s.)</p>
 <h2 id="custom-timeouts">Custom timeouts</h2>
-<p>The reconnection timeout can be customized from the server-side by emitting a <code>retry:</code> field in any of the events.</p>
+<p>The reconnection timeout can be customized.</p>
+<p>Emit a <code>retry:</code> field in any of the events:</p>
 <pre><code>retry: 2500
 data: Hello!\n\n
 </code></pre>
-<p>Value is in ms; timeouts are linear.</p>
+<ul>
+<li>Value is in milliseconds</li>
+<li>Timeouts are linear</li>
+</ul>
 <p><sup><a href="https://github.com/takadenoshi/sse-presentation">Playground</a>: “Retry-flaky” scenario</sup></p>
 </div>
 <div id="reconnection-2" class="slide section level1">
@@ -297,29 +301,6 @@ data: Hello!\n\n
 </div>
 </div>
 </div>
-<div id="the-eventsource-interface" class="slide section level1">
-<h1>The EventSource Interface</h1>
-<ul>
-<li><code>constructor(url, { withCredentials: boolean })</code>
-<ul>
-<li><code>withCredentials</code>: instantiate with CORS credentials (default: false)</li>
-</ul></li>
-<li>Events:
-<ul>
-<li><code>open</code>: on connection</li>
-<li><code>error</code>: on error/disconnection</li>
-<li><code>message</code>: on generic data: event received</li>
-<li><code>&lt;custom&gt;:</code> on named event received</li>
-</ul></li>
-<li><code>addEventListener(event_name: string, (event: Event) =&gt; void, bubbles: boolean)</code></li>
-<li>readyState: <code>CONNECTING</code> (0) | <code>OPEN</code> (1) | <code>CLOSED</code>(2)
-<ul>
-<li>CONNECTING: also “waiting to reconnect”</li>
-<li>CLOSED: will not attempt to reconnect</li>
-</ul></li>
-<li>close()</li>
-</ul>
-</div>
 <div id="eventsource-custom-events" class="slide section level1">
 <h1>EventSource: custom events</h1>
 <p>You can subscribe to custom events (e.g. <code>status</code>) with <code>.addEventListener</code>:</p>
@@ -355,6 +336,29 @@ source.addEventListener(
   (event) =&gt; { console.log(&quot;Connection status&quot;); },
   false
 );</code></pre>
+</div>
+<div id="the-eventsource-interface" class="slide section level1">
+<h1>The EventSource Interface</h1>
+<ul>
+<li><code>constructor(url, { withCredentials: boolean })</code>
+<ul>
+<li><code>withCredentials</code>: instantiate with CORS credentials (default: false)</li>
+</ul></li>
+<li>Events:
+<ul>
+<li><code>open</code>: on connection</li>
+<li><code>error</code>: on error/disconnection</li>
+<li><code>message</code>: on generic data: event received</li>
+<li><code>&lt;custom&gt;:</code> on named event received</li>
+</ul></li>
+<li><code>addEventListener(event_name: string, (event: Event) =&gt; void, bubbles: boolean)</code></li>
+<li>readyState: <code>CONNECTING</code> (0) | <code>OPEN</code> (1) | <code>CLOSED</code>(2)
+<ul>
+<li>CONNECTING: also “waiting to reconnect”</li>
+<li>CLOSED: will not attempt to reconnect</li>
+</ul></li>
+<li>close()</li>
+</ul>
 </div>
 <div id="error-event-is-a-bit-useless" class="slide section level1">
 <h1>Error event is a bit useless</h1>
@@ -401,6 +405,7 @@ source.addEventListener(
 <li>Firefox: Will <strong>stop</strong> retrying (standard compliant)</li>
 <li>Chrome: Will <strong>keep</strong> retrying (actually helpful)</li>
 </ul>
+<hr />
 <p><strong>Consider handling reconnections yourself:</strong></p>
 <ul>
 <li>Option for exponential backoff strategies</li>
@@ -419,8 +424,8 @@ source.addEventListener(
 <h1>Implementation Considerations: Proxies (1)</h1>
 <h2 id="proxies-can-kill">Proxies can kill</h2>
 <p>Proxies, load balancers and other networking middleware can kill idle connections after a short while.</p>
-<hr />
 <p>Two approaches to fix this:</p>
+<hr />
 <h2 id="comment-not-client-aware">1/ Comment (not client-aware)</h2>
 <p>You can emit a comment (any line starting with a colon <code>:</code>)</p>
 <pre><code>&lt; :bump</code></pre>
@@ -431,8 +436,8 @@ source.addEventListener(
 <h1>Implementation Considerations: Proxies (2)</h1>
 <h2 id="proxies-can-kill-1">Proxies can kill</h2>
 <p>Proxies, load balancers and other networking middleware can kill idle connections after a short while.</p>
-<hr />
 <p>Two approaches to fix this:</p>
+<hr />
 <h2 id="heartbeat-event-client-aware">2/ Heartbeat event (client-aware)</h2>
 <p>Emit a custom “heartbeat” or “ping” event every 15 seconds or so:</p>
 <pre><code>&lt; event: heartbeat

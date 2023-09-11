@@ -54,9 +54,9 @@ $if(duration)$
   $if(title)$
   <div class="slide titlepage">
     <div class="icons">
-      <img id="tasos" src="assets/tasos.jpeg" alt="Tasos image" />
-      <img id="logo" src="assets/k-internal-icon.jpg" alt="Kadena logo" />
-      <img id="reactlive" src="assets/logo_reactlive.svg" alt="React live logo" />
+      $for(icons)$
+        <img src="$icons$" alt="Logo" />
+      $endfor$
     </div>
     <div class="container">
       <h1 class="title">$title$</h1>

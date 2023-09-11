@@ -1,6 +1,11 @@
-% Server-Sent Events
-% tasos@kadena.io
-% September 29, 2023
+---
+title:  Server-Sent Events
+author: tasos@kadena.io
+date: September 29, 2023
+icons:
+  - assets/tasos.jpeg
+  - assets/k-internal-icon.jpg
+  - assets/logo_reactlive.svg
 ---
 
 # whois "Tasos Bitsios"
@@ -223,7 +228,9 @@ The default reconnection timeout is up to each browser (empirically: between 3-5
 
 ## Custom timeouts
 
-The reconnection timeout can be customized from the server-side by emitting a `retry:` field in any of the events.
+The reconnection timeout can be customized.
+
+Emit a `retry:` field in any of the events:
 
 ```
 retry: 2500
@@ -231,7 +238,8 @@ data: Hello!\n\n
 
 ```
 
-Value is in ms; timeouts are linear.
+- Value is in milliseconds
+- Timeouts are linear
 
 <sup>[Playground](https://github.com/takadenoshi/sse-presentation): "Retry-flaky" scenario</sup>
 
@@ -319,26 +327,6 @@ Entire SSE gramar: 4+1 fields
 
 ---
 
-# The EventSource Interface
-
-- `constructor(url, { withCredentials: boolean })`
-  - `withCredentials`: instantiate with CORS credentials (default: false)
-
-- Events:
-  - `open`: on connection
-  - `error`: on error/disconnection
-  - `message`: on generic data: event received
-  - `<custom>:` on named event received
-
-- `addEventListener(event_name: string, (event: Event) => void, bubbles: boolean)`
-- readyState: `CONNECTING` (0) | `OPEN` (1) | `CLOSED`(2)
-  - CONNECTING: also "waiting to reconnect"
-  - CLOSED: will not attempt to reconnect
-
-- close()
-
----
-
 # EventSource: custom events
 
 You can subscribe to custom events (e.g. `status`) with `.addEventListener`:
@@ -383,6 +371,27 @@ source.addEventListener(
 );
 ```
 
+---
+
+# The EventSource Interface
+
+- `constructor(url, { withCredentials: boolean })`
+  - `withCredentials`: instantiate with CORS credentials (default: false)
+
+- Events:
+  - `open`: on connection
+  - `error`: on error/disconnection
+  - `message`: on generic data: event received
+  - `<custom>:` on named event received
+
+- `addEventListener(event_name: string, (event: Event) => void, bubbles: boolean)`
+- readyState: `CONNECTING` (0) | `OPEN` (1) | `CLOSED`(2)
+  - CONNECTING: also "waiting to reconnect"
+  - CLOSED: will not attempt to reconnect
+
+- close()
+
+---
 
 # Error event is a bit useless
 
@@ -430,6 +439,8 @@ When a network error is encountered:
 - Firefox: Will **stop** retrying (standard compliant)
 - Chrome: Will **keep** retrying (actually helpful)
 
+<hr />
+
 **Consider handling reconnections yourself:**
 
 - Option for exponential backoff strategies
@@ -452,9 +463,9 @@ Test it out in the [playground repo](https://github.com/takadenoshi/sse-presenta
 
 Proxies, load balancers and other networking middleware can kill idle connections after a short while.
 
-<hr />
-
 Two approaches to fix this:
+
+<hr />
 
 ## 1/ Comment (not client-aware)
 
@@ -476,9 +487,9 @@ EventSource won't emit any event.
 
 Proxies, load balancers and other networking middleware can kill idle connections after a short while.
 
-<hr />
-
 Two approaches to fix this:
+
+<hr />
 
 ## 2/ Heartbeat event (client-aware)
 
