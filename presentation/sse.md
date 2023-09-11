@@ -1,4 +1,5 @@
 ---
+title-prefix: Takadenoshi
 title:  Server-Sent Events
 author: tasos@kadena.io
 date: September 29, 2023
@@ -9,6 +10,8 @@ icons:
 video:
   - src: assets/kd-back.webm
     type: video/webm
+slide_bg_is_video: true
+background: assets/bg.png
 ---
 
 # whois "Tasos Bitsios"
@@ -27,10 +30,10 @@ video:
 
 - Scalabe PoW Blockchain
 - Focus on:
-  - scalability
-  - intelligent & secure smart contracts
-    - source available
-    - formal verification
+  - Scalability
+  - Intelligent & secure smart contracts
+    - Formal verification
+    - Source available
 - Socials
   - [\@kadena-io](https://github.com/kadena-io) and [\@kadena-community](https://github.com/kadena-community) on Github
   - [\@kadena_io](https://x.com/kadena_io) on X

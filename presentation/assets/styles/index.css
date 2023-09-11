@@ -1,7 +1,7 @@
 body {
   color: #f3f3f3;
   background-color: #0a0a0a;
-  background-image: url(../bg.png);
+  background-image: var(--background-url);
   background-attachment: fixed;
   background-size: cover;
 }

@@ -31,11 +31,15 @@ div.slide.titlepage h1.title {
 
 div.slide.titlepage .subtitle {
   font-family: Kode Mono, monospace;
+  margin-top: 1rem;
 }
 
 div.slide.titlepage p.author {
-  margin-top: 2rem;
-  margin-bottom: 5rem;
+  margin-top: 1rem;
+}
+
+div.slide.titlepage p.date {
+  margin-top: 3rem;
 }
 
 div.slide.titlepage {
