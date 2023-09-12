@@ -150,6 +150,7 @@
 <ul>
 <li><a href="https://github.com/kadena-io">@kadena-io</a> and <a href="https://github.com/kadena-community">@kadena-community</a> on Github</li>
 <li><a href="https://x.com/kadena_io">@kadena_io</a> on X</li>
+<li><a href="https://kadena.io">kadena.io</a> on the Interwebs</li>
 </ul></li>
 </ul>
 </div>
@@ -196,8 +197,8 @@
 <li>2011 · [Production] Firefox v6,</li>
 <li>2015 · <a href="https://www.w3.org/TR/2015/REC-eventsource-20150203/">W3C Recommendation</a></li>
 </ul>
-<p><a href="https://www.w3.org/TR/2015/REC-eventsource-20150203/">W3C Publication History</a></p>
 <hr />
+<p>History: <a href="https://www.w3.org/TR/2015/REC-eventsource-20150203/">W3C Publication History</a></p>
 <p>Current: <a href="https://html.spec.whatwg.org/multipage/server-sent-events.html#server-sent-events">HTML Living Standard § 9.2</a></p>
 </div>
 <div id="playground-repo---download-me" class="slide section level1">
@@ -366,38 +367,38 @@ data: Hello!\n\n
 <div id="eventsource-custom-events" class="slide section level1">
 <h1>EventSource: custom events</h1>
 <p>You can subscribe to custom events (e.g. <code>status</code>) with <code>.addEventListener</code>:</p>
-<pre><code>const source = new EventSource(&#39;/stream/hello&#39;);
-
-// [name]: triggers for custom named event, here: &quot;status&quot;
-source.addEventListener(
-  &quot;status&quot;,
-  ({ data }) =&gt; console.log(&quot;custom event: status&quot;, JSON.parse(data)),
-  false,
-);
-
-// as before, un-named data events
-source.addEventListener(
-  &quot;message&quot;, 
-  (event) =&gt; { console.log(&quot;data event&quot;, event.data); },
-  false,
-);</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true"></a><span class="kw">const</span> source <span class="op">=</span> <span class="kw">new</span> <span class="bu">EventSource</span>(<span class="st">&#39;/stream/hello&#39;</span>)<span class="op">;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true"></a><span class="co">// [name]: triggers for custom named event, here: &quot;status&quot;</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true"></a>source<span class="op">.</span><span class="fu">addEventListener</span>(</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true"></a>  <span class="st">&quot;status&quot;</span><span class="op">,</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true"></a>  ({ data }) <span class="kw">=&gt;</span> <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;custom event: status&quot;</span><span class="op">,</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">parse</span>(data))<span class="op">,</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true"></a>  <span class="kw">false</span><span class="op">,</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true"></a>)<span class="op">;</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true"></a><span class="co">// as before, un-named data events</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true"></a>source<span class="op">.</span><span class="fu">addEventListener</span>(</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true"></a>  <span class="st">&quot;message&quot;</span><span class="op">,</span> </span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true"></a>  (<span class="bu">event</span>) <span class="kw">=&gt;</span> { <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;data event&quot;</span><span class="op">,</span> <span class="bu">event</span><span class="op">.</span><span class="at">data</span>)<span class="op">;</span> }<span class="op">,</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true"></a>  <span class="kw">false</span><span class="op">,</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true"></a>)<span class="op">;</span></span></code></pre></div>
 </div>
 <div id="eventsource-connection-events" class="slide section level1">
 <h1>EventSource: connection events</h1>
 <p>Subscribe to <code>open</code> and <code>error</code> for connection management:</p>
-<pre><code>// on connection established
-source.addEventListener(
-  &quot;open&quot;,
-  (event) =&gt; { console.log(&quot;Connection status&quot;); },
-  false
-);
-
-// on disconnection
-source.addEventListener(
-  &quot;error&quot;,
-  (event) =&gt; { console.log(&quot;Connection status&quot;); },
-  false
-);</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true"></a><span class="co">// on connection established</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true"></a>source<span class="op">.</span><span class="fu">addEventListener</span>(</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true"></a>  <span class="st">&quot;open&quot;</span><span class="op">,</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true"></a>  (<span class="bu">event</span>) <span class="kw">=&gt;</span> { <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;Connection status&quot;</span>)<span class="op">;</span> }<span class="op">,</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true"></a>  <span class="kw">false</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true"></a>)<span class="op">;</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true"></a><span class="co">// on disconnection</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true"></a>source<span class="op">.</span><span class="fu">addEventListener</span>(</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true"></a>  <span class="st">&quot;error&quot;</span><span class="op">,</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true"></a>  (<span class="bu">event</span>) <span class="kw">=&gt;</span> { <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;Connection status&quot;</span>)<span class="op">;</span> }<span class="op">,</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true"></a>  <span class="kw">false</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true"></a>)<span class="op">;</span></span></code></pre></div>
 </div>
 <div id="the-eventsource-interface" class="slide section level1">
 <h1>The EventSource Interface</h1>
@@ -447,7 +448,7 @@ source.addEventListener(
 <p>Browsers implement a <strong>per-hostname connection quota</strong> (6) for HTTP/1.1</p>
 <p>Per <a href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#listening_for_custom_events">MDN</a>:</p>
 <blockquote>
-<p>Warning: When not used over HTTP/2, SSE suffers from a <strong>limitation to the maximum number of open connections</strong>, which can be especially painful when opening multiple tabs, as the limit is per browser and is set to a very low number (6). The issue has been marked as “Won’t fix” in <a href="https://bugs.chromium.org/p/chromium/issues/detail?id=275955">Chrome</a> and <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=906896">Firefox</a>. This limit is per browser + domain, which means that you can open 6 SSE connections across all of the tabs to www.example1.com and another 6 SSE connections to www.example2.com (per Stackoverflow).</p>
+<p>Warning: When not used over HTTP/2, SSE suffers from a <strong>limitation to the maximum number of open connections</strong>, which can be especially painful when opening multiple tabs, as the limit is per browser and is set to a very low number (6). The issue has been marked as “Won’t fix” in <a href="https://bugs.chromium.org/p/chromium/issues/detail?id=275955">Chrome</a> and <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=906896">Firefox</a>.</p>
 </blockquote>
 <blockquote>
 <p>When using HTTP/2, the maximum number of simultaneous HTTP streams is negotiated between the server and the client (defaults to 100).</p>

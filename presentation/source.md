@@ -40,6 +40,7 @@ background: assets/bg.png
 - Socials
   - [\@kadena-io](https://github.com/kadena-io) and [\@kadena-community](https://github.com/kadena-community) on Github
   - [\@kadena_io](https://x.com/kadena_io) on X
+  - [kadena.io](https://kadena.io) on the Interwebs
 
 ---
 
@@ -84,9 +85,10 @@ Replaces polling. Stream any kind of update from the server.
 - 2011 &middot; [Production] Firefox v6, 
 - 2015 &middot; [W3C Recommendation](https://www.w3.org/TR/2015/REC-eventsource-20150203/)
 
-[W3C Publication History](https://www.w3.org/TR/2015/REC-eventsource-20150203/)
 
 <hr />
+
+History: [W3C Publication History](https://www.w3.org/TR/2015/REC-eventsource-20150203/)
 
 Current: [HTML Living Standard § 9.2](https://html.spec.whatwg.org/multipage/server-sent-events.html#server-sent-events) 
 
@@ -340,7 +342,7 @@ Entire SSE gramar: 4+1 fields
 
 You can subscribe to custom events (e.g. `status`) with `.addEventListener`:
 
-```
+```javascript
 const source = new EventSource('/stream/hello');
 
 // [name]: triggers for custom named event, here: "status"
@@ -364,7 +366,7 @@ source.addEventListener(
 
 Subscribe to `open` and `error` for connection management:
 
-```
+```javascript
 // on connection established
 source.addEventListener(
   "open",
@@ -427,7 +429,7 @@ Browsers implement a **per-hostname connection quota** (6) for HTTP/1.1
 
 Per [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#listening_for_custom_events):
 
-> Warning: When not used over HTTP/2, SSE suffers from a **limitation to the maximum number of open connections**, which can be especially painful when opening multiple tabs, as the limit is per browser and is set to a very low number (6). The issue has been marked as "Won't fix" in [Chrome](https://bugs.chromium.org/p/chromium/issues/detail?id=275955) and [Firefox](https://bugzilla.mozilla.org/show_bug.cgi?id=906896). This limit is per browser + domain, which means that you can open 6 SSE connections across all of the tabs to www.example1.com and another 6 SSE connections to www.example2.com (per Stackoverflow).
+> Warning: When not used over HTTP/2, SSE suffers from a **limitation to the maximum number of open connections**, which can be especially painful when opening multiple tabs, as the limit is per browser and is set to a very low number (6). The issue has been marked as "Won't fix" in [Chrome](https://bugs.chromium.org/p/chromium/issues/detail?id=275955) and [Firefox](https://bugzilla.mozilla.org/show_bug.cgi?id=906896).
 
 > When using HTTP/2, the maximum number of simultaneous HTTP streams is negotiated between the server and the client (defaults to 100).
 
