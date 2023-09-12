@@ -47,3 +47,5 @@ The template file which generates the html is `assets/kadena.slidy`.
 ### Stylesheets
 
 CSS stylesheets can be tweaked under `assets/styles/`.
+
+If you want to pick different colors or tones, please consult the [Color System](https://www.figma.com/file/cNQkFOjrqO3PAYv7TSIhpB/Foundation?type=design&node-id=188-869&mode=design&t=5J7YpU6yxy8El0DC-0).

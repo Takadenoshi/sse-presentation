@@ -148,7 +148,7 @@
 <li>React app</li>
 <li>Presentation</li>
 </ul>
-<p><a href="https://github.com/takadenoshi/sse-presentation">https://github.com/takadenoshi/sse-presentation</a></p>
+<p><a href="https://github.com/takadenoshi/sse-presentation">github.com/takadenoshi/sse-presentation</a></p>
 <p>Useful for examining behaviors, browser implementation differences.</p>
 <p>Repo link in QR ➡</p>
 </div><div class="column" style="width:38%;">
@@ -181,7 +181,7 @@
 const source = new EventSource(&quot;http://localhost:3001/stream/simple&quot;);
 
 // &quot;message&quot; event emitted for each &quot;data&quot; event received
-source.addEventListener(&quot;message&quot;, (event) =&gt; console.log(++i, event.data), false);
+source.addEventListener(&quot;message&quot;, event =&gt; console.log(++i, event.data), false);
 </code></pre>
 <p>The exmaple from the previous slide would trigger the callback twice, logging:</p>
 <div class="columns">
@@ -532,7 +532,7 @@ source.addEventListener(
 <h1>Can I use?</h1>
 <p>Yes (96.11%)</p>
 <p><img src="assets/images/caniuse.png" /></p>
-<p><a href="https://caniuse.com/eventsource">https://caniuse.com/eventsource</a></p>
+<p><a href="https://caniuse.com/eventsource">caniuse.com/eventsource</a></p>
 </div>
 <div id="almost-done" class="slide section level1">
 <h1>Almost Done</h1>

@@ -103,7 +103,7 @@ Play-along repository:
 - React app
 - Presentation
 
-[https://github.com/takadenoshi/sse-presentation](https://github.com/takadenoshi/sse-presentation)
+[github.com/takadenoshi/sse-presentation](https://github.com/takadenoshi/sse-presentation)
 
 Useful for examining behaviors, browser implementation differences.
 
@@ -158,7 +158,7 @@ let i=0;
 const source = new EventSource("http://localhost:3001/stream/simple");
 
 // "message" event emitted for each "data" event received
-source.addEventListener("message", (event) => console.log(++i, event.data), false);
+source.addEventListener("message", event => console.log(++i, event.data), false);
 
 ```
 
@@ -623,7 +623,7 @@ Yes (96.11%)
 
 ![](assets/images/caniuse.png)
 
-[https://caniuse.com/eventsource](https://caniuse.com/eventsource)
+[caniuse.com/eventsource](https://caniuse.com/eventsource)
 
 ---
 

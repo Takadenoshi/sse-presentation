@@ -17,8 +17,8 @@ h2 {
 hr {
   width: 50%;
   border-width: 0;
-  background-color: rgba(237, 9, 143, 0.4);
-  color: rgba(237, 9, 143, 0.4);
+  background-color: #450070;
+  color: #450070;
   height: 2px;
   margin-top: 30px;
   margin-bottom: 25px;
@@ -218,7 +218,7 @@ div.slide.titlepage .icons img {
 .slide .container .content a:hover,
 .slide .container .content a:visited {
   text-decoration: underline !important;
-  color: #51ff6d !important;
+  color: #2997FF !important;
 }
 
 .slide .container code {
