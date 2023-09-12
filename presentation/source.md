@@ -152,7 +152,7 @@ Data is encoded in UTF-8 (mandatory)
 
 Server-sent events are consumed with `EventSource`:
 
-```
+```javascript
 let i=0;
 
 const source = new EventSource("http://localhost:3001/stream/simple");
