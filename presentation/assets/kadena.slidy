@@ -36,7 +36,7 @@ $if(duration)$
 <script>
     window.showvideo = () => {
       const video = document.getElementById('video-cover');
-      video.playbackRate = 0.5;
+      $if(video_playback_rate)$video.playbackRate = $video_playback_rate$;$endif$
       video.play();
       video.style.display = 'block';
     }
