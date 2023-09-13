@@ -1,3 +1,13 @@
+function registerVideoToggle({ code }) {
+  if (code === 'KeyV') {
+    const video = document.querySelector('#video-cover');
+    if (!video)
+      return;
+    const { display: prevDisplay } = video.style;
+    video.style.display = prevDisplay === 'block' ? 'none' : 'block';
+  }
+}
+
 function wrapAllSlideContents() {
   const slides = document.querySelectorAll('.slide:not(.titlepage)')
 
@@ -22,3 +32,5 @@ function wrapAllSlideContents() {
 }
 
 wrapAllSlideContents();
+
+document.addEventListener('keyup', registerVideoToggle, false);

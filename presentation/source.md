@@ -10,11 +10,9 @@ icons:
 video:
   - src: assets/videos/kd-back.webm
     type: video/webm
-  - src: assets/videos/kd-back.mp4
-    type: video/mp4
 video_playback_rate: 0.5
 slide_bg_is_video: true
-background: assets/bg.png
+background: assets/images/bg.png
 ---
 
 # whois "Tasos Bitsios"

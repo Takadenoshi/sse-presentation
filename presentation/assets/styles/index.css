@@ -1,9 +1,16 @@
 body {
   color: #f3f3f3;
   background-color: #0a0a0a;
-  background-image: var(--background-url);
-  background-attachment: fixed;
-  background-size: cover;
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  object-fit: cover;
+  z-index: -1;
 }
 
 .toolbar,
