@@ -154,7 +154,7 @@ Data is encoded in UTF-8 (mandatory)
 
 Server-sent events are consumed with `EventSource`:
 
-```javascript
+```{.javascript .numberLines}
 let i=0;
 
 const source = new EventSource("http://localhost:3001/stream/simple");
@@ -342,7 +342,7 @@ Entire SSE gramar: 4+1 fields
 
 You can subscribe to custom events (e.g. `status`) with `.addEventListener`:
 
-```javascript
+```{.javascript .numberLines}
 const source = new EventSource('/stream/hello');
 
 // [name]: triggers for custom named event, here: "status"
@@ -366,7 +366,7 @@ source.addEventListener(
 
 Subscribe to `open` and `error` for connection management:
 
-```javascript
+```{.javascript .numberLines}
 // on connection established
 source.addEventListener(
   "open",

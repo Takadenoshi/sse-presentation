@@ -318,3 +318,10 @@ code span.st { color: #FCB0DC; } /* String yellow 30 */
 code span.va { color: #C2E1FF; } /* Variable blue 40 */
 code span.vs { color: #FFC670; } /* VerbatimString yellow 40 */
 code span.wa { color: #FFB23D; font-weight: bold; font-style: italic; } /* Warning yellow 50 */
+
+/* line numbers */
+pre > code.sourceCode > span > a:first-child::before {
+  text-decoration: none;
+  left: -0.5rem;
+  color: #9EA1A6; /* gray 40 - alt: rgba(0, 188, 250, 1); blue from border */
+}
