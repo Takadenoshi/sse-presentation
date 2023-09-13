@@ -244,9 +244,8 @@ The reconnection timeout can be customized.
 Emit a `retry:` field in any of the events:
 
 ```
-retry: 2500
-data: Hello!\n\n
-
+< retry: 2500
+< data: Hello!\n\n
 ```
 
 - Value is in milliseconds
@@ -316,7 +315,7 @@ Entire SSE gramar: 4+1 fields
 :::
 ::: {.column width="55%"}
 
-```
+```{.numberLines}
 > GET /stream/hello HTTP/1.1
 
 < HTTP/1.1 200 OK

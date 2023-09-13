@@ -296,9 +296,8 @@
 <h2 id="custom-timeouts">Custom timeouts</h2>
 <p>The reconnection timeout can be customized.</p>
 <p>Emit a <code>retry:</code> field in any of the events:</p>
-<pre><code>retry: 2500
-data: Hello!\n\n
-</code></pre>
+<pre><code>&lt; retry: 2500
+&lt; data: Hello!\n\n</code></pre>
 <ul>
 <li>Value is in milliseconds</li>
 <li>Timeouts are linear</li>
@@ -347,20 +346,20 @@ data: Hello!\n\n
 <li>Named events <code>event: status</code></li>
 </ul>
 </div><div class="column" style="width:55%;">
-<pre><code>&gt; GET /stream/hello HTTP/1.1
-
-&lt; HTTP/1.1 200 OK
-&lt; Content-Type: text/event-stream
-
-&lt; retry: 2000
-&lt; id: 0
-&lt; data: Hello\n\n
-
-&lt; :I am a comment line
-
-&lt; id: 1
-&lt; event: status
-&lt; data: {&quot;warn&quot;:&quot;Service degraded&quot;}\n\n</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource numberLines"><code class="sourceCode"><span id="cb10-1"><a href="#cb10-1"></a>&gt; GET /stream/hello HTTP/1.1</span>
+<span id="cb10-2"><a href="#cb10-2"></a></span>
+<span id="cb10-3"><a href="#cb10-3"></a>&lt; HTTP/1.1 200 OK</span>
+<span id="cb10-4"><a href="#cb10-4"></a>&lt; Content-Type: text/event-stream</span>
+<span id="cb10-5"><a href="#cb10-5"></a></span>
+<span id="cb10-6"><a href="#cb10-6"></a>&lt; retry: 2000</span>
+<span id="cb10-7"><a href="#cb10-7"></a>&lt; id: 0</span>
+<span id="cb10-8"><a href="#cb10-8"></a>&lt; data: Hello\n\n</span>
+<span id="cb10-9"><a href="#cb10-9"></a></span>
+<span id="cb10-10"><a href="#cb10-10"></a>&lt; :I am a comment line</span>
+<span id="cb10-11"><a href="#cb10-11"></a></span>
+<span id="cb10-12"><a href="#cb10-12"></a>&lt; id: 1</span>
+<span id="cb10-13"><a href="#cb10-13"></a>&lt; event: status</span>
+<span id="cb10-14"><a href="#cb10-14"></a>&lt; data: {&quot;warn&quot;:&quot;Service degraded&quot;}\n\n</span></code></pre></div>
 </div>
 </div>
 </div>

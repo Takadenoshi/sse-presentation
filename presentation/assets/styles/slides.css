@@ -322,6 +322,11 @@ code span.wa { color: #FFB23D; font-weight: bold; font-style: italic; } /* Warni
 /* line numbers */
 pre > code.sourceCode > span > a:first-child::before {
   text-decoration: none;
-  left: -0.5rem;
-  color: #9EA1A6; /* gray 40 - alt: rgba(0, 188, 250, 1); blue from border */
+  left: -1rem;
+  color: #768489; /* gray 40 - alt: rgba(0, 188, 250, 1); blue from border */
+  content: counter(source-line, decimal-leading-zero);
+}
+
+.slide .container .content pre.numberSource {
+  padding-left: 3rem;
 }
