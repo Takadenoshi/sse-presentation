@@ -1,3 +1,12 @@
+#logosig-icon, .logosig-icon {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 64px;
+  height: 64px;
+  opacity: 0.66;
+}
+
 h1,
 h2,
 h3,
@@ -74,6 +83,18 @@ pre code {
 }
 
 ul li {
+  list-style: disc;
+}
+
+ul ul li {
+  list-style: circle;
+}
+
+ul ul ul li {
+  list-style: disc;
+}
+
+ul ul ul ul li {
   list-style: circle;
 }
 
@@ -320,7 +341,7 @@ code span.vs { color: #FFC670; } /* VerbatimString yellow 40 */
 code span.wa { color: #FFB23D; font-weight: bold; font-style: italic; } /* Warning yellow 50 */
 
 /* line numbers */
-pre > code.sourceCode > span > a:first-child::before {
+pre.numberSource > code.sourceCode > span > a:first-child::before {
   text-decoration: none;
   left: -1rem;
   color: #768489; /* gray 40 - alt: rgba(0, 188, 250, 1); blue from border */

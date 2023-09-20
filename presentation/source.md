@@ -385,18 +385,15 @@ source.addEventListener(
 
 - `constructor(url, { withCredentials: boolean })`
   - `withCredentials`: instantiate with CORS credentials (default: false)
-
 - Events:
   - `open`: on connection
   - `error`: on error/disconnection
   - `message`: on generic data: event received
   - `<custom>:` on named event received
-
 - `addEventListener(event_name: string, (event: Event) => void, bubbles: boolean)`
 - readyState: `CONNECTING` (0) | `OPEN` (1) | `CLOSED`(2)
   - CONNECTING: also "waiting to reconnect"
   - CLOSED: will not attempt to reconnect
-
 - close()
 
 ---

@@ -9,6 +9,15 @@ function registerVideoToggle({ code }) {
 }
 
 function wrapAllSlideContents() {
+  // remove the logosig from <body>
+  // to then add it on all slides except title
+  // - brings it over the slide background layer
+  // - hides it on the title screen
+  // - allows standalone slide generation (src is found in the html, but it wouldn't be found if we had the element/src here)
+  const logosig = document.getElementById('logosig-icon');
+  logosig.parentNode.removeChild(logosig);
+  logosig.removeAttribute("id"); // non unique IDs are not good
+
   const slides = document.querySelectorAll('.slide:not(.titlepage)')
 
   slides.forEach((slide) => {
@@ -26,6 +35,7 @@ function wrapAllSlideContents() {
 
     container.appendChild(header)
     container.appendChild(content)
+    slide.appendChild(logosig.cloneNode());
 
     slide.appendChild(container)
   })
