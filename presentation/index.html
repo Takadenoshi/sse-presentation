@@ -118,9 +118,18 @@
           </div>
   </div>
     
+<div class="slide section level1">
+
+<div id="section" class="abs-centered big-font">
+<h2>👋</h2>
+</div>
+</div>
 <div id="whois-tasos-bitsios" class="slide section level1">
-<h1>whois “Tasos Bitsios”</h1>
+<h1><code>whois</code> “Tasos Bitsios”</h1>
+<div class="columns">
+<div class="column" style="width:50%;">
 <ul>
+<li>Developer @ <a href="https://kadena.io/">Kadena</a> Developer Experience team</li>
 <li>Full stack software developer ~ 13 years
 <ul>
 <li>Somwehat backend-leaning</li>
@@ -128,16 +137,21 @@
 <li>Mostly worked in startups</li>
 </ul></li>
 <li>Long time listener, first time speaker</li>
-<li>Developer @ <a href="https://kadena.io/">Kadena</a> Developer Experience team</li>
 <li>Socials:
 <ul>
 <li><a href="https://github.com/takadenoshi">@Takadenoshi</a> on Github</li>
 <li><a href="https://x.com/takadenoshi">@Takadenoshi</a> on X</li>
 </ul></li>
 </ul>
+</div><div class="column" style="width:auto;">
+<p><img src="./assets/images/tasos-green-sunglasses.png" /></p>
+</div>
+</div>
 </div>
 <div id="whois-kadena" class="slide section level1">
-<h1>whois “Kadena”</h1>
+<h1><code>whois</code> “Kadena”</h1>
+<div class="columns">
+<div class="column" style="width:50%;">
 <ul>
 <li>Scalabe PoW Blockchain</li>
 <li>Focus on:
@@ -156,36 +170,57 @@
 <li><a href="https://kadena.io">kadena.io</a> on the Interwebs</li>
 </ul></li>
 </ul>
+</div><div class="column" style="width:auto;">
+<p><img src="./assets/icons/k-internal-icon-alpha.png" /></p>
+</div>
+</div>
+</div>
+<div class="slide section level1">
+
+<div id="sse" class="abs-centered big-font">
+<h2>SSE?</h2>
+</div>
 </div>
 <div id="server-sent-events-sse" class="slide section level1">
 <h1>Server-Sent Events (SSE)</h1>
+<div class="columns">
+<div class="column" style="width:50%;">
 <h2 id="a-server-push-protocol">A server-push protocol</h2>
 <ul>
-<li>Unidirectional: Server -&gt; Client</li>
+<li>Unidirectional
+<ul>
+<li>Server -&gt; Client</li>
+</ul></li>
 <li>Essentially a streaming HTTP/1.1 GET (or HTTP/2)
 <ul>
-<li>Connection is kept open, server writes more data as it becomes available</li>
-</ul></li>
-<li>(Web) Client side interacts with SSE endpoints using <code>EventSource</code>
-<ul>
-<li>Register <code>data</code> or custom <code>event</code> callbacks</li>
-<li>A MessageEvent Interface</li>
+<li>Connection is kept open</li>
+<li>Server writes more data as it becomes available</li>
 </ul></li>
 <li>With reconnection batteries included*
 <ul>
 <li>Terms and conditions may apply</li>
 </ul></li>
 </ul>
+</div><div class="column" style="width:auto;">
+<p><img src="./assets/images/SSE.png" class="full-width" /></p>
+</div>
+</div>
 </div>
 <div id="use-cases" class="slide section level1">
 <h1>Use cases</h1>
-<p>Replaces polling. Stream any kind of update from the server.</p>
-<ul>
-<li>notifications</li>
-<li>live ticker data</li>
-<li>live sports events</li>
-<li>anything that is UTF-8 suitable</li>
-</ul>
+<h2 id="like-polling-but-better">Like polling but better</h2>
+<div class="columns">
+<div class="column" style="width:33%;">
+<p>Notifications</p>
+<p><img src="./assets/images/use-notifications.png" /></p>
+</div><div class="column" style="width:33%;">
+<p>Async job progress</p>
+<p><img src="./assets/images/use-job-status.png" /></p>
+</div><div class="column" style="width:33%;">
+<p>Real-time ticker data</p>
+<p><img src="./assets/images/use-ticker.png" /></p>
+</div>
+</div>
 </div>
 <div id="what-is-this-new-thing" class="slide section level1">
 <h1>What is this <del>new</del> thing?</h1>
@@ -203,6 +238,45 @@
 <hr />
 <p>History: <a href="https://www.w3.org/TR/2015/REC-eventsource-20150203/">W3C Publication History</a></p>
 <p>Current: <a href="https://html.spec.whatwg.org/multipage/server-sent-events.html#server-sent-events">HTML Living Standard § 9.2</a></p>
+</div>
+<div id="can-i-use" class="slide section level1">
+<h1>Can I use?</h1>
+<p>Yes (96.11%)</p>
+<p><img src="assets/images/caniuse.png" /></p>
+<p><a href="https://caniuse.com/eventsource">caniuse.com/eventsource</a></p>
+</div>
+<div id="largely-ignored-google-trends" class="slide section level1">
+<h1>Largely ignored: Google Trends</h1>
+<div class="centered">
+<img src="./assets/images/google-trends.png" class="full-width" />
+</div>
+</div>
+<div id="largely-ignored-stackoverflow" class="slide section level1">
+<h1>Largely ignored: StackOverflow</h1>
+<div class="columns">
+<div class="column" style="width:33%;">
+<h2 id="sse-tags">SSE Tags</h2>
+<p><img src="./assets/images/so-tags-sse.png" /> <img src="./assets/images/so-tags-sse-2.png" /> <img src="./assets/images/so-tags-evtsrc.png" /></p>
+</div><div class="column" style="width:33%;">
+<h2 id="polling-tags">Polling Tags</h2>
+<p><img src="./assets/images/so-tags-polling.png" /></p>
+</div><div class="column" style="width:33%;">
+<h2 id="websocket-tags">Websocket Tags</h2>
+<p><img src="./assets/images/so-tags-ws.png" /></p>
+</div>
+</div>
+</div>
+<div id="largely-ignored-why" class="slide section level1">
+<h1>Largely ignored: why?</h1>
+<p>Contemporary to HTML5, <code>&lt;video&gt;</code>, Web sockets, Web workers, …</p>
+<div class="columns">
+<div class="column" style="width:33%;">
+<p><img src="assets/images/meme-excluded.jpg" /></p>
+</div><div class="column" style="width:auto;">
+<p><img src="./assets/images/cv.png" /></p>
+<p><a href="http://ian.hixie.ch/career/resume.html">Ian Hickson Resume</a></p>
+</div>
+</div>
 </div>
 <div id="playground-repo---download-me" class="slide section level1">
 <h1>Playground repo - download me!</h1>
@@ -317,6 +391,7 @@
 <ul>
 <li>301, 307 redirects to a 200 are OK</li>
 </ul></li>
+<li>TODO 4xx / 5xx ?</li>
 </ul>
 <p><sup><a href="https://github.com/takadenoshi/sse-presentation">Playground</a>: “Not SSE” scenario</sup></p>
 </div>
@@ -445,36 +520,49 @@
 </ul></li>
 </ul>
 </div>
-<div id="implementation-considerations-http1.1-connections-quota" class="slide section level1">
-<h1>Implementation Considerations: HTTP/1.1 connections quota</h1>
-<p>Browsers implement a <strong>per-hostname connection quota</strong> (6) for HTTP/1.1</p>
-<p>Per <a href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#listening_for_custom_events">MDN</a>:</p>
-<blockquote>
-<p>Warning: When not used over HTTP/2, SSE suffers from a <strong>limitation to the maximum number of open connections</strong>, which can be especially painful when opening multiple tabs, as the limit is per browser and is set to a very low number (6). The issue has been marked as “Won’t fix” in <a href="https://bugs.chromium.org/p/chromium/issues/detail?id=275955">Chrome</a> and <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=906896">Firefox</a>.</p>
-</blockquote>
-<blockquote>
-<p>When using HTTP/2, the maximum number of simultaneous HTTP streams is negotiated between the server and the client (defaults to 100).</p>
-</blockquote>
-<h2 id="solutions">Solutions</h2>
+<div id="implementation-considerations-no-custom-headers" class="slide section level1">
+<h1>Implementation Considerations: No custom headers</h1>
+<p>It is not possible to set custom HTTP headers on SSE requests using <code>EventSource</code></p>
+</div>
+<div id="implementation-considerations-http1.1" class="slide section level1">
+<h1>Implementation Considerations: HTTP/1.1</h1>
+<h2 id="http1.1-connections-quota">HTTP/1.1 connections quota</h2>
+<p><strong>Per-hostname connection quota</strong> over HTTP/1.1</p>
+<p>Max number of connections: 6</p>
+<p>Browser-wide enforcement (shared by all tabs)</p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#listening_for_custom_events">MDN</a> <a href="https://stackoverflow.com/questions/5195452/websockets-vs-server-sent-events-eventsource/5326159">StackOverflow</a></p>
+<p>Too much SSE without planning -&gt; choking your performance</p>
+</div>
+<div id="implementation-considerations-http1.1-1" class="slide section level1">
+<h1>Implementation Considerations: HTTP/1.1</h1>
+<h2 id="possible-solutions">Possible Solutions</h2>
 <ul>
-<li><strong>Prefer HTTP/2 where available</strong> (can-i-use 96% yes)</li>
-<li>If applicable, use an EventSource within a SharedWorker</li>
-<li>Use subdomains for SSE endpoint(s)</li>
+<li><strong>Prefer HTTP/2 where available</strong> (can-i-use 96% yes)
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#listening_for_custom_events">When using HTTP/2</a>, the maximum number of simultaneous HTTP streams is negotiated between the server and the client (defaults to 100)</li>
+</ul></li>
+<li>Use an EventSource within a SharedWorker
+<ul>
+<li>Applicable to global streams</li>
+<li>Used by all tabs</li>
+</ul></li>
+<li>Use subdomains for SSE endpoint(s)
+<ul>
+<li>Each subdomain -&gt; another 6 connection threads</li>
+<li>Global HTTP/1.1 browser limits also apply
+<ul>
+<li>Don’t overdo it</li>
+</ul></li>
+</ul></li>
 </ul>
 </div>
 <div id="implementation-considerations-reconnecting" class="slide section level1">
 <h1>Implementation Considerations: Reconnecting</h1>
-<p><strong>Default reconnection behavior implementation is not fully standardized</strong></p>
+<p><strong>Default reconnection behavior implementation issue:</strong></p>
 <p>When a network error is encountered:</p>
 <ul>
 <li>Firefox: Will <strong>stop</strong> retrying (standard compliant)</li>
 <li>Chrome: Will <strong>keep</strong> retrying (actually helpful)</li>
-</ul>
-<hr />
-<p><strong>Consider handling reconnections yourself:</strong></p>
-<ul>
-<li>Option for exponential backoff strategies</li>
-<li>Better connection timeout detection</li>
 </ul>
 <hr />
 <p>Test it out in the <a href="https://github.com/takadenoshi/sse-presentation">playground repo</a>:</p>
@@ -483,6 +571,16 @@
 <li>Open react-app in Chrome and Firefox</li>
 <li>Try to connect to any endpoint</li>
 <li>Chrome will keep trying to reconnect vs Firefox will quit after one network error</li>
+</ul>
+</div>
+<div id="implementation-considerations-reconnecting-1" class="slide section level1">
+<h1>Implementation Considerations: Reconnecting</h1>
+<p><strong>Recommendation: consider handling reconnections explicitly</strong></p>
+<ul>
+<li>Ensure uniform behavior everywhere</li>
+<li>Option for exponential backoff strategies</li>
+<li>Better connection timeout detection</li>
+<li>Rotate multiple backend endpoints</li>
 </ul>
 </div>
 <div id="implementation-considerations-proxies-1" class="slide section level1">
@@ -542,7 +640,7 @@
 <p>“Hanging GET” - server keeps connection open/hanging until there is something to write.</p>
 <p>Client loops the GET request.</p>
 </div><div class="column" style="width:32%;">
-<h2 id="sse">2/ SSE</h2>
+<h2 id="sse-1">2/ SSE</h2>
 <ul>
 <li>Like formalized, reusable long polling</li>
 <li>HTTP + REST compatible
@@ -582,7 +680,7 @@
 <p><a href="https://github.com/kadena-io/chainweb-stream">Chainweb-stream</a>:</p>
 <ul>
 <li>SSE Server</li>
-<li>Streams transactions of a certain type (specific account or contract)</li>
+<li>Streams transactions of a certain type (specific account or application/contract)</li>
 </ul>
 <p><a href="https://github.com/kadena-community/kadena.js/tree/main/packages/libs/chainweb-stream-client">Chainweb-stream-client</a>:</p>
 <ul>
@@ -592,22 +690,26 @@
 <li>Custom reconnection (exponential backoffs)</li>
 </ul>
 </div>
-<div id="can-i-use" class="slide section level1">
-<h1>Can I use?</h1>
-<p>Yes (96.11%)</p>
-<p><img src="assets/images/caniuse.png" /></p>
-<p><a href="https://caniuse.com/eventsource">caniuse.com/eventsource</a></p>
-</div>
-<div id="almost-done" class="slide section level1">
-<h1>Almost Done</h1>
+<div id="thank-you" class="slide section level1">
+<h1>Thank you</h1>
+<div class="columns">
+<div class="column" style="width:50%;">
+<h2 id="links">Links</h2>
+<p><a href="https://twitter.com/takadenoshi">Takadenoshi @ X</a></p>
+<p>[QR] <a href="https://github.com/takadenoshi/sse-presentation">Presentation source &amp; SSE playground - Github</a></p>
+<p><a href="https://takadenoshi.github.io/sse-presentation/#(1)">Presentation on Web</a></p>
+<p><a href="https://github.com/kadena-community/kadena.js/tree/main/packages/libs/chainweb-stream-client">Chainweb-stream-client</a> <a href="https://github.com/kadena-community/kadena.js/blob/main/packages/libs/chainweb-stream-client/src/index.ts">SSE Consumer</a></p>
 <h2 id="references">References</h2>
 <p><a href="https://html.spec.whatwg.org/multipage/comms.html">§ 9.1 MessageEvent Interface - HTML Living Standard</a></p>
 <p><a href="https://html.spec.whatwg.org/multipage/server-sent-events.html#server-sent-events">§ 9.2 Server-Sent Events - HTML Living Standard</a></p>
-<h2 id="links">Links</h2>
-<p><a href="https://takadenoshi.github.io/sse-presentation/#(1)">Presentation</a></p>
-<p><a href="https://github.com/takadenoshi/sse-presentation">Presentation source &amp; SSE playground - Github</a></p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events">MDN - Server-Sent Events</a></p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/EventSource">MDN - EventSource</a></p>
 <h2 id="font">Font</h2>
 <p><code>Monospace font:</code> <a href="https://kodemono.com/">Kode mono</a> by Kadena’s Isa Ozler</p>
+</div><div class="column" style="width:auto;">
+<p><img src="./assets/images/qr.png" class="full-width" /></p>
+</div>
+</div>
 </div>
   
   <script src="assets/scripts/index.js" charset="utf-8" type="text/javascript"></script>

@@ -15,19 +15,41 @@ slide_bg_is_video: true
 background: assets/images/bg.png
 ---
 
-# whois "Tasos Bitsios"
+<div class="abs-centered big-font">
+## 👋
+</div>
 
+---
+
+# `whois` "Tasos Bitsios"
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+
+- Developer @ [Kadena](https://kadena.io/) Developer Experience team
 - Full stack software developer ~ 13 years
   - Somwehat backend-leaning
   - Mostly JS/TS/node.js/React
   - Mostly worked in startups
 - Long time listener, first time speaker
-- Developer @ [Kadena](https://kadena.io/) Developer Experience team
 - Socials:
   - [\@Takadenoshi](https://github.com/takadenoshi) on Github 
   - [\@Takadenoshi](https://x.com/takadenoshi) on X
 
-# whois "Kadena"
+
+:::
+::: {.column width="auto"}
+
+![](./assets/images/tasos-green-sunglasses.png)
+
+:::
+::::::::::::::
+
+
+# `whois` "Kadena"
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
 
 - Scalabe PoW Blockchain
 - Focus on:
@@ -40,31 +62,75 @@ background: assets/images/bg.png
   - [\@kadena_io](https://x.com/kadena_io) on X
   - [kadena.io](https://kadena.io) on the Interwebs
 
+:::
+::: {.column width="auto"}
+
+![](./assets/icons/k-internal-icon-alpha.png)
+
+:::
+::::::::::::::
+
+---
+
+<div class="abs-centered big-font">
+## SSE?
+</div>
+
 ---
 
 # Server-Sent Events (SSE)
 
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+
 ## A server-push protocol
 
-- Unidirectional: Server -> Client
+- Unidirectional
+  - Server -> Client
 - Essentially a streaming HTTP/1.1 GET (or HTTP/2)
-  - Connection is kept open, server writes more data as it becomes available
-- (Web) Client side interacts with SSE endpoints using `EventSource`
-  - Register `data` or custom `event` callbacks
-  - A MessageEvent Interface
+  - Connection is kept open
+  - Server writes more data as it becomes available
 - With reconnection batteries included*
   - Terms and conditions may apply
+
+
+:::
+::: {.column width="auto"}
+
+![](./assets/images/SSE.png){.full-width}
+
+:::
+::::::::::::::
 
 ---
 
 # Use cases
 
-Replaces polling. Stream any kind of update from the server.
+## Like polling but better
 
-- notifications
-- live ticker data
-- live sports events
-- anything that is UTF-8 suitable
+:::::::::::::: {.columns}
+::: {.column width="33%"}
+
+Notifications
+
+![](./assets/images/use-notifications.png)
+
+:::
+::: {.column width="33%"}
+
+Async job progress
+
+![](./assets/images/use-job-status.png)
+
+:::
+::: {.column width="33%"}
+
+Real-time ticker data
+
+![](./assets/images/use-ticker.png)
+
+:::
+::::::::::::::
 
 ---
 
@@ -89,6 +155,74 @@ Replaces polling. Stream any kind of update from the server.
 History: [W3C Publication History](https://www.w3.org/TR/2015/REC-eventsource-20150203/)
 
 Current: [HTML Living Standard § 9.2](https://html.spec.whatwg.org/multipage/server-sent-events.html#server-sent-events) 
+
+---
+
+# Can I use?
+
+Yes (96.11%)
+
+![](assets/images/caniuse.png)
+
+[caniuse.com/eventsource](https://caniuse.com/eventsource)
+
+---
+
+# Largely ignored: Google Trends
+
+<div class="centered"> ![](./assets/images/google-trends.png){.full-width} </div>
+
+---
+
+# Largely ignored: StackOverflow
+
+:::::::::::::: {.columns}
+::: {.column width="33%"}
+
+## SSE Tags
+
+![](./assets/images/so-tags-sse.png)
+![](./assets/images/so-tags-sse-2.png)
+![](./assets/images/so-tags-evtsrc.png)
+
+:::
+::: {.column width="33%"}
+
+## Polling Tags
+
+![](./assets/images/so-tags-polling.png)
+
+:::
+::: {.column width="33%"}
+
+## Websocket Tags
+
+![](./assets/images/so-tags-ws.png)
+
+:::
+::::::::::::::
+
+---
+
+# Largely ignored: why?
+
+Contemporary to HTML5, `<video>`, Web sockets, Web workers, ...
+
+
+:::::::::::::: {.columns}
+::: {.column width="33%"}
+
+![](assets/images/meme-excluded.jpg)
+
+:::
+::: {.column width="auto"}
+
+![](./assets/images/cv.png)
+
+[Ian Hickson Resume](http://ian.hixie.ch/career/resume.html)
+
+:::
+::::::::::::::
 
 ---
 
@@ -262,6 +396,7 @@ A server can signal "do not reconnect":
 - with a `Content-Type` header other than `text/event-stream`
 - with a `2xx` response other than 200
   - 301, 307 redirects to a 200 are OK
+- TODO 4xx / 5xx ?
 
 <sup>[Playground](https://github.com/takadenoshi/sse-presentation): "Not SSE" scenario</sup>
 
@@ -414,42 +549,53 @@ source.addEventListener(
   - CONNECTING: will reconnect / waiting to reconnect / reconnecting
   - CLOSED: will not reconnect
 
+---
+
+# Implementation Considerations: No custom headers
+
+It is not possible to set custom HTTP headers on SSE requests using `EventSource`
 
 ---
 
-# Implementation Considerations: HTTP/1.1 connections quota
 
-Browsers implement a **per-hostname connection quota** (6) for HTTP/1.1
+# Implementation Considerations: HTTP/1.1
 
-Per [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#listening_for_custom_events):
+## HTTP/1.1 connections quota
 
-> Warning: When not used over HTTP/2, SSE suffers from a **limitation to the maximum number of open connections**, which can be especially painful when opening multiple tabs, as the limit is per browser and is set to a very low number (6). The issue has been marked as "Won't fix" in [Chrome](https://bugs.chromium.org/p/chromium/issues/detail?id=275955) and [Firefox](https://bugzilla.mozilla.org/show_bug.cgi?id=906896).
+**Per-hostname connection quota** over HTTP/1.1
 
-> When using HTTP/2, the maximum number of simultaneous HTTP streams is negotiated between the server and the client (defaults to 100).
+Max number of connections: 6
 
-## Solutions
+Browser-wide enforcement (shared by all tabs)
+
+[MDN](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#listening_for_custom_events) [StackOverflow](https://stackoverflow.com/questions/5195452/websockets-vs-server-sent-events-eventsource/5326159)
+
+Too much SSE without planning -> choking your performance
+
+# Implementation Considerations: HTTP/1.1
+
+## Possible Solutions
 
 - **Prefer HTTP/2 where available** (can-i-use 96% yes)
-- If applicable, use an EventSource within a SharedWorker
+  - [When using HTTP/2](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#listening_for_custom_events), the maximum number of simultaneous HTTP streams is negotiated between the server and the client (defaults to 100)
+- Use an EventSource within a SharedWorker
+  - Applicable to global streams
+  - Used by all tabs
 - Use subdomains for SSE endpoint(s)
+  - Each subdomain -> another 6 connection threads
+  - Global HTTP/1.1 browser limits also apply
+      - Don't overdo it 
 
 ---
 
 # Implementation Considerations: Reconnecting
 
-**Default reconnection behavior implementation is not fully standardized**
+**Default reconnection behavior implementation issue:**
 
 When a network error is encountered:
 
 - Firefox: Will **stop** retrying (standard compliant)
 - Chrome: Will **keep** retrying (actually helpful)
-
-<hr />
-
-**Consider handling reconnections yourself:**
-
-- Option for exponential backoff strategies
-- Better connection timeout detection
 
 <hr />
 
@@ -459,6 +605,17 @@ Test it out in the [playground repo](https://github.com/takadenoshi/sse-presenta
 - Open react-app in Chrome and Firefox
 - Try to connect to any endpoint
 - Chrome will keep trying to reconnect vs Firefox will quit after one network error
+
+---
+
+# Implementation Considerations: Reconnecting
+
+**Recommendation: consider handling reconnections explicitly**
+
+- Ensure uniform behavior everywhere
+- Option for exponential backoff strategies
+- Better connection timeout detection
+- Rotate multiple backend endpoints
 
 ---
 
@@ -602,7 +759,7 @@ Kadena's Chainweb is 20 "braided" chains -> 20x polling threads (worst case)
 [Chainweb-stream](https://github.com/kadena-io/chainweb-stream):
 
 - SSE Server
-- Streams transactions of a certain type (specific account or contract)
+- Streams transactions of a certain type (specific account or application/contract)
 
 [Chainweb-stream-client](https://github.com/kadena-community/kadena.js/tree/main/packages/libs/chainweb-stream-client):
 
@@ -613,17 +770,20 @@ Kadena's Chainweb is 20 "braided" chains -> 20x polling threads (worst case)
 
 ---
 
-# Can I use?
+# Thank you
 
-Yes (96.11%)
+:::::::::::::: {.columns}
+::: {.column width="50%"}
 
-![](assets/images/caniuse.png)
+## Links
 
-[caniuse.com/eventsource](https://caniuse.com/eventsource)
+[Takadenoshi @ X](https://twitter.com/takadenoshi)
 
----
+[QR] [Presentation source & SSE playground - Github](https://github.com/takadenoshi/sse-presentation)
 
-# Almost Done
+[Presentation on Web](https://takadenoshi.github.io/sse-presentation/#(1))
+
+[Chainweb-stream-client](https://github.com/kadena-community/kadena.js/tree/main/packages/libs/chainweb-stream-client) [SSE Consumer](https://github.com/kadena-community/kadena.js/blob/main/packages/libs/chainweb-stream-client/src/index.ts)
 
 ## References
 
@@ -631,12 +791,20 @@ Yes (96.11%)
 
 [§ 9.2 Server-Sent Events - HTML Living Standard](https://html.spec.whatwg.org/multipage/server-sent-events.html#server-sent-events)
 
-## Links
+[MDN - Server-Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events)
 
-[Presentation](https://takadenoshi.github.io/sse-presentation/#(1))
-
-[Presentation source & SSE playground - Github](https://github.com/takadenoshi/sse-presentation)
+[MDN - EventSource](https://developer.mozilla.org/en-US/docs/Web/API/EventSource)
 
 ## Font
 
 `Monospace font:` [Kode mono](https://kodemono.com/) by Kadena's Isa Ozler
+
+:::
+::: {.column width="auto"}
+
+![](./assets/images/qr.png){.full-width}
+
+:::
+::::::::::::::
+
+

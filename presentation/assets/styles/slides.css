@@ -1,12 +1,3 @@
-#logosig-icon, .logosig-icon {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  width: 64px;
-  height: 64px;
-  opacity: 0.66;
-}
-
 h1,
 h2,
 h3,
@@ -36,6 +27,7 @@ hr {
 
 div.slide.titlepage h1.title {
   padding: 0;
+  font-weight: 700;
 }
 
 div.slide.titlepage .subtitle {
@@ -350,4 +342,33 @@ pre.numberSource > code.sourceCode > span > a:first-child::before {
 
 .slide .container .content pre.numberSource {
   padding-left: 3rem;
+}
+
+#logosig-icon, .logosig-icon {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 64px;
+  height: 64px;
+  opacity: 0.66;
+}
+
+.full-width {
+  object-fit: none;
+}
+
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.abs-centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.big-font {
+  font-size: 250%;
 }
