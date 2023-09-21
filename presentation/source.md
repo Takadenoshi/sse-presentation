@@ -90,7 +90,8 @@ background: assets/images/bg.png
 - Essentially a streaming HTTP/1.1 GET (or HTTP/2)
   - Connection is kept open
   - Server writes more data as it becomes available
-- With reconnection batteries included*
+- UTF-8 only
+- With reconnection batteries included
   - Terms and conditions may apply
 
 
