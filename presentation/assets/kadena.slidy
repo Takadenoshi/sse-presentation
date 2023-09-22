@@ -122,11 +122,11 @@ $if(duration)$
 
   @keyframes animoji {
     20% {
-      opacity: 0.2;
+      opacity: 0.1;
     }
     60% {
       filter: grayscale(0.8);
-      opacity: 0.2;
+      opacity: 0.6;
     }
     80% {
       filter: grayscale(0);
@@ -138,7 +138,6 @@ $if(duration)$
     100% {
       filter: grayscale(1);
       transform: translate(-50%, 0) rotateY(90deg);
-      opacity: 0.5;
       margin-left: 20px;
       margin-top: -180px;
     }

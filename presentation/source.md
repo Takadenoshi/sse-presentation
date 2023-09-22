@@ -135,6 +135,36 @@ Real-time ticker data
 
 ---
 
+# Vs Polling
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+
+![](assets/images/Polling.png)
+
+:::
+::: {.column width="33%"}
+
+SSE Pro:
+
+- More immediate results
+  - no waiting
+- Fewer round trips
+- Less DB load
+
+SSE Con:
+
+- Keeps a connection open
+  - Can be an issue
+
+:::
+::: {.column width="33%"}
+<p style="text-align:right">![](assets/images/SSE.png)</p>
+:::
+::::::::::::::
+
+---
+
 # What is this ~~new~~ thing?
 
 🥳 SSE is 19 years old
@@ -207,42 +237,46 @@ Yes (96.11%)
 
 # Largely ignored: why?
 
-Contemporary to HTML5, `<video>`, Web sockets, Web workers, ...
+Contemporary to Web sockets, HTML5, `<video>`, Web workers, Web storage...
 
+<hr />
 
 :::::::::::::: {.columns}
-::: {.column width="33%"}
+::: {.column width="66%"}
 
-![](assets/images/meme-excluded.jpg)
+Forsaken: not notable enough
+
+Fair enough though, [Ian Hickson Resume](http://ian.hixie.ch/career/resume.html) is heavy:
+
+![](./assets/images/cv.png)
 
 :::
 ::: {.column width="auto"}
 
-![](./assets/images/cv.png)
-
-[Ian Hickson Resume](http://ian.hixie.ch/career/resume.html)
+![](assets/images/meme-excluded.jpg)
 
 :::
 ::::::::::::::
 
 ---
 
-# Playground repo - download me!
+# Interactive part - scan me!
 
 :::::::::::::: {.columns}
 ::: {.column width="60%"}
 
-Play-along repository:
+Scan the QR to react to this presentation directly.
 
-- SSE server (express)
-- React app
-- Presentation
+Demo app:
 
-[github.com/takadenoshi/sse-presentation](https://github.com/takadenoshi/sse-presentation)
+- Emote with 1 of TODO emojis
+- Stream SSE Data/logs/status
 
-Useful for examining behaviors, browser implementation differences.
+Bottom right:
 
-Repo link in QR ➡
+- Reaction emojis streamed via SSE.
+- Connection status 🔌
+- Number of streaming clients
 
 :::
 ::: {.column width="38%"}
@@ -260,8 +294,6 @@ Repo link in QR ➡
 
 The simplest server-sent event stream specifies just `data` events.
 
-Example with 2 events:
-
 ```
 > GET /stream/hello HTTP/1.1
 
@@ -272,8 +304,6 @@ Example with 2 events:
 
 < data: ReactLive are you there?\n\n
 ```
-
-Content-Type is `text/event-stream`
 
 Events separated by two newline characters `\n\n`
 
@@ -294,11 +324,11 @@ const source = new EventSource("http://localhost:3001/stream/simple");
 
 // "message" event emitted for each "data" event received
 source.addEventListener("message", event => console.log(++i, event.data), false);
+// or .onmessage = (...) if that is your jam
 
 ```
 
-The exmaple from the previous slide would trigger the callback twice, logging:
-
+Previous slide's data would result in:
 
 :::::::::::::: {.columns}
 ::: {.column width="50%"}
@@ -348,6 +378,24 @@ The `goal` and `spectator-chat` events are handled separately on the frontend
 
 ---
 
+# Named Events: Live Demo
+
+In the live reactions demo, we stream two types of things:
+
+- number of clients (as `clients` event)
+- emoji enum value (as unnamed message)
+
+```
+< event: clients
+< data: 10
+
+< data: [1,2,3,4]
+```
+
+Each event is on a separate listener and triggering the appropriate action
+
+---
+
 # Comments
 
 Any lines starting with `:` (colon) are interpreted as comments 
@@ -364,11 +412,11 @@ These are ignored on the client-side
 
 # Reconnection (1)
 
-By default*, EventSource consumers will reconnect if the connection is interrupted.
+EventSource consumers will reconnect* if the connection is interrupted.
+
+Default reconnection timeout ~ 3-5 s.
 
 <sup>\* _with implementation-specific caveats_</sup>
-
-The default reconnection timeout is up to each browser (empirically: between 3-5 s.)
 
 ## Custom timeouts
 
@@ -405,7 +453,7 @@ A server can signal "do not reconnect":
 
 # Reconnection (3) - Last-Event-ID
 
-Events can include an `id` field with any UTF-8 string as value.
+Events can include an `id` field (value: any UTF-8 string)
 
 Connection interrupted? Reconnection header `Last-Event-ID` set to the last id received.
 
@@ -792,9 +840,7 @@ Kadena's Chainweb is 20 "braided" chains -> 20x polling threads (worst case)
 
 [§ 9.2 Server-Sent Events - HTML Living Standard](https://html.spec.whatwg.org/multipage/server-sent-events.html#server-sent-events)
 
-[MDN - Server-Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events)
-
-[MDN - EventSource](https://developer.mozilla.org/en-US/docs/Web/API/EventSource)
+[MDN - Server-Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events) [EventSource](https://developer.mozilla.org/en-US/docs/Web/API/EventSource)
 
 ## Font
 

@@ -362,6 +362,9 @@ pre.numberSource > code.sourceCode > span > a:first-child::before {
   justify-content: center;
   align-items: center;
 }
+.ai-start {
+  align-items: flex-start;
+}
 .abs-centered {
   position: absolute;
   top: 50%;
