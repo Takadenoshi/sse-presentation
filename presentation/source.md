@@ -96,9 +96,9 @@ background: assets/images/bg.png
 
 
 :::
-::: {.column width="auto"}
+::: {.column width="50%"}
 
-![](./assets/images/SSE.png){.full-width}
+![](./assets/images/SSE.png)
 
 :::
 ::::::::::::::

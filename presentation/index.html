@@ -12,13 +12,24 @@
 <style type="text/css">
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    ul.task-list{list-style: none;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span { line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
     div.sourceCode { margin: 1em 0; }
     pre.sourceCode { margin: 0; }
@@ -53,7 +64,7 @@
     code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
     code span.at { color: #7d9029; } /* Attribute */
     code span.bn { color: #40a070; } /* BaseN */
-    code span.bu { } /* BuiltIn */
+    code span.bu { color: #008000; } /* BuiltIn */
     code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
     code span.ch { color: #4070a0; } /* Char */
     code span.cn { color: #880000; } /* Constant */
@@ -66,7 +77,7 @@
     code span.ex { } /* Extension */
     code span.fl { color: #40a070; } /* Float */
     code span.fu { color: #06287e; } /* Function */
-    code span.im { } /* Import */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
     code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
     code span.kw { color: #007020; font-weight: bold; } /* Keyword */
     code span.op { color: #666666; } /* Operator */
@@ -129,7 +140,8 @@
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
-<li>Developer @ <a href="https://kadena.io/">Kadena</a> Developer Experience team</li>
+<li>Developer @ <a href="https://kadena.io/">Kadena</a> Developer
+Experience team</li>
 <li>Full stack software developer ~ 13 years
 <ul>
 <li>Somwehat backend-leaning</li>
@@ -139,7 +151,8 @@
 <li>Long time listener, first time speaker</li>
 <li>Socials:
 <ul>
-<li><a href="https://github.com/takadenoshi">@Takadenoshi</a> on Github</li>
+<li><a href="https://github.com/takadenoshi">@Takadenoshi</a> on
+Github</li>
 <li><a href="https://x.com/takadenoshi">@Takadenoshi</a> on X</li>
 </ul></li>
 </ul>
@@ -165,7 +178,9 @@
 </ul></li>
 <li>Socials
 <ul>
-<li><a href="https://github.com/kadena-io">@kadena-io</a> and <a href="https://github.com/kadena-community">@kadena-community</a> on Github</li>
+<li><a href="https://github.com/kadena-io">@kadena-io</a> and <a
+href="https://github.com/kadena-community">@kadena-community</a> on
+Github</li>
 <li><a href="https://x.com/kadena_io">@kadena_io</a> on X</li>
 <li><a href="https://kadena.io">kadena.io</a> on the Interwebs</li>
 </ul></li>
@@ -202,8 +217,8 @@
 <li>Terms and conditions may apply</li>
 </ul></li>
 </ul>
-</div><div class="column" style="width:auto;">
-<p><img src="./assets/images/SSE.png" class="full-width" /></p>
+</div><div class="column" style="width:50%;">
+<p><img src="./assets/images/SSE.png" /></p>
 </div>
 </div>
 </div>
@@ -229,22 +244,34 @@
 <p>🔧 13 years of mainstream support</p>
 <hr />
 <ul>
-<li>2004 Sep 23 · <a href="https://web.archive.org/web/20041009144718/http://www.whatwg.org/specs/web-apps/current-work/#server-sent">Server-sent DOM Events</a>, Ian Hickson, Opera Software, WHATWG Web Applications 1.0</li>
+<li>2004 Sep 23 · <a
+href="https://web.archive.org/web/20041009144718/http://www.whatwg.org/specs/web-apps/current-work/#server-sent">Server-sent
+DOM Events</a>, Ian Hickson, Opera Software, WHATWG Web Applications
+1.0</li>
 <li>2006 · [Production] Opera browser implementation</li>
-<li>2009 · <a href="https://www.w3.org/TR/2009/WD-eventsource-20090423/">W3C Working Draft</a>, Ian Hickson, Google Inc</li>
+<li>2009 · <a
+href="https://www.w3.org/TR/2009/WD-eventsource-20090423/">W3C Working
+Draft</a>, Ian Hickson, Google Inc</li>
 <li>2010 · [Production] Safari v5, Chrome v6</li>
 <li>2011 · [Production] Firefox v6,</li>
-<li>2015 · <a href="https://www.w3.org/TR/2015/REC-eventsource-20150203/">W3C Recommendation</a></li>
+<li>2015 · <a
+href="https://www.w3.org/TR/2015/REC-eventsource-20150203/">W3C
+Recommendation</a></li>
 </ul>
 <hr />
-<p>History: <a href="https://www.w3.org/TR/2015/REC-eventsource-20150203/">W3C Publication History</a></p>
-<p>Current: <a href="https://html.spec.whatwg.org/multipage/server-sent-events.html#server-sent-events">HTML Living Standard § 9.2</a></p>
+<p>History: <a
+href="https://www.w3.org/TR/2015/REC-eventsource-20150203/">W3C
+Publication History</a></p>
+<p>Current: <a
+href="https://html.spec.whatwg.org/multipage/server-sent-events.html#server-sent-events">HTML
+Living Standard § 9.2</a></p>
 </div>
 <div id="can-i-use" class="slide section level1">
 <h1>Can I use?</h1>
 <p>Yes (96.11%)</p>
 <p><img src="assets/images/caniuse.png" /></p>
-<p><a href="https://caniuse.com/eventsource">caniuse.com/eventsource</a></p>
+<p><a
+href="https://caniuse.com/eventsource">caniuse.com/eventsource</a></p>
 </div>
 <div id="largely-ignored-google-trends" class="slide section level1">
 <h1>Largely ignored: Google Trends</h1>
@@ -257,7 +284,9 @@
 <div class="columns">
 <div class="column" style="width:33%;">
 <h2 id="sse-tags">SSE Tags</h2>
-<p><img src="./assets/images/so-tags-sse.png" /> <img src="./assets/images/so-tags-sse-2.png" /> <img src="./assets/images/so-tags-evtsrc.png" /></p>
+<p><img src="./assets/images/so-tags-sse.png" /> <img
+src="./assets/images/so-tags-sse-2.png" /> <img
+src="./assets/images/so-tags-evtsrc.png" /></p>
 </div><div class="column" style="width:33%;">
 <h2 id="polling-tags">Polling Tags</h2>
 <p><img src="./assets/images/so-tags-polling.png" /></p>
@@ -269,13 +298,15 @@
 </div>
 <div id="largely-ignored-why" class="slide section level1">
 <h1>Largely ignored: why?</h1>
-<p>Contemporary to HTML5, <code>&lt;video&gt;</code>, Web sockets, Web workers, …</p>
+<p>Contemporary to HTML5, <code>&lt;video&gt;</code>, Web sockets, Web
+workers, …</p>
 <div class="columns">
 <div class="column" style="width:33%;">
 <p><img src="assets/images/meme-excluded.jpg" /></p>
 </div><div class="column" style="width:auto;">
 <p><img src="./assets/images/cv.png" /></p>
-<p><a href="http://ian.hixie.ch/career/resume.html">Ian Hickson Resume</a></p>
+<p><a href="http://ian.hixie.ch/career/resume.html">Ian Hickson
+Resume</a></p>
 </div>
 </div>
 </div>
@@ -289,8 +320,10 @@
 <li>React app</li>
 <li>Presentation</li>
 </ul>
-<p><a href="https://github.com/takadenoshi/sse-presentation">github.com/takadenoshi/sse-presentation</a></p>
-<p>Useful for examining behaviors, browser implementation differences.</p>
+<p><a
+href="https://github.com/takadenoshi/sse-presentation">github.com/takadenoshi/sse-presentation</a></p>
+<p>Useful for examining behaviors, browser implementation
+differences.</p>
 <p>Repo link in QR ➡</p>
 </div><div class="column" style="width:38%;">
 <p><img src="assets/images/qr.png" /></p>
@@ -299,7 +332,8 @@
 </div>
 <div id="minimum-viable-sse-response" class="slide section level1">
 <h1>Minimum Viable SSE response</h1>
-<p>The simplest server-sent event stream specifies just <code>data</code> events.</p>
+<p>The simplest server-sent event stream specifies just
+<code>data</code> events.</p>
 <p>Example with 2 events:</p>
 <pre><code>&gt; GET /stream/hello HTTP/1.1
 
@@ -312,18 +346,22 @@
 <p>Content-Type is <code>text/event-stream</code></p>
 <p>Events separated by two newline characters <code>\n\n</code></p>
 <p>Data is encoded in UTF-8 (mandatory)</p>
-<p><sup><a href="https://github.com/takadenoshi/sse-presentation">Playground</a>: “simple” scenario</sup></p>
+<p><sup><a
+href="https://github.com/takadenoshi/sse-presentation">Playground</a>:
+“simple” scenario</sup></p>
 </div>
 <div id="simple-eventsource-consumer" class="slide section level1">
 <h1>Simple EventSource consumer</h1>
 <p>Server-sent events are consumed with <code>EventSource</code>:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource javascript numberLines"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">let</span> i<span class="op">=</span><span class="dv">0</span><span class="op">;</span></span>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode numberSource javascript numberLines"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">let</span> i<span class="op">=</span><span class="dv">0</span><span class="op">;</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a></span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="kw">const</span> source <span class="op">=</span> <span class="kw">new</span> <span class="bu">EventSource</span>(<span class="st">&quot;http://localhost:3001/stream/simple&quot;</span>)<span class="op">;</span></span>
 <span id="cb2-4"><a href="#cb2-4"></a></span>
 <span id="cb2-5"><a href="#cb2-5"></a><span class="co">// &quot;message&quot; event emitted for each &quot;data&quot; event received</span></span>
 <span id="cb2-6"><a href="#cb2-6"></a>source<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">&quot;message&quot;</span><span class="op">,</span> <span class="bu">event</span> <span class="kw">=&gt;</span> <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="op">++</span>i<span class="op">,</span> <span class="bu">event</span><span class="op">.</span><span class="at">data</span>)<span class="op">,</span> <span class="kw">false</span>)<span class="op">;</span></span></code></pre></div>
-<p>The exmaple from the previous slide would trigger the callback twice, logging:</p>
+<p>The exmaple from the previous slide would trigger the callback twice,
+logging:</p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <pre><code>&lt; HTTP/1.1 200 OK
@@ -344,13 +382,15 @@
 </div>
 <div id="named-events" class="slide section level1">
 <h1>Named Events</h1>
-<p>You can “namespace” your events using the <code>event</code> field with any custom name:</p>
+<p>You can “namespace” your events using the <code>event</code> field
+with any custom name:</p>
 <pre><code>&lt; event: goal
 &lt; data: &quot;ARS-LIV 1-1 45&quot;\n\n
 
 &lt; event: spectator-chat
 &lt; data: &quot;Did you see that ludicrous display just now&quot;\n\n</code></pre>
-<p>The <code>goal</code> and <code>spectator-chat</code> events are handled separately on the frontend</p>
+<p>The <code>goal</code> and <code>spectator-chat</code> events are
+handled separately on the frontend</p>
 <ul>
 <li>Allows multiplexing / routing events
 <ul>
@@ -360,7 +400,8 @@
 </div>
 <div id="comments" class="slide section level1">
 <h1>Comments</h1>
-<p>Any lines starting with <code>:</code> (colon) are interpreted as comments</p>
+<p>Any lines starting with <code>:</code> (colon) are interpreted as
+comments</p>
 <pre><code>&lt; data: this or that\n\n
 
 &lt; :TODO emit some events in the near future</code></pre>
@@ -368,9 +409,11 @@
 </div>
 <div id="reconnection-1" class="slide section level1">
 <h1>Reconnection (1)</h1>
-<p>By default*, EventSource consumers will reconnect if the connection is interrupted.</p>
+<p>By default*, EventSource consumers will reconnect if the connection
+is interrupted.</p>
 <p><sup>* <em>with implementation-specific caveats</em></sup></p>
-<p>The default reconnection timeout is up to each browser (empirically: between 3-5 s.)</p>
+<p>The default reconnection timeout is up to each browser (empirically:
+between 3-5 s.)</p>
 <h2 id="custom-timeouts">Custom timeouts</h2>
 <p>The reconnection timeout can be customized.</p>
 <p>Emit a <code>retry:</code> field in any of the events:</p>
@@ -380,37 +423,48 @@
 <li>Value is in milliseconds</li>
 <li>Timeouts are linear</li>
 </ul>
-<p><sup><a href="https://github.com/takadenoshi/sse-presentation">Playground</a>: “Retry-flaky” scenario</sup></p>
+<p><sup><a
+href="https://github.com/takadenoshi/sse-presentation">Playground</a>:
+“Retry-flaky” scenario</sup></p>
 </div>
 <div id="reconnection-2" class="slide section level1">
 <h1>Reconnection (2)</h1>
 <h2 id="computer-can-say-no">Computer can say no</h2>
 <p>A server can signal “do not reconnect”:</p>
 <ul>
-<li>with a <code>Content-Type</code> header other than <code>text/event-stream</code></li>
+<li>with a <code>Content-Type</code> header other than
+<code>text/event-stream</code></li>
 <li>with a <code>2xx</code> response other than 200
 <ul>
 <li>301, 307 redirects to a 200 are OK</li>
 </ul></li>
 <li>TODO 4xx / 5xx ?</li>
 </ul>
-<p><sup><a href="https://github.com/takadenoshi/sse-presentation">Playground</a>: “Not SSE” scenario</sup></p>
+<p><sup><a
+href="https://github.com/takadenoshi/sse-presentation">Playground</a>:
+“Not SSE” scenario</sup></p>
 </div>
 <div id="reconnection-3---last-event-id" class="slide section level1">
 <h1>Reconnection (3) - Last-Event-ID</h1>
-<p>Events can include an <code>id</code> field with any UTF-8 string as value.</p>
-<p>Connection interrupted? Reconnection header <code>Last-Event-ID</code> set to the last id received.</p>
+<p>Events can include an <code>id</code> field with any UTF-8 string as
+value.</p>
+<p>Connection interrupted? Reconnection header
+<code>Last-Event-ID</code> set to the last id received.</p>
 <p>This allows the server to resume gracefully.</p>
 <hr />
 <p>If this is the last event received in a stream that disconnects:</p>
 <pre><code>&lt; id: data-0
 &lt; retry: 5000
 &lt; data: Data Zero event\n</code></pre>
-<p>Then the connection timeout will be 5 seconds, and the <code>Last-Event-ID</code> header will be set to <code>data-0</code>.</p>
+<p>Then the connection timeout will be 5 seconds, and the
+<code>Last-Event-ID</code> header will be set to
+<code>data-0</code>.</p>
 <pre><code>&gt; GET /stream/notifications HTTP/1.1
 &gt; Host: localhost:3001
 &gt; Last-Event-ID: data-0</code></pre>
-<p><sup><a href="https://github.com/takadenoshi/sse-presentation">Playground</a>: “notifications” scenario</sup></p>
+<p><sup><a
+href="https://github.com/takadenoshi/sse-presentation">Playground</a>:
+“notifications” scenario</sup></p>
 </div>
 <div id="full-sse-response" class="slide section level1">
 <h1>Full SSE response</h1>
@@ -425,7 +479,8 @@
 <li>Named events <code>event: status</code></li>
 </ul>
 </div><div class="column" style="width:55%;">
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource numberLines"><code class="sourceCode"><span id="cb10-1"><a href="#cb10-1"></a>&gt; GET /stream/hello HTTP/1.1</span>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode numberSource numberLines"><code class="sourceCode"><span id="cb10-1"><a href="#cb10-1"></a>&gt; GET /stream/hello HTTP/1.1</span>
 <span id="cb10-2"><a href="#cb10-2"></a></span>
 <span id="cb10-3"><a href="#cb10-3"></a>&lt; HTTP/1.1 200 OK</span>
 <span id="cb10-4"><a href="#cb10-4"></a>&lt; Content-Type: text/event-stream</span>
@@ -444,8 +499,10 @@
 </div>
 <div id="eventsource-custom-events" class="slide section level1">
 <h1>EventSource: custom events</h1>
-<p>You can subscribe to custom events (e.g. <code>status</code>) with <code>.addEventListener</code>:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource javascript numberLines"><code class="sourceCode javascript"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">const</span> source <span class="op">=</span> <span class="kw">new</span> <span class="bu">EventSource</span>(<span class="st">&#39;/stream/hello&#39;</span>)<span class="op">;</span></span>
+<p>You can subscribe to custom events (e.g. <code>status</code>) with
+<code>.addEventListener</code>:</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode numberSource javascript numberLines"><code class="sourceCode javascript"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">const</span> source <span class="op">=</span> <span class="kw">new</span> <span class="bu">EventSource</span>(<span class="st">&#39;/stream/hello&#39;</span>)<span class="op">;</span></span>
 <span id="cb11-2"><a href="#cb11-2"></a></span>
 <span id="cb11-3"><a href="#cb11-3"></a><span class="co">// [name]: triggers for custom named event, here: &quot;status&quot;</span></span>
 <span id="cb11-4"><a href="#cb11-4"></a>source<span class="op">.</span><span class="fu">addEventListener</span>(</span>
@@ -463,8 +520,10 @@
 </div>
 <div id="eventsource-connection-events" class="slide section level1">
 <h1>EventSource: connection events</h1>
-<p>Subscribe to <code>open</code> and <code>error</code> for connection management:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource javascript numberLines"><code class="sourceCode javascript"><span id="cb12-1"><a href="#cb12-1"></a><span class="co">// on connection established</span></span>
+<p>Subscribe to <code>open</code> and <code>error</code> for connection
+management:</p>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode numberSource javascript numberLines"><code class="sourceCode javascript"><span id="cb12-1"><a href="#cb12-1"></a><span class="co">// on connection established</span></span>
 <span id="cb12-2"><a href="#cb12-2"></a>source<span class="op">.</span><span class="fu">addEventListener</span>(</span>
 <span id="cb12-3"><a href="#cb12-3"></a>  <span class="st">&quot;open&quot;</span><span class="op">,</span></span>
 <span id="cb12-4"><a href="#cb12-4"></a>  (<span class="bu">event</span>) <span class="kw">=&gt;</span> { <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;Connection status&quot;</span>)<span class="op">;</span> }<span class="op">,</span></span>
@@ -483,7 +542,8 @@
 <ul>
 <li><code>constructor(url, { withCredentials: boolean })</code>
 <ul>
-<li><code>withCredentials</code>: instantiate with CORS credentials (default: false)</li>
+<li><code>withCredentials</code>: instantiate with CORS credentials
+(default: false)</li>
 </ul></li>
 <li>Events:
 <ul>
@@ -493,7 +553,8 @@
 <li><code>&lt;custom&gt;:</code> on named event received</li>
 </ul></li>
 <li><code>addEventListener(event_name: string, (event: Event) =&gt; void, bubbles: boolean)</code></li>
-<li>readyState: <code>CONNECTING</code> (0) | <code>OPEN</code> (1) | <code>CLOSED</code>(2)
+<li>readyState: <code>CONNECTING</code> (0) | <code>OPEN</code> (1) |
+<code>CLOSED</code>(2)
 <ul>
 <li>CONNECTING: also “waiting to reconnect”</li>
 <li>CLOSED: will not attempt to reconnect</li>
@@ -513,34 +574,47 @@
 <ul>
 <li>usually output in console</li>
 </ul></li>
-<li><p>Some disconnections can be “fatal”, cancelling the reconnection policy.</p></li>
-<li><p>Inspect <code>readyState</code> to find out EventSource’s intent:</p>
+<li><p>Some disconnections can be “fatal”, cancelling the reconnection
+policy.</p></li>
+<li><p>Inspect <code>readyState</code> to find out EventSource’s
+intent:</p>
 <ul>
-<li>CONNECTING: will reconnect / waiting to reconnect / reconnecting</li>
+<li>CONNECTING: will reconnect / waiting to reconnect /
+reconnecting</li>
 <li>CLOSED: will not reconnect</li>
 </ul></li>
 </ul>
 </div>
-<div id="implementation-considerations-no-custom-headers" class="slide section level1">
+<div id="implementation-considerations-no-custom-headers"
+class="slide section level1">
 <h1>Implementation Considerations: No custom headers</h1>
-<p>It is not possible to set custom HTTP headers on SSE requests using <code>EventSource</code></p>
+<p>It is not possible to set custom HTTP headers on SSE requests using
+<code>EventSource</code></p>
 </div>
-<div id="implementation-considerations-http1.1" class="slide section level1">
+<div id="implementation-considerations-http1.1"
+class="slide section level1">
 <h1>Implementation Considerations: HTTP/1.1</h1>
 <h2 id="http1.1-connections-quota">HTTP/1.1 connections quota</h2>
 <p><strong>Per-hostname connection quota</strong> over HTTP/1.1</p>
 <p>Max number of connections: 6</p>
 <p>Browser-wide enforcement (shared by all tabs)</p>
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#listening_for_custom_events">MDN</a> <a href="https://stackoverflow.com/questions/5195452/websockets-vs-server-sent-events-eventsource/5326159">StackOverflow</a></p>
+<p><a
+href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#listening_for_custom_events">MDN</a>
+<a
+href="https://stackoverflow.com/questions/5195452/websockets-vs-server-sent-events-eventsource/5326159">StackOverflow</a></p>
 <p>Too much SSE without planning -&gt; choking your performance</p>
 </div>
-<div id="implementation-considerations-http1.1-1" class="slide section level1">
+<div id="implementation-considerations-http1.1-1"
+class="slide section level1">
 <h1>Implementation Considerations: HTTP/1.1</h1>
 <h2 id="possible-solutions">Possible Solutions</h2>
 <ul>
 <li><strong>Prefer HTTP/2 where available</strong> (can-i-use 96% yes)
 <ul>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#listening_for_custom_events">When using HTTP/2</a>, the maximum number of simultaneous HTTP streams is negotiated between the server and the client (defaults to 100)</li>
+<li><a
+href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#listening_for_custom_events">When
+using HTTP/2</a>, the maximum number of simultaneous HTTP streams is
+negotiated between the server and the client (defaults to 100)</li>
 </ul></li>
 <li>Use an EventSource within a SharedWorker
 <ul>
@@ -557,26 +631,34 @@
 </ul></li>
 </ul>
 </div>
-<div id="implementation-considerations-reconnecting" class="slide section level1">
+<div id="implementation-considerations-reconnecting"
+class="slide section level1">
 <h1>Implementation Considerations: Reconnecting</h1>
-<p><strong>Default reconnection behavior implementation issue:</strong></p>
+<p><strong>Default reconnection behavior implementation
+issue:</strong></p>
 <p>When a network error is encountered:</p>
 <ul>
-<li>Firefox: Will <strong>stop</strong> retrying (standard compliant)</li>
+<li>Firefox: Will <strong>stop</strong> retrying (standard
+compliant)</li>
 <li>Chrome: Will <strong>keep</strong> retrying (actually helpful)</li>
 </ul>
 <hr />
-<p>Test it out in the <a href="https://github.com/takadenoshi/sse-presentation">playground repo</a>:</p>
+<p>Test it out in the <a
+href="https://github.com/takadenoshi/sse-presentation">playground
+repo</a>:</p>
 <ul>
 <li>Start react-app but not the server</li>
 <li>Open react-app in Chrome and Firefox</li>
 <li>Try to connect to any endpoint</li>
-<li>Chrome will keep trying to reconnect vs Firefox will quit after one network error</li>
+<li>Chrome will keep trying to reconnect vs Firefox will quit after one
+network error</li>
 </ul>
 </div>
-<div id="implementation-considerations-reconnecting-1" class="slide section level1">
+<div id="implementation-considerations-reconnecting-1"
+class="slide section level1">
 <h1>Implementation Considerations: Reconnecting</h1>
-<p><strong>Recommendation: consider handling reconnections explicitly</strong></p>
+<p><strong>Recommendation: consider handling reconnections
+explicitly</strong></p>
 <ul>
 <li>Ensure uniform behavior everywhere</li>
 <li>Option for exponential backoff strategies</li>
@@ -584,45 +666,60 @@
 <li>Rotate multiple backend endpoints</li>
 </ul>
 </div>
-<div id="implementation-considerations-proxies-1" class="slide section level1">
+<div id="implementation-considerations-proxies-1"
+class="slide section level1">
 <h1>Implementation Considerations: Proxies (1)</h1>
 <h2 id="proxies-can-kill">Proxies can kill</h2>
-<p>Proxies, load balancers and other networking middleware can kill idle connections after a short while.</p>
+<p>Proxies, load balancers and other networking middleware can kill idle
+connections after a short while.</p>
 <p>Two approaches to fix this:</p>
 <hr />
 <h2 id="comment-not-client-aware">1/ Comment (not client-aware)</h2>
-<p>You can emit a comment (any line starting with a colon <code>:</code>)</p>
+<p>You can emit a comment (any line starting with a colon
+<code>:</code>)</p>
 <pre><code>&lt; :bump</code></pre>
 <p>Good enough to keep connection alive.</p>
 <p>EventSource won’t emit any event.</p>
 </div>
-<div id="implementation-considerations-proxies-2" class="slide section level1">
+<div id="implementation-considerations-proxies-2"
+class="slide section level1">
 <h1>Implementation Considerations: Proxies (2)</h1>
 <h2 id="proxies-can-kill-1">Proxies can kill</h2>
-<p>Proxies, load balancers and other networking middleware can kill idle connections after a short while.</p>
+<p>Proxies, load balancers and other networking middleware can kill idle
+connections after a short while.</p>
 <p>Two approaches to fix this:</p>
 <hr />
-<h2 id="heartbeat-event-client-aware">2/ Heartbeat event (client-aware)</h2>
+<h2 id="heartbeat-event-client-aware">2/ Heartbeat event
+(client-aware)</h2>
 <p>Emit a custom “heartbeat” or “ping” event every 15 seconds or so:</p>
 <pre><code>&lt; event: heartbeat
 &lt; data: &quot;&quot;</code></pre>
 <p>(data field <strong>must</strong> be present)</p>
-<p>The client can listen to this event and use it to detect stale connections:</p>
-<p><strong>“expect heartbeats every N seconds, otherwise reconnect”</strong></p>
+<p>The client can listen to this event and use it to detect stale
+connections:</p>
+<p><strong>“expect heartbeats every N seconds, otherwise
+reconnect”</strong></p>
 <p>Preferred approach, especially for important payloads.</p>
 </div>
-<div id="implementation-considerations-service-workers-firefox" class="slide section level1">
+<div id="implementation-considerations-service-workers-firefox"
+class="slide section level1">
 <h1>Implementation Considerations: Service Workers (Firefox)</h1>
-<h2 id="firefox-service-workers-eventsource">Firefox Service Workers 💔 EventSource</h2>
-<p>Firefox has yet to implement support for EventSource in its Service Worker context.</p>
-<p>Future people can track the present validity of this statement <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1681218">here</a>.</p>
+<h2 id="firefox-service-workers-eventsource">Firefox Service Workers 💔
+EventSource</h2>
+<p>Firefox has yet to implement support for EventSource in its Service
+Worker context.</p>
+<p>Future people can track the present validity of this statement <a
+href="https://bugzilla.mozilla.org/show_bug.cgi?id=1681218">here</a>.</p>
 <p>✅ But you can use it in a SharedWorker</p>
 </div>
-<div id="implementation-considerations-last-event-id-detail" class="slide section level1">
+<div id="implementation-considerations-last-event-id-detail"
+class="slide section level1">
 <h1>Implementation Considerations: Last-Event-ID detail</h1>
-<p><strong>If no event is emitted in the subsequent connection’s lifetime, the Last-Event-ID is reset.</strong></p>
+<p><strong>If no event is emitted in the subsequent connection’s
+lifetime, the Last-Event-ID is reset.</strong></p>
 <hr />
-<p>When a reconnected session is initialized with <code>Last-Event-ID: Some-id</code></p>
+<p>When a reconnected session is initialized with
+<code>Last-Event-ID: Some-id</code></p>
 <p>And the connection emits no messages for its lifetime,</p>
 <p>Then the Last-Event-ID value is <em>reset</em>.</p>
 </div>
@@ -638,7 +735,8 @@
 </ul>
 <p>Benefit: Doesn’t “hog” a connection (HTTP/1.1)</p>
 <h2 id="b-long-polling">1b/ Long Polling</h2>
-<p>“Hanging GET” - server keeps connection open/hanging until there is something to write.</p>
+<p>“Hanging GET” - server keeps connection open/hanging until there is
+something to write.</p>
 <p>Client loops the GET request.</p>
 </div><div class="column" style="width:32%;">
 <h2 id="sse-1">2/ SSE</h2>
@@ -677,13 +775,17 @@
 <div id="kadena-use-case" class="slide section level1">
 <h1>Kadena use case</h1>
 <p>Blockchain stuff usually comes with lots of polling.</p>
-<p>Kadena’s Chainweb is 20 “braided” chains -&gt; 20x polling threads (worst case)</p>
-<p><a href="https://github.com/kadena-io/chainweb-stream">Chainweb-stream</a>:</p>
+<p>Kadena’s Chainweb is 20 “braided” chains -&gt; 20x polling threads
+(worst case)</p>
+<p><a
+href="https://github.com/kadena-io/chainweb-stream">Chainweb-stream</a>:</p>
 <ul>
 <li>SSE Server</li>
-<li>Streams transactions of a certain type (specific account or application/contract)</li>
+<li>Streams transactions of a certain type (specific account or
+application/contract)</li>
 </ul>
-<p><a href="https://github.com/kadena-community/kadena.js/tree/main/packages/libs/chainweb-stream-client">Chainweb-stream-client</a>:</p>
+<p><a
+href="https://github.com/kadena-community/kadena.js/tree/main/packages/libs/chainweb-stream-client">Chainweb-stream-client</a>:</p>
 <ul>
 <li>Client side lib (node, browser)</li>
 <li>Detects stale connections (heartbeat events)</li>
@@ -697,16 +799,32 @@
 <div class="column" style="width:50%;">
 <h2 id="links">Links</h2>
 <p><a href="https://twitter.com/takadenoshi">Takadenoshi @ X</a></p>
-<p>[QR] <a href="https://github.com/takadenoshi/sse-presentation">Presentation source &amp; SSE playground - Github</a></p>
-<p><a href="https://takadenoshi.github.io/sse-presentation/#(1)">Presentation on Web</a></p>
-<p><a href="https://github.com/kadena-community/kadena.js/tree/main/packages/libs/chainweb-stream-client">Chainweb-stream-client</a> <a href="https://github.com/kadena-community/kadena.js/blob/main/packages/libs/chainweb-stream-client/src/index.ts">SSE Consumer</a></p>
+<p>[QR] <a
+href="https://github.com/takadenoshi/sse-presentation">Presentation
+source &amp; SSE playground - Github</a></p>
+<p><a
+href="https://takadenoshi.github.io/sse-presentation/#(1)">Presentation
+on Web</a></p>
+<p><a
+href="https://github.com/kadena-community/kadena.js/tree/main/packages/libs/chainweb-stream-client">Chainweb-stream-client</a>
+<a
+href="https://github.com/kadena-community/kadena.js/blob/main/packages/libs/chainweb-stream-client/src/index.ts">SSE
+Consumer</a></p>
 <h2 id="references">References</h2>
-<p><a href="https://html.spec.whatwg.org/multipage/comms.html">§ 9.1 MessageEvent Interface - HTML Living Standard</a></p>
-<p><a href="https://html.spec.whatwg.org/multipage/server-sent-events.html#server-sent-events">§ 9.2 Server-Sent Events - HTML Living Standard</a></p>
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events">MDN - Server-Sent Events</a></p>
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/EventSource">MDN - EventSource</a></p>
+<p><a href="https://html.spec.whatwg.org/multipage/comms.html">§ 9.1
+MessageEvent Interface - HTML Living Standard</a></p>
+<p><a
+href="https://html.spec.whatwg.org/multipage/server-sent-events.html#server-sent-events">§
+9.2 Server-Sent Events - HTML Living Standard</a></p>
+<p><a
+href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events">MDN
+- Server-Sent Events</a></p>
+<p><a
+href="https://developer.mozilla.org/en-US/docs/Web/API/EventSource">MDN
+- EventSource</a></p>
 <h2 id="font">Font</h2>
-<p><code>Monospace font:</code> <a href="https://kodemono.com/">Kode mono</a> by Kadena’s Isa Ozler</p>
+<p><code>Monospace font:</code> <a href="https://kodemono.com/">Kode
+mono</a> by Kadena’s Isa Ozler</p>
 </div><div class="column" style="width:auto;">
 <p><img src="./assets/images/qr.png" class="full-width" /></p>
 </div>
