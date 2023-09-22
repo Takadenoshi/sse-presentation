@@ -1,0 +1,40 @@
+body {
+  background: #232323;
+  color: #eee;
+}
+
+.App {
+  max-height: 100vh;
+}
+
+.container {
+  flex-grow: 1;
+  height: 90vh;
+  overflow-y: scroll;
+}
+
+.buttons {
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button {
+  background: #454545;
+  font-size: 2rem;
+  margin: 0.5rem;
+  padding: 1rem;
+  border-radius: 10%;
+  aspect-ratio: 1;
+  width: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: font-size 200ms;
+}
+
+.button:hover {
+  font-size: 2.5rem;
+  cursor: pointer;
+}

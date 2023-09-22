@@ -39,7 +39,7 @@ export default function register(server) {
     let { uuid } = req.cookies;
     if (!uuid) {
       uuid = uuidv4();
-      res.cookie('uuid', uuid);
+      res.cookie('uuid', uuid, { maxAge: 86400000, httpOnly: true });
     }
     connected.set(uuid, 1 + (connected.get(uuid) ?? 0));
     updateConnected();

@@ -85,15 +85,124 @@
 <link rel="stylesheet" type="text/css" media="screen, projection, print" href="assets/styles/slides.css" />
 <script src="https://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js" charset="utf-8" type="text/javascript"></script>
 <script>
-    window.showvideo = () => {
-      const video = document.getElementById('video-cover');
-      video.playbackRate = 0.5;
-      video.play();
-      video.style.display = 'block';
-    }
+  window.showvideo = () => {
+    const video = document.getElementById('video-cover');
+    video.playbackRate = 0.5;
+    video.play();
+    video.style.display = 'block';
+  }
+
+  function set(id, val) {
+    const elem = document.getElementById(id);
+    elem.innerText = val;
+  }
+
+  const sse = new EventSource('http://localhost:3001/demo/emoji');
+
+  sse.addEventListener('open', () => {
+    set('status', '🔌');
+  });
+
+  sse.addEventListener('error', ({ data }) => {
+    set('status', '.');
+    set('num-clients', '');
+  });
+
+  sse.addEventListener('clients', ({ data }) => {
+    set('num-clients', data);
+  });
+
+  const emojiMap = {
+    1: "🙂",
+    2: "🙃",
+  }
+
+  function launchEmoji(val) {
+    const elem = document.createElement('div');
+    elem.classList.add('emoji');
+    elem.innerText = emojiMap[val];
+    elem.style.top = random(60, -120) + 'px';
+    elem.style.left = random(0, 80) + '%';
+    document.getElementById('launchpad').appendChild(elem);
+    setTimeout(() => elem.parentNode.removeChild(elem), 10_000);
+  }
+
+  sse.addEventListener('message', ({ data }) => {
+    JSON.parse(data).forEach(
+      (val, idx) => setTimeout(() => launchEmoji(val), idx * 100)
+    );
+  });
+
+  function random(start, end) {
+    const diff = end - start;
+    return start + Math.floor(Math.random() * diff);
+  }
 </script>
+<style>
+#indicators {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 70px;
+  right: 0;
+  z-index: 30;
+  color: #666;
+  width: 64px;
+}
+#indicators div {
+  text-align: center;
+}
+#num-clients {
+  font-size: 1rem;
+}
+  #status {
+    opacity: 0.7;
+  }
+.emoji {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  animation: animoji 1s forwards;
+  transform: translate(-50%, 0) scale(0.1);
+  filter: grayscale(1);
+  transition-timing-function: ease-in;
+    opacity: 0;
+  }
+
+  @keyframes animoji {
+    20% {
+      opacity: 0.2;
+    }
+    60% {
+      filter: grayscale(0.8);
+      opacity: 0.2;
+    }
+    80% {
+      filter: grayscale(0);
+      margin-top: -180px;
+      transform: translate(-50%, 0) scale(1) rotateY(0deg);
+      opacity: 1;
+      margin-left: 0px;
+    }
+    100% {
+      filter: grayscale(1);
+      transform: translate(-50%, 0) rotateY(90deg);
+      opacity: 0.5;
+      margin-left: 20px;
+      margin-top: -180px;
+    }
+  }
+</style>
 </head>
 <body>
+  <div id="indicators">
+    <div id="status"></div>
+    <div id="num-clients"></div>
+    <div id="launchpad">
+    </div>
+  </div>
   
   <img class="logosig-icon" id="logosig-icon" src="assets/icons/k-internal-icon-alpha.png" />
 

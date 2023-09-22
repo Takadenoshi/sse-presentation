@@ -1,4 +1,11 @@
 function registerVideoToggle({ code }) {
+  if (code === 'KeyI') {
+    const indicators = document.querySelector('#indicators');
+    if (!indicators)
+      return;
+    const { display: prevDisplay } = indicators.style;
+    indicators.style.display = prevDisplay === 'flex' ? 'none' : 'flex';
+  }
   if (code === 'KeyV') {
     const video = document.querySelector('#video-cover');
     if (!video)
