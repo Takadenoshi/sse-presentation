@@ -9,4 +9,4 @@ export const EMOJI_MAP = {
   2: "🙃",
 }
 
-export const API_SERVER = 'http://localhost:3001';
+export const API_SERVER = process.env.REACT_APP_ENDPOINT ?? 'http://localhost:3001';
