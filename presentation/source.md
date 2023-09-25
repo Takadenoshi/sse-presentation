@@ -259,35 +259,6 @@ Fair enough though, [Ian Hickson Resume](http://ian.hixie.ch/career/resume.html)
 
 ---
 
-# Interactive part - scan me!
-
-:::::::::::::: {.columns}
-::: {.column width="60%"}
-
-Scan the QR to react to this presentation directly.
-
-Demo app:
-
-- Emote with 1 of TODO emojis
-- Stream SSE Data/logs/status
-
-Bottom right:
-
-- Reaction emojis streamed via SSE.
-- Connection status 🔌
-- Number of streaming clients
-
-:::
-::: {.column width="38%"}
-
-![](assets/images/qr.png)
-
-:::
-::::::::::::::
-
-
----
-
 # Minimum Viable SSE response
 
 
@@ -355,6 +326,35 @@ Previous slide's data would result in:
 
 :::
 ::::::::::::::
+
+---
+
+# Interactive part - scan me!
+
+:::::::::::::: {.columns}
+::: {.column width="60%"}
+
+Scan the QR to react to this presentation directly.
+
+Demo app:
+
+- Emote with 1 of TODO emojis
+- Stream SSE Data/logs/status
+
+Bottom right:
+
+- Reaction emojis streamed via SSE.
+- Connection status 🔌
+- Number of streaming clients
+
+:::
+::: {.column width="38%"}
+
+![](assets/images/0xk.svg)
+
+:::
+::::::::::::::
+
 
 ---
 

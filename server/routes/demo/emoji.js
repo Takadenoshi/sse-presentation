@@ -19,6 +19,11 @@ const connected = new Map();
 
 const sse = new SSE(connected.size + 1, { initialEvent: 'clients' });
 
+const keepAliveInt = setInterval(() => {
+  console.log('bump');
+  sse.comment();
+}, 15_000);
+
 const updateConnected = debounce(() => {
   sse.send(connected.size, 'clients');
   sse.updateInit(connected.size);

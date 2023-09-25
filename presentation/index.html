@@ -141,15 +141,30 @@
 <style>
 #indicators {
   display: none;
+}
+#indicators .bottom-right {
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: fixed;
-  bottom: 70px;
+  bottom: 190px;
   right: 0;
   z-index: 30;
-  color: #666;
+  color: #aaa;
   width: 64px;
+}
+#indicators .demo-qr {
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+  z-index: 30;
+  background: rgba(0,0,0,1);
+}
+#indicators .demo-qr p {
+  font-family: Kode mono;
+  margin: 0;
+  margin-top: -10px;
+  font-size: 28px;
 }
 #indicators div {
   text-align: center;
@@ -157,9 +172,10 @@
 #num-clients {
   font-size: 1rem;
 }
-  #status {
-    opacity: 0.7;
-  }
+#status {
+  opacity: 0.9;
+  filter: invert(1);
+}
 .emoji {
   position: absolute;
   top: -30px;
@@ -197,9 +213,15 @@
 </head>
 <body>
   <div id="indicators">
-    <div id="status"></div>
-    <div id="num-clients"></div>
-    <div id="launchpad">
+    <div class="bottom-right">
+      <div id="status"></div>
+      <div id="num-clients"></div>
+      <div id="launchpad">
+      </div>
+    </div>
+    <div class="demo-qr">
+      <img src="assets/images/s0xk.svg" width=128 />
+      <p>0xK.co/s</p>
     </div>
   </div>
   
@@ -417,27 +439,6 @@
 </div>
 </div>
 </div>
-<div id="interactive-part---scan-me" class="slide section level1">
-<h1>Interactive part - scan me!</h1>
-<div class="columns">
-<div class="column" style="width:60%;">
-<p>Scan the QR to react to this presentation directly.</p>
-<p>Demo app:</p>
-<ul>
-<li>Emote with 1 of TODO emojis</li>
-<li>Stream SSE Data/logs/status</li>
-</ul>
-<p>Bottom right:</p>
-<ul>
-<li>Reaction emojis streamed via SSE.</li>
-<li>Connection status 🔌</li>
-<li>Number of streaming clients</li>
-</ul>
-</div><div class="column" style="width:38%;">
-<p><img src="assets/images/qr.png" /></p>
-</div>
-</div>
-</div>
 <div id="minimum-viable-sse-response" class="slide section level1">
 <h1>Minimum Viable SSE response</h1>
 <p>The simplest server-sent event stream specifies just <code>data</code> events.</p>
@@ -479,6 +480,27 @@
 1 Hello
 
 2 ReactLive are you there?</code></pre>
+</div>
+</div>
+</div>
+<div id="interactive-part---scan-me" class="slide section level1">
+<h1>Interactive part - scan me!</h1>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p>Scan the QR to react to this presentation directly.</p>
+<p>Demo app:</p>
+<ul>
+<li>Emote with 1 of TODO emojis</li>
+<li>Stream SSE Data/logs/status</li>
+</ul>
+<p>Bottom right:</p>
+<ul>
+<li>Reaction emojis streamed via SSE.</li>
+<li>Connection status 🔌</li>
+<li>Number of streaming clients</li>
+</ul>
+</div><div class="column" style="width:38%;">
+<p><img src="assets/images/0xk.svg" /></p>
 </div>
 </div>
 </div>
