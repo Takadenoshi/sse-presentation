@@ -7,7 +7,6 @@ const endpoint = `${API_SERVER}${path}`;
 
 export default function Demo() {
   const [eventSource, setEventSource] = useState();
-  const [counter, setCounter] = useState(0);
   const [clients, setClients] = useState(0);
   const [logs, setLogs] = useState([]);
 
@@ -29,6 +28,7 @@ export default function Demo() {
       });
       es.addEventListener('clients', ({ data }) => {
         appendLogs(`rcv clients = ${data}`);
+        setClients(data);
       });
       es.addEventListener('message', ({ data }) => {
         const parsed = JSON.parse(data);
@@ -54,13 +54,13 @@ export default function Demo() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ e }),
         });
-        const data = await resp.json()
+        await resp.json();
         appendLogs(`POST ${path} [${e}]`);
       } catch(e) {
         appendLogs(`ERROR POST ${path} [${e}] ${e.message}`);
       }
     })()
-  }, []);
+  }, [appendLogs]);
 
   return <>
     <div className="App">
@@ -74,6 +74,9 @@ export default function Demo() {
         {Object.entries(EMOJI_MAP).map(([val, emoji], i) =>
           <div className="button" onClick={() => post(Number(val))} key={`emoji-${i}`}>{emoji}</div>
         )}
+      </div>
+      <div className="clients">
+        {clients}
       </div>
     </div>
   </>
