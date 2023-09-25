@@ -97,7 +97,7 @@
     elem.innerText = val;
   }
 
-  const sse = new EventSource('http://localhost:3001/demo/emoji');
+  const sse = new EventSource('https://ssf.chainweeb.com/demo/emoji');
 
   sse.addEventListener('open', () => {
     set('status', '🔌');

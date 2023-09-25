@@ -87,8 +87,7 @@ background: assets/images/bg.png
 
 - Unidirectional
   - Server -> Client
-- Essentially a streaming HTTP/1.1 GET (or HTTP/2)
-  - Connection is kept open
+- Essentially a streaming GET
   - Server writes more data as it becomes available
 - UTF-8 only
 - With reconnection batteries included
