@@ -21,7 +21,6 @@ export default function Demo() {
   useEffect(() => {
     let eventSource;
     function init() {
-      console.log('endpoint', endpoint);
       const es = eventSource = new EventSource(endpoint);
       es.addEventListener('open', () => {
         appendLogs(`connection open`);

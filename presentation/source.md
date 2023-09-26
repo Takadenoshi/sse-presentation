@@ -529,19 +529,6 @@ source.addEventListener(
 
 ---
 
-# The EventSource Interface
-
-- `constructor(url, { withCredentials: boolean })`
-  - `withCredentials`: instantiate with CORS credentials (default: false)
-- Events: `open` | `error` | `message` | `<custom-name>`
-- `addEventListener(event_name: string, (event: Event) => void, bubbles: boolean)`
-- close()
-- readyState: `CONNECTING` (0) | `OPEN` (1) | `CLOSED`(2)
-  - CONNECTING: also "waiting to reconnect"
-  - CLOSED: will not attempt to reconnect
-
----
-
 # Error event is a bit useless
 
 - Single bit of information: "error"
@@ -558,40 +545,64 @@ source.addEventListener(
 
 ---
 
+# The EventSource Interface
+
+- `constructor(url, { withCredentials: boolean })`
+  - `withCredentials`: instantiate with CORS credentials (default: false)
+- Events: `open` | `error` | `message` | `<custom-name>`
+  - addEventListener, onmessage, onerror, ...
+- close()
+- readyState: `CONNECTING` (0) | `OPEN` (1) | `CLOSED`(2)
+  - CONNECTING: also "waiting to reconnect"
+  - CLOSED: will not attempt to reconnect
+
+---
+
 
 # Implementation Considerations: HTTP/1.1
 
 ## HTTP/1.1 connections quota
 
-**Per-hostname connection quota** over HTTP/1.1
-
 Max number of connections: 6
+
+. . .
+
+Per-hostname quota
 
 Browser-wide enforcement (shared by all tabs)
 
-[MDN](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#listening_for_custom_events) [StackOverflow](https://stackoverflow.com/questions/5195452/websockets-vs-server-sent-events-eventsource/5326159)
+Too much SSE without planning -> choke
 
-Too much SSE without planning -> choking your performance
+::: notes
+[MDN](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#listening_for_custom_events) [StackOverflow](https://stackoverflow.com/questions/5195452/websockets-vs-server-sent-events-eventsource/5326159)
+:::
 
 # Implementation Considerations: HTTP/1.1
 
 ## Possible Solutions
 
+
 - **Prefer HTTP/2 where available** (can-i-use 96% yes)
-  - [When using HTTP/2](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#listening_for_custom_events), the maximum number of simultaneous HTTP streams is negotiated between the server and the client (defaults to 100)
+  - max number of [simultaneous HTTP streams](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#listening_for_custom_events) is negotiated (defaults to 100)
+  
+. . .
+
 - Use an EventSource within a SharedWorker
-  - Applicable to global streams
   - Used by all tabs
+  - Applicable for global streams
+  
+. . .
+
 - Use subdomains for SSE endpoint(s)
   - Each subdomain -> another 6 connection threads
-  - Global HTTP/1.1 browser limits also apply
+  - Global HTTP/1.1 browser limits apply (~20)
       - Don't overdo it 
 
 ---
 
 # Implementation Considerations: Reconnecting
 
-**Default reconnection behavior implementation issue:**
+## Different Browser Implementations
 
 When a network error is encountered:
 
@@ -600,12 +611,14 @@ When a network error is encountered:
 
 <hr />
 
+. . .
+
 Test it out in the [playground repo](https://github.com/takadenoshi/sse-presentation):
 
 - Start react-app but not the server
 - Open react-app in Chrome and Firefox
 - Try to connect to any endpoint
-- Chrome will keep trying to reconnect vs Firefox will quit after one network error
+- Observe behavior of each browser
 
 ---
 
@@ -613,7 +626,7 @@ Test it out in the [playground repo](https://github.com/takadenoshi/sse-presenta
 
 **Recommendation: consider handling reconnections explicitly**
 
-- Ensure uniform behavior everywhere
+- Ensure uniform behavior
 - Option for exponential backoff strategies
 - Better connection timeout detection
 - Rotate multiple backend endpoints
@@ -685,47 +698,12 @@ Future people can track the present validity of this statement [here](https://bu
 
 ---
 
-# Implementation Considerations: Last-Event-ID detail
-
-**If no event is emitted in the subsequent connection's lifetime, the Last-Event-ID is reset.**
-
-<hr />
-
-When a reconnected session is initialized with `Last-Event-ID: Some-id`
-
-And the connection emits no messages for its lifetime,
-
-Then the Last-Event-ID value is _reset_.
-
----
-
 # Vs Polling
 
-:::::::::::::: {.columns}
-::: {.column width="50%"}
+![](assets/images/diagram-SSE.png){.float-right}
 
-![](assets/images/Polling.png)
+![](assets/images/diagram-polling.png)
 
-:::
-::: {.column width="33%"}
-
-SSE Pro:
-
-- More immediate results
-  - no waiting
-- Fewer round trips
-- Less DB load
-
-SSE Con:
-
-- Keeps a connection open
-  - Can be an issue
-
-:::
-::: {.column width="33%"}
-<p style="text-align:right">![](assets/images/SSE.png)</p>
-:::
-::::::::::::::
 
 ---
 
@@ -783,7 +761,7 @@ Client loops the GET request.
 
 # Kadena use case
 
-Blockchain stuff usually comes with lots of polling.
+Blockchain stuff usually comes with lots of polling. E.g. determining finality
 
 Kadena's Chainweb is 20 "braided" chains -> 20x polling threads (worst case)
 
@@ -808,13 +786,11 @@ Kadena's Chainweb is 20 "braided" chains -> 20x polling threads (worst case)
 
 ## Links
 
-[Takadenoshi @ X](https://twitter.com/takadenoshi)
+![](assets/images/github-mark-white.svg){.w32} [Presentation source & SSE playground - Github](https://github.com/takadenoshi/sse-presentation)
 
-[QR] [Presentation source & SSE playground - Github](https://github.com/takadenoshi/sse-presentation)
+![](assets/images/github-mark-white.svg){.w32} [Chainweb-Stream-Client](https://github.com/kadena-community/kadena.js/tree/main/packages/libs/chainweb-stream-client) / [interesting part](https://github.com/kadena-community/kadena.js/blob/main/packages/libs/chainweb-stream-client/src/index.ts)
 
-[Presentation on Web](https://takadenoshi.github.io/sse-presentation/#(1))
-
-[Chainweb-stream-client](https://github.com/kadena-community/kadena.js/tree/main/packages/libs/chainweb-stream-client) [SSE Consumer](https://github.com/kadena-community/kadena.js/blob/main/packages/libs/chainweb-stream-client/src/index.ts)
+![](assets/images/twitter-mark-white.svg){.w28} [\@Takadenoshi](https://twitter.com/takadenoshi)
 
 ## References
 
@@ -822,7 +798,7 @@ Kadena's Chainweb is 20 "braided" chains -> 20x polling threads (worst case)
 
 [§ 9.2 Server-Sent Events - HTML Living Standard](https://html.spec.whatwg.org/multipage/server-sent-events.html#server-sent-events)
 
-[MDN - Server-Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events) [EventSource](https://developer.mozilla.org/en-US/docs/Web/API/EventSource)
+[MDN - Server-Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events) &middot; [EventSource](https://developer.mozilla.org/en-US/docs/Web/API/EventSource)
 
 ## Font
 

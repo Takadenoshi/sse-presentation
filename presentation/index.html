@@ -654,23 +654,6 @@
 <span id="cb13-12"><a href="#cb13-12"></a>  <span class="kw">false</span></span>
 <span id="cb13-13"><a href="#cb13-13"></a>)<span class="op">;</span></span></code></pre></div>
 </div>
-<div id="the-eventsource-interface" class="slide section level1">
-<h1>The EventSource Interface</h1>
-<ul>
-<li><code>constructor(url, { withCredentials: boolean })</code>
-<ul>
-<li><code>withCredentials</code>: instantiate with CORS credentials (default: false)</li>
-</ul></li>
-<li>Events: <code>open</code> | <code>error</code> | <code>message</code> | <code>&lt;custom-name&gt;</code></li>
-<li><code>addEventListener(event_name: string, (event: Event) =&gt; void, bubbles: boolean)</code></li>
-<li>close()</li>
-<li>readyState: <code>CONNECTING</code> (0) | <code>OPEN</code> (1) | <code>CLOSED</code>(2)
-<ul>
-<li>CONNECTING: also “waiting to reconnect”</li>
-<li>CLOSED: will not attempt to reconnect</li>
-</ul></li>
-</ul>
-</div>
 <div id="error-event-is-a-bit-useless" class="slide section level1">
 <h1>Error event is a bit useless</h1>
 <ul>
@@ -688,14 +671,34 @@
 </ul></li>
 </ul>
 </div>
+<div id="the-eventsource-interface" class="slide section level1">
+<h1>The EventSource Interface</h1>
+<ul>
+<li><code>constructor(url, { withCredentials: boolean })</code>
+<ul>
+<li><code>withCredentials</code>: instantiate with CORS credentials (default: false)</li>
+</ul></li>
+<li>Events: <code>open</code> | <code>error</code> | <code>message</code> | <code>&lt;custom-name&gt;</code>
+<ul>
+<li>addEventListener, onmessage, onerror, …</li>
+</ul></li>
+<li>close()</li>
+<li>readyState: <code>CONNECTING</code> (0) | <code>OPEN</code> (1) | <code>CLOSED</code>(2)
+<ul>
+<li>CONNECTING: also “waiting to reconnect”</li>
+<li>CLOSED: will not attempt to reconnect</li>
+</ul></li>
+</ul>
+</div>
 <div id="implementation-considerations-http1.1" class="slide section level1">
 <h1>Implementation Considerations: HTTP/1.1</h1>
 <h2 id="http1.1-connections-quota">HTTP/1.1 connections quota</h2>
-<p><strong>Per-hostname connection quota</strong> over HTTP/1.1</p>
 <p>Max number of connections: 6</p>
+<div class="incremental">
+<p>Per-hostname quota</p>
 <p>Browser-wide enforcement (shared by all tabs)</p>
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#listening_for_custom_events">MDN</a> <a href="https://stackoverflow.com/questions/5195452/websockets-vs-server-sent-events-eventsource/5326159">StackOverflow</a></p>
-<p>Too much SSE without planning -&gt; choking your performance</p>
+<p>Too much SSE without planning -&gt; choke</p>
+</div>
 </div>
 <div id="implementation-considerations-http1.1-1" class="slide section level1">
 <h1>Implementation Considerations: HTTP/1.1</h1>
@@ -703,45 +706,55 @@
 <ul>
 <li><strong>Prefer HTTP/2 where available</strong> (can-i-use 96% yes)
 <ul>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#listening_for_custom_events">When using HTTP/2</a>, the maximum number of simultaneous HTTP streams is negotiated between the server and the client (defaults to 100)</li>
+<li>max number of <a href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#listening_for_custom_events">simultaneous HTTP streams</a> is negotiated (defaults to 100)</li>
 </ul></li>
+</ul>
+<div class="incremental">
+<ul>
 <li>Use an EventSource within a SharedWorker
 <ul>
-<li>Applicable to global streams</li>
 <li>Used by all tabs</li>
+<li>Applicable for global streams</li>
 </ul></li>
+</ul>
+</div>
+<div class="incremental">
+<ul>
 <li>Use subdomains for SSE endpoint(s)
 <ul>
 <li>Each subdomain -&gt; another 6 connection threads</li>
-<li>Global HTTP/1.1 browser limits also apply
+<li>Global HTTP/1.1 browser limits apply (~20)
 <ul>
 <li>Don’t overdo it</li>
 </ul></li>
 </ul></li>
 </ul>
 </div>
+</div>
 <div id="implementation-considerations-reconnecting" class="slide section level1">
 <h1>Implementation Considerations: Reconnecting</h1>
-<p><strong>Default reconnection behavior implementation issue:</strong></p>
+<h2 id="different-browser-implementations">Different Browser Implementations</h2>
 <p>When a network error is encountered:</p>
 <ul>
 <li>Firefox: Will <strong>stop</strong> retrying (standard compliant)</li>
 <li>Chrome: Will <strong>keep</strong> retrying (actually helpful)</li>
 </ul>
 <hr />
+<div class="incremental">
 <p>Test it out in the <a href="https://github.com/takadenoshi/sse-presentation">playground repo</a>:</p>
 <ul>
 <li>Start react-app but not the server</li>
 <li>Open react-app in Chrome and Firefox</li>
 <li>Try to connect to any endpoint</li>
-<li>Chrome will keep trying to reconnect vs Firefox will quit after one network error</li>
+<li>Observe behavior of each browser</li>
 </ul>
+</div>
 </div>
 <div id="implementation-considerations-reconnecting-1" class="slide section level1">
 <h1>Implementation Considerations: Reconnecting</h1>
 <p><strong>Recommendation: consider handling reconnections explicitly</strong></p>
 <ul>
-<li>Ensure uniform behavior everywhere</li>
+<li>Ensure uniform behavior</li>
 <li>Option for exponential backoff strategies</li>
 <li>Better connection timeout detection</li>
 <li>Rotate multiple backend endpoints</li>
@@ -781,42 +794,10 @@
 <p>Future people can track the present validity of this statement <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1681218">here</a>.</p>
 <p>✅ But you can use it in a SharedWorker</p>
 </div>
-<div id="implementation-considerations-last-event-id-detail" class="slide section level1">
-<h1>Implementation Considerations: Last-Event-ID detail</h1>
-<p><strong>If no event is emitted in the subsequent connection’s lifetime, the Last-Event-ID is reset.</strong></p>
-<hr />
-<p>When a reconnected session is initialized with <code>Last-Event-ID: Some-id</code></p>
-<p>And the connection emits no messages for its lifetime,</p>
-<p>Then the Last-Event-ID value is <em>reset</em>.</p>
-</div>
 <div id="vs-polling" class="slide section level1">
 <h1>Vs Polling</h1>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><img src="assets/images/Polling.png" /></p>
-</div><div class="column" style="width:33%;">
-<p>SSE Pro:</p>
-<ul>
-<li>More immediate results
-<ul>
-<li>no waiting</li>
-</ul></li>
-<li>Fewer round trips</li>
-<li>Less DB load</li>
-</ul>
-<p>SSE Con:</p>
-<ul>
-<li>Keeps a connection open
-<ul>
-<li>Can be an issue</li>
-</ul></li>
-</ul>
-</div><div class="column" style="width:33%;">
-<p style="text-align:right">
-<img src="assets/images/SSE.png" />
-</p>
-</div>
-</div>
+<p><img src="assets/images/diagram-SSE.png" class="float-right" /></p>
+<p><img src="assets/images/diagram-polling.png" /></p>
 </div>
 <div id="vs-competiting-options" class="slide section level1">
 <h1>Vs competiting options</h1>
@@ -868,7 +849,7 @@
 </div>
 <div id="kadena-use-case" class="slide section level1">
 <h1>Kadena use case</h1>
-<p>Blockchain stuff usually comes with lots of polling.</p>
+<p>Blockchain stuff usually comes with lots of polling. E.g. determining finality</p>
 <p>Kadena’s Chainweb is 20 “braided” chains -&gt; 20x polling threads (worst case)</p>
 <p><a href="https://github.com/kadena-io/chainweb-stream">Chainweb-stream</a>:</p>
 <ul>
@@ -888,14 +869,13 @@
 <div class="columns">
 <div class="column" style="width:50%;">
 <h2 id="links">Links</h2>
-<p><a href="https://twitter.com/takadenoshi">Takadenoshi @ X</a></p>
-<p>[QR] <a href="https://github.com/takadenoshi/sse-presentation">Presentation source &amp; SSE playground - Github</a></p>
-<p><a href="https://takadenoshi.github.io/sse-presentation/#(1)">Presentation on Web</a></p>
-<p><a href="https://github.com/kadena-community/kadena.js/tree/main/packages/libs/chainweb-stream-client">Chainweb-stream-client</a> <a href="https://github.com/kadena-community/kadena.js/blob/main/packages/libs/chainweb-stream-client/src/index.ts">SSE Consumer</a></p>
+<p><img src="assets/images/github-mark-white.svg" class="w32" /> <a href="https://github.com/takadenoshi/sse-presentation">Presentation source &amp; SSE playground - Github</a></p>
+<p><img src="assets/images/github-mark-white.svg" class="w32" /> <a href="https://github.com/kadena-community/kadena.js/tree/main/packages/libs/chainweb-stream-client">Chainweb-Stream-Client</a> / <a href="https://github.com/kadena-community/kadena.js/blob/main/packages/libs/chainweb-stream-client/src/index.ts">interesting part</a></p>
+<p><img src="assets/images/twitter-mark-white.svg" class="w28" /> <a href="https://twitter.com/takadenoshi">@Takadenoshi</a></p>
 <h2 id="references">References</h2>
 <p><a href="https://html.spec.whatwg.org/multipage/comms.html">§ 9.1 MessageEvent Interface - HTML Living Standard</a></p>
 <p><a href="https://html.spec.whatwg.org/multipage/server-sent-events.html#server-sent-events">§ 9.2 Server-Sent Events - HTML Living Standard</a></p>
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events">MDN - Server-Sent Events</a> <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventSource">EventSource</a></p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events">MDN - Server-Sent Events</a> · <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventSource">EventSource</a></p>
 <h2 id="font">Font</h2>
 <p><code>Monospace font:</code> <a href="https://kodemono.com/">Kode mono</a> by Kadena’s Isa Ozler</p>
 </div><div class="column" style="width:auto;">
