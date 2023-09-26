@@ -14,10 +14,11 @@ body {
 }
 
 .buttons {
-  height: 10vh;
+  height: 15vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  user-select: none;
 }
 
 .button {

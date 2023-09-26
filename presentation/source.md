@@ -15,60 +15,47 @@ slide_bg_is_video: true
 background: assets/images/bg.png
 ---
 
-<div class="abs-centered big-font">
-## 👋
-</div>
-
----
-
 # `whois` "Tasos Bitsios"
 
-:::::::::::::: {.columns}
-::: {.column width="50%"}
+![](./assets/images/tasos-green-sunglasses.png){.float-right}
 
-- Developer @ [Kadena](https://kadena.io/) Developer Experience team
+- Long time listener, first time speaker
+
+. . .
+
 - Full stack software developer ~ 13 years
   - Somwehat backend-leaning
   - Mostly JS/TS/node.js/React
   - Mostly worked in startups
-- Long time listener, first time speaker
-- Socials:
-  - [\@Takadenoshi](https://github.com/takadenoshi) on Github 
-  - [\@Takadenoshi](https://x.com/takadenoshi) on X
 
+. . .
 
-:::
-::: {.column width="auto"}
+- Developer @ [Kadena](https://kadena.io/) Developer Experience team
 
-![](./assets/images/tasos-green-sunglasses.png)
+![](assets/images/github-mark-white.svg){.w32} [Takadenoshi](https://github.com/takadenoshi) 
 
-:::
-::::::::::::::
+![](assets/images/twitter-mark-white.svg){.w28} [\@Takadenoshi](https://x.com/takadenoshi)
 
 
 # `whois` "Kadena"
 
-:::::::::::::: {.columns}
-::: {.column width="50%"}
+![](./assets/icons/k-internal-icon-alpha.png){.float-right}
 
 - Scalabe PoW Blockchain
+
 - Focus on:
   - Scalability
-  - Intelligent & secure smart contracts
+  - Secure smart contracts
     - Formal verification
     - Source available
-- Socials
-  - [\@kadena-io](https://github.com/kadena-io) and [\@kadena-community](https://github.com/kadena-community) on Github
-  - [\@kadena_io](https://x.com/kadena_io) on X
-  - [kadena.io](https://kadena.io) on the Interwebs
 
-:::
-::: {.column width="auto"}
+- DX Team
+  - Enable and empower our ecosystem developers
 
-![](./assets/icons/k-internal-icon-alpha.png)
+![](assets/images/github-mark-white.svg){.w32} [Kadena-io](https://github.com/kadena-io) & [Kadena-community](https://github.com/kadena-community)
 
-:::
-::::::::::::::
+![](assets/images/twitter-mark-white.svg){.w28} [\@Kadena_io](https://x.com/kadena_io) 🌐 [https://kadena.io](https://kadena.io)
+
 
 ---
 
@@ -85,11 +72,20 @@ background: assets/images/bg.png
 
 ## A server-push protocol
 
-- Unidirectional
-  - Server -> Client
 - Essentially a streaming GET
   - Server writes more data as it becomes available
+
+. . .
+
+- Unidirectional
+  - Server -> Client
+
+. . .
+
 - UTF-8 only
+
+. . .
+
 - With reconnection batteries included
   - Terms and conditions may apply
 
@@ -106,61 +102,25 @@ background: assets/images/bg.png
 
 # Use cases
 
-## Like polling but better
+## Like polling but better - Notifications
 
-:::::::::::::: {.columns}
-::: {.column width="33%"}
-
-Notifications
-
-![](./assets/images/use-notifications.png)
-
-:::
-::: {.column width="33%"}
-
-Async job progress
-
-![](./assets/images/use-job-status.png)
-
-:::
-::: {.column width="33%"}
-
-Real-time ticker data
-
-![](./assets/images/use-ticker.png)
-
-:::
-::::::::::::::
+<div class="centered">![](./assets/images/use-notifications.png)</div>
 
 ---
 
-# Vs Polling
+# Use cases
 
-:::::::::::::: {.columns}
-::: {.column width="50%"}
+## Like polling but better - Real-time ticker data
 
-![](assets/images/Polling.png)
+<div class="centered">![](./assets/images/use-ticker.png)</div>
 
-:::
-::: {.column width="33%"}
+---
 
-SSE Pro:
+# Use cases
 
-- More immediate results
-  - no waiting
-- Fewer round trips
-- Less DB load
+## Like polling but better - Async job progress
 
-SSE Con:
-
-- Keeps a connection open
-  - Can be an issue
-
-:::
-::: {.column width="33%"}
-<p style="text-align:right">![](assets/images/SSE.png)</p>
-:::
-::::::::::::::
+<div class="centered">![](./assets/images/use-job-status.png)</div>
 
 ---
 
@@ -743,6 +703,36 @@ When a reconnected session is initialized with `Last-Event-ID: Some-id`
 And the connection emits no messages for its lifetime,
 
 Then the Last-Event-ID value is _reset_.
+
+---
+
+# Vs Polling
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+
+![](assets/images/Polling.png)
+
+:::
+::: {.column width="33%"}
+
+SSE Pro:
+
+- More immediate results
+  - no waiting
+- Fewer round trips
+- Less DB load
+
+SSE Con:
+
+- Keeps a connection open
+  - Can be an issue
+
+:::
+::: {.column width="33%"}
+<p style="text-align:right">![](assets/images/SSE.png)</p>
+:::
+::::::::::::::
 
 ---
 

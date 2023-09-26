@@ -6,7 +6,11 @@ export const READY_STATES = {
 
 export const EMOJI_MAP = {
   1: "🙂",
-  2: "🙃",
+  2: "😆",
+  3: "🤠",
+  4: "😱",
+  5: "🙃",
+  6: "🥸",
 }
 
 export const API_SERVER = process.env.REACT_APP_ENDPOINT ?? 'http://localhost:3001';

@@ -375,3 +375,19 @@ pre.numberSource > code.sourceCode > span > a:first-child::before {
 .big-font {
   font-size: 250%;
 }
+
+.float-right {
+  float: right;
+}
+
+.w28, .w32 {
+  vertical-align: middle;
+}
+
+.w28 {
+  width: 28px;
+}
+
+.w32 {
+  width: 32px;
+}

@@ -6,7 +6,11 @@ export const name = 'emoji';
 
 const emojiMap = {
   1: "🙂",
-  2: "🙃",
+  2: "😆",
+  3: "🤠",
+  4: "😱",
+  5: "🙃",
+  6: "🥸",
 }
 
 const validEmojiValues = Object.keys(emojiMap).map(strNum => parseInt(strNum, 10));
