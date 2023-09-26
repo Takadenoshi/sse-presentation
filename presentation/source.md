@@ -316,7 +316,7 @@ Demo app:
 
 . . .
 
-Bottom right:
+Bottom right corner:
 
 - Reaction emoji fountain
 - Connection status 🔌

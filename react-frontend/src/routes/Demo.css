@@ -3,29 +3,36 @@ body {
   color: #eee;
 }
 
+html, body, #root, .App {
+  height: 100vh;
+  height: -moz-available;
+  height: -webkit-fill-available;
+  height: fill-available;
+}
+
 .App {
-  max-height: 100vh;
+  display: flex;
+  flex-flow: column;
 }
 
 .container {
-  flex-grow: 1;
-  height: 90vh;
+  flex: 1;
   overflow-y: scroll;
 }
 
 .buttons {
-  height: 15vh;
   display: flex;
   justify-content: center;
   align-items: center;
   user-select: none;
+  flex-wrap: wrap;
 }
 
 .button {
   background: #454545;
   font-size: 2rem;
   margin: 0.5rem;
-  padding: 1rem;
+  padding: 0.5rem;
   border-radius: 10%;
   aspect-ratio: 1;
   width: 3rem;
@@ -38,4 +45,9 @@ body {
 .button:hover {
   font-size: 2.5rem;
   cursor: pointer;
+}
+
+.clients {
+  text-align: center;
+  margin-bottom: 10px;
 }

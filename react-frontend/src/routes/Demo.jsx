@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, } from 'react';
+import { useState, useEffect, useCallback, useRef, } from 'react';
 import { READY_STATES, EMOJI_MAP, API_SERVER, } from '../util.js';
 import './Demo.css';
 
@@ -9,8 +9,14 @@ export default function Demo() {
   const [eventSource, setEventSource] = useState();
   const [clients, setClients] = useState(0);
   const [logs, setLogs] = useState([]);
+  const scrollRef = useRef();
 
-  const appendLogs = useCallback((...args) => setLogs((logs) => [...logs, [new Date().toISOString(), ...args].join(' ')]), []);
+  const appendLogs = useCallback((...args) => {
+    setLogs((logs) => [...logs, [new Date().toISOString(), ...args].join(' ')]);
+    setTimeout(() => {
+      scrollRef.current?.scroll(0, 1e8);
+    }, 10);
+  }, [scrollRef]);
 
   useEffect(() => {
     let eventSource;
@@ -39,7 +45,7 @@ export default function Demo() {
     function destroy() {
       if (eventSource) {
         eventSource.close();
-        appendLogs(`error, disconnected`);
+        appendLogs(`disconnected`);
       }
     }
     init();
@@ -64,7 +70,7 @@ export default function Demo() {
 
   return <>
     <div className="App">
-      <div className="container">
+      <div className="container" ref={scrollRef}>
         { eventSource ? <p>Current eventSource.readyState: {READY_STATES[eventSource.readyState]}</p> : null }
         {logs.map((log, i) =>
           <div key={`log-${i}`}>{log}</div>
@@ -76,7 +82,7 @@ export default function Demo() {
         )}
       </div>
       <div className="clients">
-        {clients}
+        Connected: {clients}
       </div>
     </div>
   </>
