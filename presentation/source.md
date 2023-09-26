@@ -43,6 +43,8 @@ background: assets/images/bg.png
 
 - Scalabe PoW Blockchain
 
+. . .
+
 - Focus on:
   - Scalability
   - Secure smart contracts
@@ -54,7 +56,7 @@ background: assets/images/bg.png
 
 ![](assets/images/github-mark-white.svg){.w32} [Kadena-io](https://github.com/kadena-io) & [Kadena-community](https://github.com/kadena-community)
 
-![](assets/images/twitter-mark-white.svg){.w28} [\@Kadena_io](https://x.com/kadena_io) 🌐 [https://kadena.io](https://kadena.io)
+![](assets/images/twitter-mark-white.svg){.w28} [\@Kadena_io](https://x.com/kadena_io) &middot; 🌐 [https://kadena.io](https://kadena.io)
 
 
 ---
@@ -65,12 +67,10 @@ background: assets/images/bg.png
 
 ---
 
+
 # Server-Sent Events (SSE)
 
-:::::::::::::: {.columns}
-::: {.column width="50%"}
-
-## A server-push protocol
+![](assets/images/diagram-SSE.png){.float-right}
 
 - Essentially a streaming GET
   - Server writes more data as it becomes available
@@ -86,65 +86,36 @@ background: assets/images/bg.png
 
 . . .
 
-- With reconnection batteries included
+- Reconnection batteries included
   - Terms and conditions may apply
 
+---
 
-:::
-::: {.column width="auto"}
+# Like polling but better
 
-![](./assets/images/SSE.png){.full-width}
+Best suited for UTF-8 updates
 
-:::
-::::::::::::::
+. . .
+
+Especially for multiple update channels
 
 ---
 
-# Use cases
-
-## Like polling but better - Notifications
-
-<div class="centered">![](./assets/images/use-notifications.png)</div>
-
----
-
-# Use cases
-
-## Like polling but better - Real-time ticker data
-
-<div class="centered">![](./assets/images/use-ticker.png)</div>
-
----
-
-# Use cases
-
-## Like polling but better - Async job progress
+# Use cases: Async job progress
 
 <div class="centered">![](./assets/images/use-job-status.png)</div>
 
 ---
 
-# What is this ~~new~~ thing?
+# Use cases: Real-time ticker data
 
-🥳 SSE is 19 years old
+<div class="centered">![](./assets/images/use-ticker.png)</div>
 
-🔧 13 years of mainstream support
+---
 
-<hr />
+# Use cases: Notifications
 
-- 2004 Sep 23 &middot; [Server-sent DOM Events](https://web.archive.org/web/20041009144718/http://www.whatwg.org/specs/web-apps/current-work/#server-sent), Ian Hickson, Opera Software, WHATWG Web Applications 1.0
-- 2006 &middot; [Production] Opera browser implementation
-- 2009 &middot; [W3C Working Draft](https://www.w3.org/TR/2009/WD-eventsource-20090423/), Ian Hickson, Google Inc
-- 2010 &middot; [Production] Safari v5, Chrome v6
-- 2011 &middot; [Production] Firefox v6, 
-- 2015 &middot; [W3C Recommendation](https://www.w3.org/TR/2015/REC-eventsource-20150203/)
-
-
-<hr />
-
-History: [W3C Publication History](https://www.w3.org/TR/2015/REC-eventsource-20150203/)
-
-Current: [HTML Living Standard § 9.2](https://html.spec.whatwg.org/multipage/server-sent-events.html#server-sent-events) 
+<div class="centered">![](./assets/images/use-notifications.png)</div>
 
 ---
 
@@ -158,13 +129,46 @@ Yes (96.11%)
 
 ---
 
-# Largely ignored: Google Trends
+# What is this ~~new~~ thing?
+
+:::::::::::::: {.columns}
+::: {.column width="40%"}
+
+## Old enough to vote
+
+🥳 SSE is 19 years old
+
+🔧 13 years of mainstream support
+
+Originally by Ian Hickson, while at Opera
+
+:::
+::: {.column width="60%"}
+
+## Timeline
+
+- 2004 &middot; [Server-sent DOM Events](https://web.archive.org/web/20041009144718/http://www.whatwg.org/specs/web-apps/current-work/#server-sent), Ian Hickson, Opera Software, WHATWG Web Applications 1.0
+- 2006 &middot; [Production] Opera browser implementation
+- 2009 &middot; [W3C Working Draft](https://www.w3.org/TR/2009/WD-eventsource-20090423/), Ian Hickson, Google Inc
+- 2010 &middot; [Production] Safari v5, Chrome v6
+- 2011 &middot; [Production] Firefox v6, 
+- 2015 &middot; [W3C Recommendation](https://www.w3.org/TR/2015/REC-eventsource-20150203/)
+
+[W3C Publication History](https://www.w3.org/TR/2015/REC-eventsource-20150203/) &middot; [HTML Living Standard § 9.2](https://html.spec.whatwg.org/multipage/server-sent-events.html#server-sent-events) 
+
+
+:::
+::::::::::::::
+
+---
+
+# Largely overlooked: Google Trends
 
 <div class="centered"> ![](./assets/images/google-trends.png){.full-width} </div>
 
 ---
 
-# Largely ignored: StackOverflow
+# Largely overlooked: StackOverflow
 
 :::::::::::::: {.columns}
 ::: {.column width="33%"}
@@ -194,20 +198,18 @@ Yes (96.11%)
 
 ---
 
-# Largely ignored: why?
+# Largely overlooked: why?
 
-Contemporary to Web sockets, HTML5, `<video>`, Web workers, Web storage...
+Contemporary to Web sockets, HTML5, `<video>`, Web workers, Web storage
 
-<hr />
+Narrower use case
 
 :::::::::::::: {.columns}
 ::: {.column width="66%"}
 
-Forsaken: not notable enough
-
-Fair enough though, [Ian Hickson Resume](http://ian.hixie.ch/career/resume.html) is heavy:
-
 ![](./assets/images/cv.png)
+
+[Ian Hickson Resume](http://ian.hixie.ch/career/resume.html)
 
 :::
 ::: {.column width="auto"}
@@ -216,6 +218,12 @@ Fair enough though, [Ian Hickson Resume](http://ian.hixie.ch/career/resume.html)
 
 :::
 ::::::::::::::
+
+---
+
+<div class="abs-centered big-font">
+## Show me the `<>`
+</div>
 
 ---
 
@@ -234,6 +242,8 @@ The simplest server-sent event stream specifies just `data` events.
 
 < data: ReactLive are you there?\n\n
 ```
+
+. . .
 
 Events separated by two newline characters `\n\n`
 
@@ -254,11 +264,12 @@ const source = new EventSource("http://localhost:3001/stream/simple");
 
 // "message" event emitted for each "data" event received
 source.addEventListener("message", event => console.log(++i, event.data), false);
+
 // or .onmessage = (...) if that is your jam
 
 ```
 
-Previous slide's data would result in:
+. . .
 
 :::::::::::::: {.columns}
 ::: {.column width="50%"}
@@ -291,30 +302,26 @@ Previous slide's data would result in:
 
 # Interactive part - scan me!
 
-:::::::::::::: {.columns}
-::: {.column width="60%"}
+![](assets/images/0xk.svg){.float-right}
 
-Scan the QR to react to this presentation directly.
+Scan the QR to interact with this presentation directly
+
+. . .
 
 Demo app:
 
-- Emote with 1 of TODO emojis
-- Stream SSE Data/logs/status
+- Emote with 💖 👍 🎉 👏 😂 😲 🤔 👎
+- See SSE data
+- Link to SSE experiments playground & presentation
+
+. . .
 
 Bottom right:
 
-- Reaction emojis streamed via SSE.
+- Reaction emoji fountain
 - Connection status 🔌
 - Number of streaming clients
-
-:::
-::: {.column width="38%"}
-
-![](assets/images/0xk.svg)
-
-:::
-::::::::::::::
-
+- QR again (you can scan later)
 
 ---
 
@@ -330,6 +337,8 @@ You can "namespace" your events using the `event` field with any custom name:
 < data: "Did you see that ludicrous display just now"\n\n
 ```
 
+. . .
+
 The `goal` and `spectator-chat` events are handled separately on the frontend
 
 - Allows multiplexing / routing events 
@@ -341,8 +350,10 @@ The `goal` and `spectator-chat` events are handled separately on the frontend
 
 In the live reactions demo, we stream two types of things:
 
-- number of clients (as `clients` event)
-- emoji enum value (as unnamed message)
+- `clients` event: number of clients
+- `data` event: list of emoji enum values (1-8)
+
+. . .
 
 ```
 < event: clients
@@ -350,22 +361,6 @@ In the live reactions demo, we stream two types of things:
 
 < data: [1,2,3,4]
 ```
-
-Each event is on a separate listener and triggering the appropriate action
-
----
-
-# Comments
-
-Any lines starting with `:` (colon) are interpreted as comments 
-
-```
-< data: this or that\n\n
-
-< :TODO emit some events in the near future
-```
-
-These are ignored on the client-side
 
 ---
 
@@ -377,7 +372,9 @@ Default reconnection timeout ~ 3-5 s.
 
 <sup>\* _with implementation-specific caveats_</sup>
 
-## Custom timeouts
+---
+
+# Reconnection (2) - Custom timeouts
 
 The reconnection timeout can be customized.
 
@@ -395,9 +392,7 @@ Emit a `retry:` field in any of the events:
 
 ---
 
-# Reconnection (2)
-
-## Computer can say no
+# Reconnection (3) - Computer says no
 
 A server can signal "do not reconnect":
 
@@ -410,32 +405,42 @@ A server can signal "do not reconnect":
 
 ---
 
-# Reconnection (3) - Last-Event-ID
+# Reconnection (4) - Last-Event-ID
 
-Events can include an `id` field (value: any UTF-8 string)
+Events can include an `id` field with value as any UTF-8 string
 
-Connection interrupted? Reconnection header `Last-Event-ID` set to the last id received.
+. . .
 
-This allows the server to resume gracefully.
+Connection interrupted? Sets reconnection header `Last-Event-ID: x`
 
-<hr />
-
-If this is the last event received in a stream that disconnects:
 ```
 < id: data-0
 < retry: 5000
 < data: Data Zero event\n
 ```
 
-Then the connection timeout will be 5 seconds, and the `Last-Event-ID` header will be set to `data-0`.
+💔 **Disconnects**
+
+➡️  _5 seconds later_
 
 ```
 > GET /stream/notifications HTTP/1.1
-> Host: localhost:3001
 > Last-Event-ID: data-0
 ```
 
 <sup>[Playground](https://github.com/takadenoshi/sse-presentation): "notifications" scenario</sup>
+
+---
+
+# Comments
+
+Any lines starting with `:` (colon)
+
+```
+< :TODO emit some events in the near future
+```
+
+These are ignored on the client-side
 
 ---
 
@@ -464,7 +469,7 @@ Entire SSE gramar: 4+1 fields
 
 < retry: 2000
 < id: 0
-< data: Hello\n\n
+< data: {"message":"Hello"}\n\n
 
 < :I am a comment line
 
@@ -480,7 +485,7 @@ Entire SSE gramar: 4+1 fields
 
 # EventSource: custom events
 
-You can subscribe to custom events (e.g. `status`) with `.addEventListener`:
+You can subscribe to custom events with `.addEventListener`:
 
 ```{.javascript .numberLines}
 const source = new EventSource('/stream/hello');
@@ -492,7 +497,7 @@ source.addEventListener(
   false,
 );
 
-// as before, un-named data events
+// as before, unnamed data events
 source.addEventListener(
   "message", 
   (event) => { console.log("data event", event.data); },
@@ -510,14 +515,14 @@ Subscribe to `open` and `error` for connection management:
 // on connection established
 source.addEventListener(
   "open",
-  (event) => { console.log("Connection status"); },
+  (event) => { console.log("Connection opened"); },
   false
 );
 
 // on disconnection
 source.addEventListener(
   "error",
-  (event) => { console.log("Connection status"); },
+  (event) => { console.log("Connection error"); },
   false
 );
 ```
@@ -528,16 +533,12 @@ source.addEventListener(
 
 - `constructor(url, { withCredentials: boolean })`
   - `withCredentials`: instantiate with CORS credentials (default: false)
-- Events:
-  - `open`: on connection
-  - `error`: on error/disconnection
-  - `message`: on generic data: event received
-  - `<custom>:` on named event received
+- Events: `open` | `error` | `message` | `<custom-name>`
 - `addEventListener(event_name: string, (event: Event) => void, bubbles: boolean)`
+- close()
 - readyState: `CONNECTING` (0) | `OPEN` (1) | `CLOSED`(2)
   - CONNECTING: also "waiting to reconnect"
   - CLOSED: will not attempt to reconnect
-- close()
 
 ---
 
@@ -546,22 +547,14 @@ source.addEventListener(
 - Single bit of information: "error"
 
 - callback signature is `(event: Event) => void`
-  - event.target instanceof EventSource
+  - `event.target` is instanceof `EventSource`
+  - no reason / message / code
 
-- No reason or message can be derived 
-  - usually output in console
-
-- Some disconnections can be "fatal", cancelling the reconnection policy.
+- Some disconnections can be "fatal", cancelling the reconnection policy
 
 - Inspect `readyState` to find out EventSource's intent:
   - CONNECTING: will reconnect / waiting to reconnect / reconnecting
   - CLOSED: will not reconnect
-
----
-
-# Implementation Considerations: No custom headers
-
-It is not possible to set custom HTTP headers on SSE requests using `EventSource`
 
 ---
 

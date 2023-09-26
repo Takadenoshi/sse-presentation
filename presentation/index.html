@@ -113,12 +113,14 @@
   });
 
   const emojiMap = {
-    1: "🙂",
-    2: "😆",
-    3: "🤠",
-    4: "😱",
-    5: "🙃",
-    6: "🥸",
+    1: "💖",
+    2: "👍",
+    3: "🎉",
+    4: "👏",
+    5: "😂",
+    6: "😲",
+    7: "🤔",
+    8: "👎",
   }
 
   function launchEmoji(val) {
@@ -280,8 +282,11 @@
 <h1><code>whois</code> “Kadena”</h1>
 <p><img src="./assets/icons/k-internal-icon-alpha.png" class="float-right" /></p>
 <ul>
-<li><p>Scalabe PoW Blockchain</p></li>
-<li><p>Focus on:</p>
+<li>Scalabe PoW Blockchain</li>
+</ul>
+<div class="incremental">
+<ul>
+<li>Focus on:
 <ul>
 <li>Scalability</li>
 <li>Secure smart contracts
@@ -290,13 +295,14 @@
 <li>Source available</li>
 </ul></li>
 </ul></li>
-<li><p>DX Team</p>
+<li>DX Team
 <ul>
 <li>Enable and empower our ecosystem developers</li>
 </ul></li>
 </ul>
 <p><img src="assets/images/github-mark-white.svg" class="w32" /> <a href="https://github.com/kadena-io">Kadena-io</a> &amp; <a href="https://github.com/kadena-community">Kadena-community</a></p>
-<p><img src="assets/images/twitter-mark-white.svg" class="w28" /> <a href="https://x.com/kadena_io">@Kadena_io</a> 🌐 <a href="https://kadena.io">https://kadena.io</a></p>
+<p><img src="assets/images/twitter-mark-white.svg" class="w28" /> <a href="https://x.com/kadena_io">@Kadena_io</a> · 🌐 <a href="https://kadena.io">https://kadena.io</a></p>
+</div>
 </div>
 <div class="slide section level1">
 
@@ -306,9 +312,7 @@
 </div>
 <div id="server-sent-events-sse" class="slide section level1">
 <h1>Server-Sent Events (SSE)</h1>
-<div class="columns">
-<div class="column" style="width:50%;">
-<h2 id="a-server-push-protocol">A server-push protocol</h2>
+<p><img src="assets/images/diagram-SSE.png" class="float-right" /></p>
 <ul>
 <li>Essentially a streaming GET
 <ul>
@@ -330,54 +334,37 @@
 </div>
 <div class="incremental">
 <ul>
-<li>With reconnection batteries included
+<li>Reconnection batteries included
 <ul>
 <li>Terms and conditions may apply</li>
 </ul></li>
 </ul>
 </div>
-</div><div class="column" style="width:auto;">
-<p><img src="./assets/images/SSE.png" class="full-width" /></p>
+</div>
+<div id="like-polling-but-better" class="slide section level1">
+<h1>Like polling but better</h1>
+<p>Best suited for UTF-8 updates</p>
+<div class="incremental">
+<p>Especially for multiple update channels</p>
 </div>
 </div>
-</div>
-<div id="use-cases" class="slide section level1">
-<h1>Use cases</h1>
-<h2 id="like-polling-but-better---notifications">Like polling but better - Notifications</h2>
-<div class="centered">
-<img src="./assets/images/use-notifications.png" />
-</div>
-</div>
-<div id="use-cases-1" class="slide section level1">
-<h1>Use cases</h1>
-<h2 id="like-polling-but-better---real-time-ticker-data">Like polling but better - Real-time ticker data</h2>
-<div class="centered">
-<img src="./assets/images/use-ticker.png" />
-</div>
-</div>
-<div id="use-cases-2" class="slide section level1">
-<h1>Use cases</h1>
-<h2 id="like-polling-but-better---async-job-progress">Like polling but better - Async job progress</h2>
+<div id="use-cases-async-job-progress" class="slide section level1">
+<h1>Use cases: Async job progress</h1>
 <div class="centered">
 <img src="./assets/images/use-job-status.png" />
 </div>
 </div>
-<div id="what-is-this-new-thing" class="slide section level1">
-<h1>What is this <del>new</del> thing?</h1>
-<p>🥳 SSE is 19 years old</p>
-<p>🔧 13 years of mainstream support</p>
-<hr />
-<ul>
-<li>2004 Sep 23 · <a href="https://web.archive.org/web/20041009144718/http://www.whatwg.org/specs/web-apps/current-work/#server-sent">Server-sent DOM Events</a>, Ian Hickson, Opera Software, WHATWG Web Applications 1.0</li>
-<li>2006 · [Production] Opera browser implementation</li>
-<li>2009 · <a href="https://www.w3.org/TR/2009/WD-eventsource-20090423/">W3C Working Draft</a>, Ian Hickson, Google Inc</li>
-<li>2010 · [Production] Safari v5, Chrome v6</li>
-<li>2011 · [Production] Firefox v6,</li>
-<li>2015 · <a href="https://www.w3.org/TR/2015/REC-eventsource-20150203/">W3C Recommendation</a></li>
-</ul>
-<hr />
-<p>History: <a href="https://www.w3.org/TR/2015/REC-eventsource-20150203/">W3C Publication History</a></p>
-<p>Current: <a href="https://html.spec.whatwg.org/multipage/server-sent-events.html#server-sent-events">HTML Living Standard § 9.2</a></p>
+<div id="use-cases-real-time-ticker-data" class="slide section level1">
+<h1>Use cases: Real-time ticker data</h1>
+<div class="centered">
+<img src="./assets/images/use-ticker.png" />
+</div>
+</div>
+<div id="use-cases-notifications" class="slide section level1">
+<h1>Use cases: Notifications</h1>
+<div class="centered">
+<img src="./assets/images/use-notifications.png" />
+</div>
 </div>
 <div id="can-i-use" class="slide section level1">
 <h1>Can I use?</h1>
@@ -385,14 +372,36 @@
 <p><img src="assets/images/caniuse.png" /></p>
 <p><a href="https://caniuse.com/eventsource">caniuse.com/eventsource</a></p>
 </div>
-<div id="largely-ignored-google-trends" class="slide section level1">
-<h1>Largely ignored: Google Trends</h1>
+<div id="what-is-this-new-thing" class="slide section level1">
+<h1>What is this <del>new</del> thing?</h1>
+<div class="columns">
+<div class="column" style="width:40%;">
+<h2 id="old-enough-to-vote">Old enough to vote</h2>
+<p>🥳 SSE is 19 years old</p>
+<p>🔧 13 years of mainstream support</p>
+<p>Originally by Ian Hickson, while at Opera</p>
+</div><div class="column" style="width:60%;">
+<h2 id="timeline">Timeline</h2>
+<ul>
+<li>2004 · <a href="https://web.archive.org/web/20041009144718/http://www.whatwg.org/specs/web-apps/current-work/#server-sent">Server-sent DOM Events</a>, Ian Hickson, Opera Software, WHATWG Web Applications 1.0</li>
+<li>2006 · [Production] Opera browser implementation</li>
+<li>2009 · <a href="https://www.w3.org/TR/2009/WD-eventsource-20090423/">W3C Working Draft</a>, Ian Hickson, Google Inc</li>
+<li>2010 · [Production] Safari v5, Chrome v6</li>
+<li>2011 · [Production] Firefox v6,</li>
+<li>2015 · <a href="https://www.w3.org/TR/2015/REC-eventsource-20150203/">W3C Recommendation</a></li>
+</ul>
+<p><a href="https://www.w3.org/TR/2015/REC-eventsource-20150203/">W3C Publication History</a> · <a href="https://html.spec.whatwg.org/multipage/server-sent-events.html#server-sent-events">HTML Living Standard § 9.2</a></p>
+</div>
+</div>
+</div>
+<div id="largely-overlooked-google-trends" class="slide section level1">
+<h1>Largely overlooked: Google Trends</h1>
 <div class="centered">
 <img src="./assets/images/google-trends.png" class="full-width" />
 </div>
 </div>
-<div id="largely-ignored-stackoverflow" class="slide section level1">
-<h1>Largely ignored: StackOverflow</h1>
+<div id="largely-overlooked-stackoverflow" class="slide section level1">
+<h1>Largely overlooked: StackOverflow</h1>
 <div class="columns">
 <div class="column" style="width:33%;">
 <h2 id="sse-tags">SSE Tags</h2>
@@ -406,18 +415,23 @@
 </div>
 </div>
 </div>
-<div id="largely-ignored-why" class="slide section level1">
-<h1>Largely ignored: why?</h1>
-<p>Contemporary to Web sockets, HTML5, <code>&lt;video&gt;</code>, Web workers, Web storage…</p>
-<hr />
+<div id="largely-overlooked-why" class="slide section level1">
+<h1>Largely overlooked: why?</h1>
+<p>Contemporary to Web sockets, HTML5, <code>&lt;video&gt;</code>, Web workers, Web storage</p>
+<p>Narrower use case</p>
 <div class="columns">
 <div class="column" style="width:66%;">
-<p>Forsaken: not notable enough</p>
-<p>Fair enough though, <a href="http://ian.hixie.ch/career/resume.html">Ian Hickson Resume</a> is heavy:</p>
 <p><img src="./assets/images/cv.png" /></p>
+<p><a href="http://ian.hixie.ch/career/resume.html">Ian Hickson Resume</a></p>
 </div><div class="column" style="width:auto;">
 <p><img src="assets/images/meme-excluded.jpg" /></p>
 </div>
+</div>
+</div>
+<div class="slide section level1">
+
+<div id="show-me-the" class="abs-centered big-font">
+<h2>Show me the <code>&lt;&gt;</code></h2>
 </div>
 </div>
 <div id="minimum-viable-sse-response" class="slide section level1">
@@ -431,9 +445,11 @@
 &lt; data: Hello\n\n
 
 &lt; data: ReactLive are you there?\n\n</code></pre>
+<div class="incremental">
 <p>Events separated by two newline characters <code>\n\n</code></p>
 <p>Data is encoded in UTF-8 (mandatory)</p>
 <p><sup><a href="https://github.com/takadenoshi/sse-presentation">Playground</a>: “simple” scenario</sup></p>
+</div>
 </div>
 <div id="simple-eventsource-consumer" class="slide section level1">
 <h1>Simple EventSource consumer</h1>
@@ -444,8 +460,9 @@
 <span id="cb2-4"><a href="#cb2-4"></a></span>
 <span id="cb2-5"><a href="#cb2-5"></a><span class="co">// &quot;message&quot; event emitted for each &quot;data&quot; event received</span></span>
 <span id="cb2-6"><a href="#cb2-6"></a>source<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">&quot;message&quot;</span><span class="op">,</span> <span class="bu">event</span> <span class="kw">=&gt;</span> <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="op">++</span>i<span class="op">,</span> <span class="bu">event</span><span class="op">.</span><span class="at">data</span>)<span class="op">,</span> <span class="kw">false</span>)<span class="op">;</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a><span class="co">// or .onmessage = (...) if that is your jam</span></span></code></pre></div>
-<p>Previous slide’s data would result in:</p>
+<span id="cb2-7"><a href="#cb2-7"></a></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="co">// or .onmessage = (...) if that is your jam</span></span></code></pre></div>
+<div class="incremental">
 <div class="columns">
 <div class="column" style="width:50%;">
 <pre><code>&lt; HTTP/1.1 200 OK
@@ -464,25 +481,27 @@
 </div>
 </div>
 </div>
+</div>
 <div id="interactive-part---scan-me" class="slide section level1">
 <h1>Interactive part - scan me!</h1>
-<div class="columns">
-<div class="column" style="width:60%;">
-<p>Scan the QR to react to this presentation directly.</p>
+<p><img src="assets/images/0xk.svg" class="float-right" /></p>
+<p>Scan the QR to interact with this presentation directly</p>
+<div class="incremental">
 <p>Demo app:</p>
 <ul>
-<li>Emote with 1 of TODO emojis</li>
-<li>Stream SSE Data/logs/status</li>
+<li>Emote with 💖 👍 🎉 👏 😂 😲 🤔 👎</li>
+<li>See SSE data</li>
+<li>Link to SSE experiments playground &amp; presentation</li>
 </ul>
+</div>
+<div class="incremental">
 <p>Bottom right:</p>
 <ul>
-<li>Reaction emojis streamed via SSE.</li>
+<li>Reaction emoji fountain</li>
 <li>Connection status 🔌</li>
 <li>Number of streaming clients</li>
+<li>QR again (you can scan later)</li>
 </ul>
-</div><div class="column" style="width:38%;">
-<p><img src="assets/images/0xk.svg" /></p>
-</div>
 </div>
 </div>
 <div id="named-events" class="slide section level1">
@@ -493,6 +512,7 @@
 
 &lt; event: spectator-chat
 &lt; data: &quot;Did you see that ludicrous display just now&quot;\n\n</code></pre>
+<div class="incremental">
 <p>The <code>goal</code> and <code>spectator-chat</code> events are handled separately on the frontend</p>
 <ul>
 <li>Allows multiplexing / routing events
@@ -501,33 +521,29 @@
 </ul></li>
 </ul>
 </div>
+</div>
 <div id="named-events-live-demo" class="slide section level1">
 <h1>Named Events: Live Demo</h1>
 <p>In the live reactions demo, we stream two types of things:</p>
 <ul>
-<li>number of clients (as <code>clients</code> event)</li>
-<li>emoji enum value (as unnamed message)</li>
+<li><code>clients</code> event: number of clients</li>
+<li><code>data</code> event: list of emoji enum values (1-8)</li>
 </ul>
+<div class="incremental">
 <pre><code>&lt; event: clients
 &lt; data: 10
 
 &lt; data: [1,2,3,4]</code></pre>
-<p>Each event is on a separate listener and triggering the appropriate action</p>
 </div>
-<div id="comments" class="slide section level1">
-<h1>Comments</h1>
-<p>Any lines starting with <code>:</code> (colon) are interpreted as comments</p>
-<pre><code>&lt; data: this or that\n\n
-
-&lt; :TODO emit some events in the near future</code></pre>
-<p>These are ignored on the client-side</p>
 </div>
 <div id="reconnection-1" class="slide section level1">
 <h1>Reconnection (1)</h1>
 <p>EventSource consumers will reconnect* if the connection is interrupted.</p>
 <p>Default reconnection timeout ~ 3-5 s.</p>
 <p><sup>* <em>with implementation-specific caveats</em></sup></p>
-<h2 id="custom-timeouts">Custom timeouts</h2>
+</div>
+<div id="reconnection-2---custom-timeouts" class="slide section level1">
+<h1>Reconnection (2) - Custom timeouts</h1>
 <p>The reconnection timeout can be customized.</p>
 <p>Emit a <code>retry:</code> field in any of the events:</p>
 <pre><code>&lt; retry: 2500
@@ -538,9 +554,8 @@
 </ul>
 <p><sup><a href="https://github.com/takadenoshi/sse-presentation">Playground</a>: “Retry-flaky” scenario</sup></p>
 </div>
-<div id="reconnection-2" class="slide section level1">
-<h1>Reconnection (2)</h1>
-<h2 id="computer-can-say-no">Computer can say no</h2>
+<div id="reconnection-3---computer-says-no" class="slide section level1">
+<h1>Reconnection (3) - Computer says no</h1>
 <p>A server can signal “do not reconnect”:</p>
 <ul>
 <li>with a <code>Content-Type</code> header other than <code>text/event-stream</code></li>
@@ -552,21 +567,26 @@
 </ul>
 <p><sup><a href="https://github.com/takadenoshi/sse-presentation">Playground</a>: “Not SSE” scenario</sup></p>
 </div>
-<div id="reconnection-3---last-event-id" class="slide section level1">
-<h1>Reconnection (3) - Last-Event-ID</h1>
-<p>Events can include an <code>id</code> field (value: any UTF-8 string)</p>
-<p>Connection interrupted? Reconnection header <code>Last-Event-ID</code> set to the last id received.</p>
-<p>This allows the server to resume gracefully.</p>
-<hr />
-<p>If this is the last event received in a stream that disconnects:</p>
+<div id="reconnection-4---last-event-id" class="slide section level1">
+<h1>Reconnection (4) - Last-Event-ID</h1>
+<p>Events can include an <code>id</code> field with value as any UTF-8 string</p>
+<div class="incremental">
+<p>Connection interrupted? Sets reconnection header <code>Last-Event-ID: x</code></p>
 <pre><code>&lt; id: data-0
 &lt; retry: 5000
 &lt; data: Data Zero event\n</code></pre>
-<p>Then the connection timeout will be 5 seconds, and the <code>Last-Event-ID</code> header will be set to <code>data-0</code>.</p>
+<p>💔 <strong>Disconnects</strong></p>
+<p>➡️ <em>5 seconds later</em></p>
 <pre><code>&gt; GET /stream/notifications HTTP/1.1
-&gt; Host: localhost:3001
 &gt; Last-Event-ID: data-0</code></pre>
 <p><sup><a href="https://github.com/takadenoshi/sse-presentation">Playground</a>: “notifications” scenario</sup></p>
+</div>
+</div>
+<div id="comments" class="slide section level1">
+<h1>Comments</h1>
+<p>Any lines starting with <code>:</code> (colon)</p>
+<pre><code>&lt; :TODO emit some events in the near future</code></pre>
+<p>These are ignored on the client-side</p>
 </div>
 <div id="full-sse-response" class="slide section level1">
 <h1>Full SSE response</h1>
@@ -588,7 +608,7 @@
 <span id="cb11-5"><a href="#cb11-5"></a></span>
 <span id="cb11-6"><a href="#cb11-6"></a>&lt; retry: 2000</span>
 <span id="cb11-7"><a href="#cb11-7"></a>&lt; id: 0</span>
-<span id="cb11-8"><a href="#cb11-8"></a>&lt; data: Hello\n\n</span>
+<span id="cb11-8"><a href="#cb11-8"></a>&lt; data: {&quot;message&quot;:&quot;Hello&quot;}\n\n</span>
 <span id="cb11-9"><a href="#cb11-9"></a></span>
 <span id="cb11-10"><a href="#cb11-10"></a>&lt; :I am a comment line</span>
 <span id="cb11-11"><a href="#cb11-11"></a></span>
@@ -600,7 +620,7 @@
 </div>
 <div id="eventsource-custom-events" class="slide section level1">
 <h1>EventSource: custom events</h1>
-<p>You can subscribe to custom events (e.g. <code>status</code>) with <code>.addEventListener</code>:</p>
+<p>You can subscribe to custom events with <code>.addEventListener</code>:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode numberSource javascript numberLines"><code class="sourceCode javascript"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">const</span> source <span class="op">=</span> <span class="kw">new</span> <span class="bu">EventSource</span>(<span class="st">&#39;/stream/hello&#39;</span>)<span class="op">;</span></span>
 <span id="cb12-2"><a href="#cb12-2"></a></span>
 <span id="cb12-3"><a href="#cb12-3"></a><span class="co">// [name]: triggers for custom named event, here: &quot;status&quot;</span></span>
@@ -610,7 +630,7 @@
 <span id="cb12-7"><a href="#cb12-7"></a>  <span class="kw">false</span><span class="op">,</span></span>
 <span id="cb12-8"><a href="#cb12-8"></a>)<span class="op">;</span></span>
 <span id="cb12-9"><a href="#cb12-9"></a></span>
-<span id="cb12-10"><a href="#cb12-10"></a><span class="co">// as before, un-named data events</span></span>
+<span id="cb12-10"><a href="#cb12-10"></a><span class="co">// as before, unnamed data events</span></span>
 <span id="cb12-11"><a href="#cb12-11"></a>source<span class="op">.</span><span class="fu">addEventListener</span>(</span>
 <span id="cb12-12"><a href="#cb12-12"></a>  <span class="st">&quot;message&quot;</span><span class="op">,</span> </span>
 <span id="cb12-13"><a href="#cb12-13"></a>  (<span class="bu">event</span>) <span class="kw">=&gt;</span> { <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;data event&quot;</span><span class="op">,</span> <span class="bu">event</span><span class="op">.</span><span class="at">data</span>)<span class="op">;</span> }<span class="op">,</span></span>
@@ -623,14 +643,14 @@
 <div class="sourceCode" id="cb13"><pre class="sourceCode numberSource javascript numberLines"><code class="sourceCode javascript"><span id="cb13-1"><a href="#cb13-1"></a><span class="co">// on connection established</span></span>
 <span id="cb13-2"><a href="#cb13-2"></a>source<span class="op">.</span><span class="fu">addEventListener</span>(</span>
 <span id="cb13-3"><a href="#cb13-3"></a>  <span class="st">&quot;open&quot;</span><span class="op">,</span></span>
-<span id="cb13-4"><a href="#cb13-4"></a>  (<span class="bu">event</span>) <span class="kw">=&gt;</span> { <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;Connection status&quot;</span>)<span class="op">;</span> }<span class="op">,</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a>  (<span class="bu">event</span>) <span class="kw">=&gt;</span> { <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;Connection opened&quot;</span>)<span class="op">;</span> }<span class="op">,</span></span>
 <span id="cb13-5"><a href="#cb13-5"></a>  <span class="kw">false</span></span>
 <span id="cb13-6"><a href="#cb13-6"></a>)<span class="op">;</span></span>
 <span id="cb13-7"><a href="#cb13-7"></a></span>
 <span id="cb13-8"><a href="#cb13-8"></a><span class="co">// on disconnection</span></span>
 <span id="cb13-9"><a href="#cb13-9"></a>source<span class="op">.</span><span class="fu">addEventListener</span>(</span>
 <span id="cb13-10"><a href="#cb13-10"></a>  <span class="st">&quot;error&quot;</span><span class="op">,</span></span>
-<span id="cb13-11"><a href="#cb13-11"></a>  (<span class="bu">event</span>) <span class="kw">=&gt;</span> { <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;Connection status&quot;</span>)<span class="op">;</span> }<span class="op">,</span></span>
+<span id="cb13-11"><a href="#cb13-11"></a>  (<span class="bu">event</span>) <span class="kw">=&gt;</span> { <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;Connection error&quot;</span>)<span class="op">;</span> }<span class="op">,</span></span>
 <span id="cb13-12"><a href="#cb13-12"></a>  <span class="kw">false</span></span>
 <span id="cb13-13"><a href="#cb13-13"></a>)<span class="op">;</span></span></code></pre></div>
 </div>
@@ -641,20 +661,14 @@
 <ul>
 <li><code>withCredentials</code>: instantiate with CORS credentials (default: false)</li>
 </ul></li>
-<li>Events:
-<ul>
-<li><code>open</code>: on connection</li>
-<li><code>error</code>: on error/disconnection</li>
-<li><code>message</code>: on generic data: event received</li>
-<li><code>&lt;custom&gt;:</code> on named event received</li>
-</ul></li>
+<li>Events: <code>open</code> | <code>error</code> | <code>message</code> | <code>&lt;custom-name&gt;</code></li>
 <li><code>addEventListener(event_name: string, (event: Event) =&gt; void, bubbles: boolean)</code></li>
+<li>close()</li>
 <li>readyState: <code>CONNECTING</code> (0) | <code>OPEN</code> (1) | <code>CLOSED</code>(2)
 <ul>
 <li>CONNECTING: also “waiting to reconnect”</li>
 <li>CLOSED: will not attempt to reconnect</li>
 </ul></li>
-<li>close()</li>
 </ul>
 </div>
 <div id="error-event-is-a-bit-useless" class="slide section level1">
@@ -663,23 +677,16 @@
 <li><p>Single bit of information: “error”</p></li>
 <li><p>callback signature is <code>(event: Event) =&gt; void</code></p>
 <ul>
-<li>event.target instanceof EventSource</li>
+<li><code>event.target</code> is instanceof <code>EventSource</code></li>
+<li>no reason / message / code</li>
 </ul></li>
-<li><p>No reason or message can be derived</p>
-<ul>
-<li>usually output in console</li>
-</ul></li>
-<li><p>Some disconnections can be “fatal”, cancelling the reconnection policy.</p></li>
+<li><p>Some disconnections can be “fatal”, cancelling the reconnection policy</p></li>
 <li><p>Inspect <code>readyState</code> to find out EventSource’s intent:</p>
 <ul>
 <li>CONNECTING: will reconnect / waiting to reconnect / reconnecting</li>
 <li>CLOSED: will not reconnect</li>
 </ul></li>
 </ul>
-</div>
-<div id="implementation-considerations-no-custom-headers" class="slide section level1">
-<h1>Implementation Considerations: No custom headers</h1>
-<p>It is not possible to set custom HTTP headers on SSE requests using <code>EventSource</code></p>
 </div>
 <div id="implementation-considerations-http1.1" class="slide section level1">
 <h1>Implementation Considerations: HTTP/1.1</h1>

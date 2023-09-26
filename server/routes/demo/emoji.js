@@ -5,13 +5,15 @@ import debounce from 'lodash/debounce.js';
 export const name = 'emoji';
 
 const emojiMap = {
-  1: "🙂",
-  2: "😆",
-  3: "🤠",
-  4: "😱",
-  5: "🙃",
-  6: "🥸",
-}
+  1: "💖",
+  2: "👍",
+  3: "🎉",
+  4: "👏",
+  5: "😂",
+  6: "😲",
+  7: "🤔",
+  8: "👎",
+};
 
 const validEmojiValues = Object.keys(emojiMap).map(strNum => parseInt(strNum, 10));
 
