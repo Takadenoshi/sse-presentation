@@ -341,6 +341,11 @@
 </ul>
 </div>
 </div>
+<div id="polling-vs-sse" class="slide section level1">
+<h1>Polling vs SSE</h1>
+<p><img src="assets/images/diagram-SSE.png" class="float-right" /></p>
+<p><img src="assets/images/diagram-polling.png" /></p>
+</div>
 <div id="like-polling-but-better" class="slide section level1">
 <h1>Like polling but better</h1>
 <p>Best suited for UTF-8 updates</p>
@@ -522,19 +527,17 @@
 </ul>
 </div>
 </div>
-<div id="named-events-live-demo" class="slide section level1">
-<h1>Named Events: Live Demo</h1>
+<div id="events-live-demo" class="slide section level1">
+<h1>Events: Live Demo</h1>
 <p>In the live reactions demo, we stream two types of things:</p>
 <ul>
 <li><code>clients</code> event: number of clients</li>
 <li><code>data</code> event: list of emoji enum values (1-8)</li>
 </ul>
-<div class="incremental">
 <pre><code>&lt; event: clients
 &lt; data: 10
 
 &lt; data: [1,2,3,4]</code></pre>
-</div>
 </div>
 <div id="reconnection-1" class="slide section level1">
 <h1>Reconnection (1)</h1>
@@ -554,22 +557,9 @@
 </ul>
 <p><sup><a href="https://github.com/takadenoshi/sse-presentation">Playground</a>: “Retry-flaky” scenario</sup></p>
 </div>
-<div id="reconnection-3---computer-says-no" class="slide section level1">
-<h1>Reconnection (3) - Computer says no</h1>
-<p>A server can signal “do not reconnect”:</p>
-<ul>
-<li>with a <code>Content-Type</code> header other than <code>text/event-stream</code></li>
-<li>with a <code>2xx</code> response other than 200
-<ul>
-<li>301, 307 redirects to a 200 are OK</li>
-</ul></li>
-<li>TODO 4xx / 5xx ?</li>
-</ul>
-<p><sup><a href="https://github.com/takadenoshi/sse-presentation">Playground</a>: “Not SSE” scenario</sup></p>
-</div>
-<div id="reconnection-4---last-event-id" class="slide section level1">
-<h1>Reconnection (4) - Last-Event-ID</h1>
-<p>Events can include an <code>id</code> field with value as any UTF-8 string</p>
+<div id="reconnection-3---last-event-id" class="slide section level1">
+<h1>Reconnection (3) - Last-Event-ID</h1>
+<p>Events can include an <code>id</code> field with any UTF-8 string as value</p>
 <div class="incremental">
 <p>Connection interrupted? Sets reconnection header <code>Last-Event-ID: x</code></p>
 <pre><code>&lt; id: data-0
@@ -750,6 +740,19 @@
 </ul>
 </div>
 </div>
+<div id="implementation-considerations-computer-says-no" class="slide section level1">
+<h1>Implementation Considerations: Computer says no</h1>
+<p>A server can signal “do not reconnect”:</p>
+<ul>
+<li>with a <code>Content-Type</code> header other than <code>text/event-stream</code></li>
+<li>with a <code>2xx</code> response other than 200
+<ul>
+<li>301, 307 redirects to a 200 are OK</li>
+</ul></li>
+<li>TODO 4xx / 5xx ?</li>
+</ul>
+<p><sup><a href="https://github.com/takadenoshi/sse-presentation">Playground</a>: “Not SSE” scenario</sup></p>
+</div>
 <div id="implementation-considerations-reconnecting-1" class="slide section level1">
 <h1>Implementation Considerations: Reconnecting</h1>
 <p><strong>Recommendation: consider handling reconnections explicitly</strong></p>
@@ -796,52 +799,27 @@
 </div>
 <div id="vs-polling" class="slide section level1">
 <h1>Vs Polling</h1>
-<p><img src="assets/images/diagram-SSE.png" class="float-right" /></p>
-<p><img src="assets/images/diagram-polling.png" /></p>
-</div>
-<div id="vs-competiting-options" class="slide section level1">
-<h1>Vs competiting options</h1>
 <div class="columns">
 <div class="column" style="width:33%;">
 <h2 id="a-polling">1a/ Polling</h2>
 <p>Keep requesting new data on an interval</p>
 <ul>
 <li>Slower</li>
-<li>Usually more resource intensive than SSE</li>
+<li>Can more resource intensive than SSE</li>
 </ul>
 <p>Benefit: Doesn’t “hog” a connection (HTTP/1.1)</p>
+</div><div class="column" style="width:33%;">
 <h2 id="b-long-polling">1b/ Long Polling</h2>
 <p>“Hanging GET” - server keeps connection open/hanging until there is something to write.</p>
 <p>Client loops the GET request.</p>
-</div><div class="column" style="width:32%;">
+</div><div class="column" style="width:33%;">
 <h2 id="sse-1">2/ SSE</h2>
 <ul>
 <li>Like formalized, reusable long polling</li>
-<li>HTTP + REST compatible
+<li>Tradeoff:
 <ul>
-<li>Works with your existing framework</li>
-<li>Works with your existing auth</li>
-</ul></li>
-<li>Reconnecting</li>
-</ul>
-</div><div class="column" style="width:32%;">
-<h2 id="websockets">3/ Websockets</h2>
-<ul>
-<li>Not HTTP/REST
-<ul>
-<li>Websocket server usually a separate beast</li>
-</ul></li>
-<li>Must bring your own:
-<ul>
-<li>Routing</li>
-<li>Auth</li>
-<li>Error handling</li>
-<li>TLS Certs (duplicated)</li>
-</ul></li>
-<li>Pain to debug</li>
-<li>Bidirectional/full duplex
-<ul>
-<li>good if you need it</li>
+<li>open sockets vs.</li>
+<li>data store lookups</li>
 </ul></li>
 </ul>
 </div>
@@ -884,6 +862,7 @@
 </div>
 </div>
   
+  <script src="assets/scripts/emoji-map.js" charset="utf-8" type="text/javascript"></script>
   <script src="assets/scripts/index.js" charset="utf-8" type="text/javascript"></script>
 </body>
 </html>

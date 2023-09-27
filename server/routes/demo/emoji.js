@@ -1,19 +1,9 @@
 import SSE from '@takadenoshi/express-sse';
 import { v4 as uuidv4 } from 'uuid';
 import debounce from 'lodash/debounce.js';
+import emojiMap from '../../../common/emoji-map.js';
 
 export const name = 'emoji';
-
-const emojiMap = {
-  1: "💖",
-  2: "👍",
-  3: "🎉",
-  4: "👏",
-  5: "😂",
-  6: "😲",
-  7: "🤔",
-  8: "👎",
-};
 
 const validEmojiValues = Object.keys(emojiMap).map(strNum => parseInt(strNum, 10));
 

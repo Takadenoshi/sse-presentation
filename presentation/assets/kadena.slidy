@@ -244,6 +244,7 @@ $body$
   $include-after$
   $endfor$
 
+  <script src="assets/scripts/emoji-map.js" charset="utf-8" type="text/javascript"></script>
   <script src="assets/scripts/index.js" charset="utf-8" type="text/javascript"></script>
 </body>
 </html>

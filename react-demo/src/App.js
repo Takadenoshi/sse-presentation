@@ -1,11 +1,13 @@
+import './App.css';
 import { useState, useEffect, useCallback, useRef, } from 'react';
-import { READY_STATES, EMOJI_MAP, API_SERVER, } from '../util.js';
-import './Demo.css';
+import { READY_STATES, API_SERVER, } from './util.js';
+import EMOJI_MAP from './emoji-map.js';
+import './App.css';
 
 const path = `/demo/emoji`;
 const endpoint = `${API_SERVER}${path}`;
 
-export default function Demo() {
+export default function App() {
   const [eventSource, setEventSource] = useState();
   const [clients, setClients] = useState(0);
   const [logs, setLogs] = useState([]);

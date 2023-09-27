@@ -1,7 +1,21 @@
 import { useState, useEffect, useCallback } from 'react';
-import { READY_STATES } from '../util.js';
+import { READY_STATES } from './const.js';
+import './App.css';
 
-export default function Playground() {
+function Instructions() {
+  return <div>
+    <h1>React SSE Playground</h1>
+    <p>Pair with the express server from the same <a href="https://github.com/takadenoshi/sse-presentation/">Repo</a>.</p>
+    <p>Scenarios:</p>
+    <ul>
+      <li></li>
+    </ul>
+    <p>Try this out in different browsers to find out if things differ and break in interesting ways.</p>
+    <p>Set env var `REACT_APP_ENDPOINT` to connect to a non default server (http://localhost:3001)</p>
+  </div>;
+}
+
+export default function App() {
   const [endpoint, setEndpoint] = useState();
   const [eventSource, setEventSource] = useState();
   const [logs, setLogs] = useState([]);
@@ -52,7 +66,7 @@ export default function Playground() {
         <button onClick={changeEndpoint('not-sse')}>Not SSE</button>
       </header>
       <div className="container">
-        { eventSource ? <p>Current eventSource.readyState: {READY_STATES[eventSource.readyState]}</p> : null }
+        { eventSource ? <p>Current eventSource.readyState: {READY_STATES[eventSource.readyState]}</p> : <Instructions /> }
         {logs.map((log, i) =>
           <div key={`log-${i}`}>{log}</div>
         )}

@@ -91,6 +91,14 @@ background: assets/images/bg.png
 
 ---
 
+# Polling vs SSE
+
+![](assets/images/diagram-SSE.png){.float-right}
+
+![](assets/images/diagram-polling.png)
+
+---
+
 # Like polling but better
 
 Best suited for UTF-8 updates
@@ -346,14 +354,12 @@ The `goal` and `spectator-chat` events are handled separately on the frontend
 
 ---
 
-# Named Events: Live Demo
+# Events: Live Demo
 
 In the live reactions demo, we stream two types of things:
 
 - `clients` event: number of clients
 - `data` event: list of emoji enum values (1-8)
-
-. . .
 
 ```
 < event: clients
@@ -392,22 +398,9 @@ Emit a `retry:` field in any of the events:
 
 ---
 
-# Reconnection (3) - Computer says no
+# Reconnection (3) - Last-Event-ID
 
-A server can signal "do not reconnect":
-
-- with a `Content-Type` header other than `text/event-stream`
-- with a `2xx` response other than 200
-  - 301, 307 redirects to a 200 are OK
-- TODO 4xx / 5xx ?
-
-<sup>[Playground](https://github.com/takadenoshi/sse-presentation): "Not SSE" scenario</sup>
-
----
-
-# Reconnection (4) - Last-Event-ID
-
-Events can include an `id` field with value as any UTF-8 string
+Events can include an `id` field with any UTF-8 string as value
 
 . . .
 
@@ -577,6 +570,8 @@ Too much SSE without planning -> choke
 [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#listening_for_custom_events) [StackOverflow](https://stackoverflow.com/questions/5195452/websockets-vs-server-sent-events-eventsource/5326159)
 :::
 
+---
+
 # Implementation Considerations: HTTP/1.1
 
 ## Possible Solutions
@@ -619,6 +614,19 @@ Test it out in the [playground repo](https://github.com/takadenoshi/sse-presenta
 - Open react-app in Chrome and Firefox
 - Try to connect to any endpoint
 - Observe behavior of each browser
+
+---
+
+# Implementation Considerations: Computer says no
+
+A server can signal "do not reconnect":
+
+- with a `Content-Type` header other than `text/event-stream`
+- with a `2xx` response other than 200
+  - 301, 307 redirects to a 200 are OK
+- TODO 4xx / 5xx ?
+
+<sup>[Playground](https://github.com/takadenoshi/sse-presentation): "Not SSE" scenario</sup>
 
 ---
 
@@ -700,15 +708,6 @@ Future people can track the present validity of this statement [here](https://bu
 
 # Vs Polling
 
-![](assets/images/diagram-SSE.png){.float-right}
-
-![](assets/images/diagram-polling.png)
-
-
----
-
-# Vs competiting options
-
 :::::::::::::: {.columns}
 ::: {.column width="33%"}
 
@@ -717,9 +716,12 @@ Future people can track the present validity of this statement [here](https://bu
 Keep requesting new data on an interval
 
 - Slower
-- Usually more resource intensive than SSE
+- Can more resource intensive than SSE
 
 Benefit: Doesn't "hog" a connection (HTTP/1.1)
+
+:::
+::: {.column width="33%"}
 
 ## 1b/ Long Polling
 
@@ -728,31 +730,14 @@ Benefit: Doesn't "hog" a connection (HTTP/1.1)
 Client loops the GET request.
 
 :::
-::: {.column width="32%"}
+::: {.column width="33%"}
 
 ## 2/ SSE
 
 - Like formalized, reusable long polling
-- HTTP + REST compatible
-  - Works with your existing framework
-  - Works with your existing auth
-- Reconnecting
-
-:::
-::: {.column width="32%"}
-
-## 3/ Websockets
-
-- Not HTTP/REST
-  - Websocket server usually a separate beast
-- Must bring your own:
-  - Routing
-  - Auth
-  - Error handling
-  - TLS Certs (duplicated)
-- Pain to debug
-- Bidirectional/full duplex
-  - good if you need it
+- Tradeoff:
+  - open sockets vs.
+  - data store lookups
 
 :::
 ::::::::::::::

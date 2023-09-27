@@ -4,15 +4,4 @@ export const READY_STATES = {
   2: 'CLOSED',
 };
 
-export const EMOJI_MAP = {
-  1: "💖",
-  2: "👍",
-  3: "🎉",
-  4: "👏",
-  5: "😂",
-  6: "😲",
-  7: "🤔",
-  8: "👎",
-}
-
 export const API_SERVER = process.env.REACT_APP_ENDPOINT ?? 'http://localhost:3001';
