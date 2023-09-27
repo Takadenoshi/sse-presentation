@@ -561,10 +561,10 @@ source.addEventListener(
 
 ---
 
-<div class="abs-centered">
-<div class="big-font">
+<div class="abs-centered big-font">
 ## To be clear
-</div>
+
+. . .
 
 I hold no $SSE stock
 </div>
@@ -587,18 +587,21 @@ available
 
 # ~~You should definitely use it~~
 
+I don no u
+
 . . .
 
 ## You should definitely know about it
 
-Warts and all
+Including: warts and all
 
 ---
 
-<div class="abs-centered">
-<div class="big-font">
+<div class="abs-centered big-font">
 ## Considerations
-</div>
+
+. . .
+
 I ate some dog food for ~~you~~ science
 </div>
 
@@ -625,9 +628,9 @@ I ate some dog food for ~~you~~ science
 
 ## HTTP/1.1 connections quota
 
-Max number of connections: 6
-
 . . .
+
+Max number of connections: 6
 
 Per-hostname quota
 
@@ -763,7 +766,7 @@ Preferred approach, especially for important payloads.
 
 ---
 
-# Implementation Considerations: Service Workers (Firefox)
+# Implementation Considerations: 🔥 🦊 💁 🤖
 
 ## Firefox Service Workers 💔 EventSource
 
@@ -775,49 +778,13 @@ Future people can track the present validity of this statement [here](https://bu
 
 ---
 
-# Vs Polling
-
-:::::::::::::: {.columns}
-::: {.column width="33%"}
-
-## 1a/ Polling
-
-Keep requesting new data on an interval
-
-- Slower
-- Can more resource intensive than SSE
-
-Benefit: Doesn't "hog" a connection (HTTP/1.1)
-
-:::
-::: {.column width="33%"}
-
-## 1b/ Long Polling
-
-"Hanging GET" - server keeps connection open/hanging until there is something to write.
-
-Client loops the GET request.
-
-:::
-::: {.column width="33%"}
-
-## 2/ SSE
-
-- Like formalized, reusable long polling
-- Tradeoff:
-  - open sockets vs.
-  - data store lookups
-
-:::
-::::::::::::::
-
----
-
 # Kadena use case
 
 Blockchain stuff usually comes with lots of polling. E.g. determining finality
 
 Kadena's Chainweb is 20 "braided" chains -> 20x polling threads (worst case)
+
+. . .
 
 [Chainweb-stream](https://github.com/kadena-io/chainweb-stream):
 
@@ -826,10 +793,19 @@ Kadena's Chainweb is 20 "braided" chains -> 20x polling threads (worst case)
 
 [Chainweb-stream-client](https://github.com/kadena-community/kadena.js/tree/main/packages/libs/chainweb-stream-client):
 
+. . .
+
 - Client side lib (node, browser)
 - Detects stale connections (heartbeat events)
 - Detects initial connection timeouts
 - Custom reconnection (exponential backoffs)
+
+---
+
+# Playground
+
+- Repo with example SSE server in express
+- Client in React with various scenarios
 
 ---
 

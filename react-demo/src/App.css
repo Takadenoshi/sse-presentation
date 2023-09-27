@@ -54,3 +54,10 @@ html, body, #root, .App {
   margin-bottom: 10px;
 }
 
+.button.button-top-right {
+  position: fixed;
+  top:0;
+  right:0;
+  font-size: 1.75rem;
+  padding: 0rem;
+}

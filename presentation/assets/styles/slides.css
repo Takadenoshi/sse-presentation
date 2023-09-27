@@ -370,11 +370,13 @@ pre.numberSource > code.sourceCode > span > a:first-child::before {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  text-align: center;
 }
 
 .big-font {
-  font-size: 250%;
+  text-align: center;
+}
+.big-font h2 {
+  font-size: 250% !important;
 }
 
 .float-right {

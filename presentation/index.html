@@ -703,11 +703,11 @@
 </div>
 <div class="slide section level1">
 
-<div class="abs-centered">
-<div id="to-be-clear" class="big-font">
+<div id="to-be-clear" class="abs-centered big-font">
 <h2>To be clear</h2>
-</div>
+<div class="incremental">
 <p>I hold no $SSE stock</p>
+</div>
 </div>
 </div>
 <div class="slide section level1">
@@ -723,18 +723,19 @@
 </div>
 <div id="you-should-definitely-use-it" class="slide section level1">
 <h1><del>You should definitely use it</del></h1>
+<p>I don no u</p>
 <div class="incremental">
 <h2 id="you-should-definitely-know-about-it">You should definitely know about it</h2>
-<p>Warts and all</p>
+<p>Including: warts and all</p>
 </div>
 </div>
 <div class="slide section level1">
 
-<div class="abs-centered">
-<div id="considerations" class="big-font">
+<div id="considerations" class="abs-centered big-font">
 <h2>Considerations</h2>
-</div>
+<div class="incremental">
 <p>I ate some dog food for <del>you</del> science</p>
+</div>
 </div>
 </div>
 <div id="error-event-is-a-bit-useless" class="slide section level1">
@@ -757,8 +758,8 @@
 <div id="implementation-considerations-http1.1" class="slide section level1">
 <h1>Implementation Considerations: HTTP/1.1</h1>
 <h2 id="http1.1-connections-quota">HTTP/1.1 connections quota</h2>
-<p>Max number of connections: 6</p>
 <div class="incremental">
+<p>Max number of connections: 6</p>
 <p>Per-hostname quota</p>
 <p>Browser-wide enforcement (shared by all tabs)</p>
 <p>Too much SSE without planning -&gt; choke</p>
@@ -864,56 +865,39 @@
 <p><strong>“expect heartbeats every N seconds, otherwise reconnect”</strong></p>
 <p>Preferred approach, especially for important payloads.</p>
 </div>
-<div id="implementation-considerations-service-workers-firefox" class="slide section level1">
-<h1>Implementation Considerations: Service Workers (Firefox)</h1>
+<div id="implementation-considerations" class="slide section level1">
+<h1>Implementation Considerations: 🔥 🦊 💁 🤖</h1>
 <h2 id="firefox-service-workers-eventsource">Firefox Service Workers 💔 EventSource</h2>
 <p>Firefox has yet to implement support for EventSource in its Service Worker context.</p>
 <p>Future people can track the present validity of this statement <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1681218">here</a>.</p>
 <p>✅ But you can use it in a SharedWorker</p>
 </div>
-<div id="vs-polling" class="slide section level1">
-<h1>Vs Polling</h1>
-<div class="columns">
-<div class="column" style="width:33%;">
-<h2 id="a-polling">1a/ Polling</h2>
-<p>Keep requesting new data on an interval</p>
-<ul>
-<li>Slower</li>
-<li>Can more resource intensive than SSE</li>
-</ul>
-<p>Benefit: Doesn’t “hog” a connection (HTTP/1.1)</p>
-</div><div class="column" style="width:33%;">
-<h2 id="b-long-polling">1b/ Long Polling</h2>
-<p>“Hanging GET” - server keeps connection open/hanging until there is something to write.</p>
-<p>Client loops the GET request.</p>
-</div><div class="column" style="width:33%;">
-<h2 id="sse-1">2/ SSE</h2>
-<ul>
-<li>Like formalized, reusable long polling</li>
-<li>Tradeoff:
-<ul>
-<li>open sockets vs.</li>
-<li>data store lookups</li>
-</ul></li>
-</ul>
-</div>
-</div>
-</div>
 <div id="kadena-use-case" class="slide section level1">
 <h1>Kadena use case</h1>
 <p>Blockchain stuff usually comes with lots of polling. E.g. determining finality</p>
 <p>Kadena’s Chainweb is 20 “braided” chains -&gt; 20x polling threads (worst case)</p>
+<div class="incremental">
 <p><a href="https://github.com/kadena-io/chainweb-stream">Chainweb-stream</a>:</p>
 <ul>
 <li>SSE Server</li>
 <li>Streams transactions of a certain type (specific account or application/contract)</li>
 </ul>
 <p><a href="https://github.com/kadena-community/kadena.js/tree/main/packages/libs/chainweb-stream-client">Chainweb-stream-client</a>:</p>
+</div>
+<div class="incremental">
 <ul>
 <li>Client side lib (node, browser)</li>
 <li>Detects stale connections (heartbeat events)</li>
 <li>Detects initial connection timeouts</li>
 <li>Custom reconnection (exponential backoffs)</li>
+</ul>
+</div>
+</div>
+<div id="playground" class="slide section level1">
+<h1>Playground</h1>
+<ul>
+<li>Repo with example SSE server in express</li>
+<li>Client in React with various scenarios</li>
 </ul>
 </div>
 <div id="thank-you" class="slide section level1">

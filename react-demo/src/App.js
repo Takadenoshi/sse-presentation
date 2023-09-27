@@ -24,6 +24,10 @@ export default function App() {
   const [logs, setLogs] = useState([]);
   const scrollRef = useRef();
 
+  const goToDocs = useCallback(() => {
+    window.open(`https://github.com/takadenoshi/sse-presentation/`); 
+  }, []);
+
   const appendLogs = useCallback((...args) => {
     setLogs((logs) => [...logs, [getISOTime(), ...args].join(' ')]);
     setTimeout(() => {
@@ -82,6 +86,7 @@ export default function App() {
 
   return <>
     <div className="App">
+      <div className="button button-top-right" onClick={goToDocs}>📚</div>
       <div className="container" ref={scrollRef}>
         { eventSource ? <p>Current eventSource.readyState: {READY_STATES[eventSource.readyState]}</p> : null }
         {logs.map((log, i) =>
