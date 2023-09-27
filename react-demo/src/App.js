@@ -7,6 +7,17 @@ import './App.css';
 const path = `/demo/emoji`;
 const endpoint = `${API_SERVER}${path}`;
 
+function getISOTime() {
+  const d = new Date();
+  const [hours, minutes, seconds, ms] = [
+    d.getHours(),
+    d.getMinutes(),
+    d.getSeconds(),
+    d.getMilliseconds(),
+  ];
+  return `${hours}:${minutes}:${seconds}.${ms}`;
+}
+
 export default function App() {
   const [eventSource, setEventSource] = useState();
   const [clients, setClients] = useState(0);
@@ -14,7 +25,7 @@ export default function App() {
   const scrollRef = useRef();
 
   const appendLogs = useCallback((...args) => {
-    setLogs((logs) => [...logs, [new Date().toISOString(), ...args].join(' ')]);
+    setLogs((logs) => [...logs, [getISOTime(), ...args].join(' ')]);
     setTimeout(() => {
       scrollRef.current?.scroll(0, 1e8);
     }, 10);

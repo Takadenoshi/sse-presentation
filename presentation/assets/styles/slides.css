@@ -370,6 +370,7 @@ pre.numberSource > code.sourceCode > span > a:first-child::before {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  text-align: center;
 }
 
 .big-font {

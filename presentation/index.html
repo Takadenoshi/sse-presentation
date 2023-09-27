@@ -341,16 +341,54 @@
 </ul>
 </div>
 </div>
-<div id="polling-vs-sse" class="slide section level1">
-<h1>Polling vs SSE</h1>
-<p><img src="assets/images/diagram-SSE.png" class="float-right" /></p>
-<p><img src="assets/images/diagram-polling.png" /></p>
-</div>
 <div id="like-polling-but-better" class="slide section level1">
 <h1>Like polling but better</h1>
 <p>Best suited for UTF-8 updates</p>
 <div class="incremental">
 <p>Especially for multiple update channels</p>
+</div>
+</div>
+<div id="polling-vs-sse" class="slide section level1">
+<h1>Polling vs SSE</h1>
+<p><img src="assets/images/diagram-SSE.png" class="float-right" /></p>
+<p><img src="assets/images/diagram-polling.png" /></p>
+</div>
+<div id="like-websockets-but--" class="slide section level1">
+<h1>Like WebSockets but -</h1>
+<ul>
+<li>Unidirectional &amp; UTF-8</li>
+</ul>
+<div class="incremental">
+<ul>
+<li>Easy to debug
+<ul>
+<li>just <code>curl</code> it ✅</li>
+</ul></li>
+</ul>
+</div>
+<div class="incremental">
+<ul>
+<li>Is HTTP/REST -&gt; easier integrated
+<ul>
+<li>Happy part of your RESTful server backend
+<ul>
+<li>vs WS the trying-to-fit-in cousin</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div class="incremental">
+<ul>
+<li>Easier for third parties &amp; exotic networks (?)</li>
+</ul>
+</div>
+<div class="incremental">
+<ul>
+<li>WS seems overkill for unidirectional
+<ul>
+<li>But if it works for you 👍</li>
+</ul></li>
+</ul>
 </div>
 </div>
 <div id="use-cases-async-job-progress" class="slide section level1">
@@ -644,6 +682,61 @@
 <span id="cb13-12"><a href="#cb13-12"></a>  <span class="kw">false</span></span>
 <span id="cb13-13"><a href="#cb13-13"></a>)<span class="op">;</span></span></code></pre></div>
 </div>
+<div id="the-eventsource-interface" class="slide section level1">
+<h1>The EventSource Interface</h1>
+<ul>
+<li><code>constructor(url, { withCredentials: boolean })</code>
+<ul>
+<li><code>withCredentials</code>: instantiate with CORS credentials (default: false)</li>
+</ul></li>
+<li>Events: <code>open</code> | <code>error</code> | <code>message</code> | <code>&lt;custom-name&gt;</code>
+<ul>
+<li>addEventListener, onmessage, onerror, …</li>
+</ul></li>
+<li><code>close()</code></li>
+<li><code>readyState</code>: State <u>intent</u> enum: <code>CONNECTING</code> (0) | <code>OPEN</code> (1) | <code>CLOSED</code>(2)
+<ul>
+<li>CONNECTING: also “waiting to reconnect”</li>
+<li>CLOSED: will not attempt to reconnect</li>
+</ul></li>
+</ul>
+</div>
+<div class="slide section level1">
+
+<div class="abs-centered">
+<div id="to-be-clear" class="big-font">
+<h2>To be clear</h2>
+</div>
+<p>I hold no $SSE stock</p>
+</div>
+</div>
+<div class="slide section level1">
+
+<div id="sse-nfts" class="abs-centered big-font">
+<h2>SSE NFTs</h2>
+<div class="incremental">
+<p>will not</p>
+<p>be made</p>
+<p>available</p>
+</div>
+</div>
+</div>
+<div id="you-should-definitely-use-it" class="slide section level1">
+<h1><del>You should definitely use it</del></h1>
+<div class="incremental">
+<h2 id="you-should-definitely-know-about-it">You should definitely know about it</h2>
+<p>Warts and all</p>
+</div>
+</div>
+<div class="slide section level1">
+
+<div class="abs-centered">
+<div id="considerations" class="big-font">
+<h2>Considerations</h2>
+</div>
+<p>I ate some dog food for <del>you</del> science</p>
+</div>
+</div>
 <div id="error-event-is-a-bit-useless" class="slide section level1">
 <h1>Error event is a bit useless</h1>
 <ul>
@@ -658,25 +751,6 @@
 <ul>
 <li>CONNECTING: will reconnect / waiting to reconnect / reconnecting</li>
 <li>CLOSED: will not reconnect</li>
-</ul></li>
-</ul>
-</div>
-<div id="the-eventsource-interface" class="slide section level1">
-<h1>The EventSource Interface</h1>
-<ul>
-<li><code>constructor(url, { withCredentials: boolean })</code>
-<ul>
-<li><code>withCredentials</code>: instantiate with CORS credentials (default: false)</li>
-</ul></li>
-<li>Events: <code>open</code> | <code>error</code> | <code>message</code> | <code>&lt;custom-name&gt;</code>
-<ul>
-<li>addEventListener, onmessage, onerror, …</li>
-</ul></li>
-<li>close()</li>
-<li>readyState: <code>CONNECTING</code> (0) | <code>OPEN</code> (1) | <code>CLOSED</code>(2)
-<ul>
-<li>CONNECTING: also “waiting to reconnect”</li>
-<li>CLOSED: will not attempt to reconnect</li>
 </ul></li>
 </ul>
 </div>

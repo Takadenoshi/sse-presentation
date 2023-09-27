@@ -91,6 +91,16 @@ background: assets/images/bg.png
 
 ---
 
+# Like polling but better
+
+Best suited for UTF-8 updates
+
+. . .
+
+Especially for multiple update channels
+
+---
+
 # Polling vs SSE
 
 ![](assets/images/diagram-SSE.png){.float-right}
@@ -99,13 +109,29 @@ background: assets/images/bg.png
 
 ---
 
-# Like polling but better
+# Like WebSockets but -
 
-Best suited for UTF-8 updates
+- Unidirectional & UTF-8
 
 . . .
 
-Especially for multiple update channels
+- Easy to debug
+  - just `curl` it ✅
+
+. . .
+
+- Is HTTP/REST -> easier integrated
+  - Happy part of your RESTful server backend
+    - vs WS the trying-to-fit-in cousin
+
+. . .
+
+- Easier for third parties & exotic networks (?)
+
+. . .
+
+- WS seems overkill for unidirectional
+  - But if it works for you 👍
 
 ---
 
@@ -522,6 +548,62 @@ source.addEventListener(
 
 ---
 
+# The EventSource Interface
+
+- `constructor(url, { withCredentials: boolean })`
+  - `withCredentials`: instantiate with CORS credentials (default: false)
+- Events: `open` | `error` | `message` | `<custom-name>`
+  - addEventListener, onmessage, onerror, ...
+- `close()`
+- `readyState`: State <u>intent</u> enum: `CONNECTING` (0) | `OPEN` (1) | `CLOSED`(2)
+  - CONNECTING: also "waiting to reconnect"
+  - CLOSED: will not attempt to reconnect
+
+---
+
+<div class="abs-centered">
+<div class="big-font">
+## To be clear
+</div>
+
+I hold no $SSE stock
+</div>
+
+---
+
+<div class="abs-centered big-font">
+## SSE NFTs
+
+. . .
+
+will not 
+
+be made
+
+available
+</div>
+
+---
+
+# ~~You should definitely use it~~
+
+. . .
+
+## You should definitely know about it
+
+Warts and all
+
+---
+
+<div class="abs-centered">
+<div class="big-font">
+## Considerations
+</div>
+I ate some dog food for ~~you~~ science
+</div>
+
+---
+
 # Error event is a bit useless
 
 - Single bit of information: "error"
@@ -535,19 +617,6 @@ source.addEventListener(
 - Inspect `readyState` to find out EventSource's intent:
   - CONNECTING: will reconnect / waiting to reconnect / reconnecting
   - CLOSED: will not reconnect
-
----
-
-# The EventSource Interface
-
-- `constructor(url, { withCredentials: boolean })`
-  - `withCredentials`: instantiate with CORS credentials (default: false)
-- Events: `open` | `error` | `message` | `<custom-name>`
-  - addEventListener, onmessage, onerror, ...
-- close()
-- readyState: `CONNECTING` (0) | `OPEN` (1) | `CLOSED`(2)
-  - CONNECTING: also "waiting to reconnect"
-  - CLOSED: will not attempt to reconnect
 
 ---
 
