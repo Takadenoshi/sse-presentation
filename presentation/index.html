@@ -420,9 +420,9 @@
 <div class="columns">
 <div class="column" style="width:40%;">
 <h2 id="old-enough-to-vote">Old enough to vote</h2>
+<p>🧙 By Ian Hickson, while at Opera</p>
 <p>🥳 SSE is 19 years old</p>
 <p>🔧 13 years of mainstream support</p>
-<p>Originally by Ian Hickson, while at Opera</p>
 </div><div class="column" style="width:60%;">
 <h2 id="timeline">Timeline</h2>
 <ul>
@@ -430,7 +430,7 @@
 <li>2006 · [Production] Opera browser implementation</li>
 <li>2009 · <a href="https://www.w3.org/TR/2009/WD-eventsource-20090423/">W3C Working Draft</a>, Ian Hickson, Google Inc</li>
 <li>2010 · [Production] Safari v5, Chrome v6</li>
-<li>2011 · [Production] Firefox v6,</li>
+<li>2011 · [Production] Firefox v6</li>
 <li>2015 · <a href="https://www.w3.org/TR/2015/REC-eventsource-20150203/">W3C Recommendation</a></li>
 </ul>
 <p><a href="https://www.w3.org/TR/2015/REC-eventsource-20150203/">W3C Publication History</a> · <a href="https://html.spec.whatwg.org/multipage/server-sent-events.html#server-sent-events">HTML Living Standard § 9.2</a></p>
@@ -496,7 +496,7 @@
 </div>
 <div id="simple-eventsource-consumer" class="slide section level1">
 <h1>Simple EventSource consumer</h1>
-<p>Server-sent events are consumed with <code>EventSource</code>:</p>
+<p>Client-side: SSE consumer API is <code>EventSource</code></p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource javascript numberLines"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">let</span> i<span class="op">=</span><span class="dv">0</span><span class="op">;</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a></span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="kw">const</span> source <span class="op">=</span> <span class="kw">new</span> <span class="bu">EventSource</span>(<span class="st">&quot;http://localhost:3001/stream/simple&quot;</span>)<span class="op">;</span></span>
@@ -525,6 +525,24 @@
 </div>
 </div>
 </div>
+<div id="named-events" class="slide section level1">
+<h1>Named Events</h1>
+<p>You can “namespace” your events using the <code>event</code> field with any custom name:</p>
+<pre><code>&lt; event: goal
+&lt; data: &quot;ARS-LIV 1-1 45&quot;\n\n
+
+&lt; event: spectator-chat
+&lt; data: &quot;Did you see that ludicrous display just now&quot;\n\n</code></pre>
+<div class="incremental">
+<p>The <code>goal</code> and <code>spectator-chat</code> events are handled separately on the frontend</p>
+<ul>
+<li>Allows multiplexing / routing events
+<ul>
+<li>no need for pattern matching on a shared data payload</li>
+</ul></li>
+</ul>
+</div>
+</div>
 <div id="interactive-part---scan-me" class="slide section level1">
 <h1>Interactive part - scan me!</h1>
 <p><img src="assets/images/0xk.svg" class="float-right" /></p>
@@ -547,30 +565,12 @@
 </ul>
 </div>
 </div>
-<div id="named-events" class="slide section level1">
-<h1>Named Events</h1>
-<p>You can “namespace” your events using the <code>event</code> field with any custom name:</p>
-<pre><code>&lt; event: goal
-&lt; data: &quot;ARS-LIV 1-1 45&quot;\n\n
-
-&lt; event: spectator-chat
-&lt; data: &quot;Did you see that ludicrous display just now&quot;\n\n</code></pre>
-<div class="incremental">
-<p>The <code>goal</code> and <code>spectator-chat</code> events are handled separately on the frontend</p>
-<ul>
-<li>Allows multiplexing / routing events
-<ul>
-<li>no need for pattern matching on a shared data payload</li>
-</ul></li>
-</ul>
-</div>
-</div>
-<div id="events-live-demo" class="slide section level1">
-<h1>Events: Live Demo</h1>
+<div id="named-events-live-demo" class="slide section level1">
+<h1>Named Events: Live Demo</h1>
 <p>In the live reactions demo, we stream two types of things:</p>
 <ul>
 <li><code>clients</code> event: number of clients</li>
-<li><code>data</code> event: list of emoji enum values (1-8)</li>
+<li><code>data</code> event: array of emoji enum values (1-8)</li>
 </ul>
 <pre><code>&lt; event: clients
 &lt; data: 10
@@ -598,14 +598,13 @@
 <div id="reconnection-3---last-event-id" class="slide section level1">
 <h1>Reconnection (3) - Last-Event-ID</h1>
 <p>Events can include an <code>id</code> field with any UTF-8 string as value</p>
-<div class="incremental">
 <p>Connection interrupted? Sets reconnection header <code>Last-Event-ID: x</code></p>
 <pre><code>&lt; id: data-0
 &lt; retry: 5000
 &lt; data: Data Zero event\n</code></pre>
-<p>💔 <strong>Disconnects</strong></p>
-<p>➡️ <em>5 seconds later</em></p>
-<pre><code>&gt; GET /stream/notifications HTTP/1.1
+<div class="incremental">
+<p>💔 <strong>Disconnects</strong> ➡️ <em>5 seconds later</em></p>
+<pre><code>&gt; GET /stream/notifications
 &gt; Last-Event-ID: data-0</code></pre>
 <p><sup><a href="https://github.com/takadenoshi/sse-presentation">Playground</a>: “notifications” scenario</sup></p>
 </div>
@@ -625,7 +624,7 @@
 <li>Setting reconnection time <code>retry: 2000</code></li>
 <li>Event identifiers <code>id: 0</code></li>
 <li>Unnamed events <code>data: Hello\n\n</code></li>
-<li>Comment: starts with colon <code>:I am a ...</code></li>
+<li>Comment: starts with colon <code>:I am a comment</code></li>
 <li>Named events <code>event: status</code></li>
 </ul>
 </div><div class="column" style="width:55%;">
@@ -675,7 +674,7 @@
 <span id="cb13-5"><a href="#cb13-5"></a>  <span class="kw">false</span></span>
 <span id="cb13-6"><a href="#cb13-6"></a>)<span class="op">;</span></span>
 <span id="cb13-7"><a href="#cb13-7"></a></span>
-<span id="cb13-8"><a href="#cb13-8"></a><span class="co">// on disconnection</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a><span class="co">// on error or disconnection</span></span>
 <span id="cb13-9"><a href="#cb13-9"></a>source<span class="op">.</span><span class="fu">addEventListener</span>(</span>
 <span id="cb13-10"><a href="#cb13-10"></a>  <span class="st">&quot;error&quot;</span><span class="op">,</span></span>
 <span id="cb13-11"><a href="#cb13-11"></a>  (<span class="bu">event</span>) <span class="kw">=&gt;</span> { <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;Connection error&quot;</span>)<span class="op">;</span> }<span class="op">,</span></span>
@@ -685,14 +684,11 @@
 <div id="the-eventsource-interface" class="slide section level1">
 <h1>The EventSource Interface</h1>
 <ul>
-<li><code>constructor(url, { withCredentials: boolean })</code>
+<li><code>constructor(url, { withCredentials })</code>
 <ul>
-<li><code>withCredentials</code>: instantiate with CORS credentials (default: false)</li>
+<li><code>withCredentials: boolean</code> use CORS credentials (default: false)</li>
 </ul></li>
-<li>Events: <code>open</code> | <code>error</code> | <code>message</code> | <code>&lt;custom-name&gt;</code>
-<ul>
-<li>addEventListener, onmessage, onerror, …</li>
-</ul></li>
+<li>Events: <code>open</code> | <code>error</code> | <code>message</code> | <code>&lt;custom-name&gt;</code></li>
 <li><code>close()</code></li>
 <li><code>readyState</code>: State <u>intent</u> enum: <code>CONNECTING</code> (0) | <code>OPEN</code> (1) | <code>CLOSED</code>(2)
 <ul>
@@ -801,15 +797,15 @@
 <h2 id="different-browser-implementations">Different Browser Implementations</h2>
 <p>When a network error is encountered:</p>
 <ul>
-<li>Firefox: Will <strong>stop</strong> retrying (standard compliant)</li>
-<li>Chrome: Will <strong>keep</strong> retrying (actually helpful)</li>
+<li>Firefox: <strong>stops</strong> retrying (standard compliant)</li>
+<li>Chrome: <strong>keeps</strong> retrying (actually helpful)</li>
 </ul>
 <hr />
 <div class="incremental">
 <p>Test it out in the <a href="https://github.com/takadenoshi/sse-presentation">playground repo</a>:</p>
 <ul>
-<li>Start react-app but not the server</li>
-<li>Open react-app in Chrome and Firefox</li>
+<li>Start react-playground but not the server</li>
+<li>Open react-playground in Chrome and Firefox</li>
 <li>Try to connect to any endpoint</li>
 <li>Observe behavior of each browser</li>
 </ul>
@@ -820,17 +816,17 @@
 <p>A server can signal “do not reconnect”:</p>
 <ul>
 <li>with a <code>Content-Type</code> header other than <code>text/event-stream</code></li>
-<li>with a <code>2xx</code> response other than 200
+<li>with a status code other than:
 <ul>
-<li>301, 307 redirects to a 200 are OK</li>
+<li>200</li>
+<li>3xx redirect to a 200</li>
 </ul></li>
-<li>TODO 4xx / 5xx ?</li>
 </ul>
 <p><sup><a href="https://github.com/takadenoshi/sse-presentation">Playground</a>: “Not SSE” scenario</sup></p>
 </div>
 <div id="implementation-considerations-reconnecting-1" class="slide section level1">
 <h1>Implementation Considerations: Reconnecting</h1>
-<p><strong>Recommendation: consider handling reconnections explicitly</strong></p>
+<p>Recommendation: consider handling reconnections explicitly</p>
 <ul>
 <li>Ensure uniform behavior</li>
 <li>Option for exponential backoff strategies</li>
@@ -841,7 +837,7 @@
 <div id="implementation-considerations-proxies-1" class="slide section level1">
 <h1>Implementation Considerations: Proxies (1)</h1>
 <h2 id="proxies-can-kill">Proxies can kill</h2>
-<p>Proxies, load balancers and other networking middleware can kill idle connections after a short while.</p>
+<p>Some proxies dislike idle connections &amp; will kill them quickly</p>
 <p>Two approaches to fix this:</p>
 <hr />
 <h2 id="comment-not-client-aware">1/ Comment (not client-aware)</h2>
@@ -853,7 +849,7 @@
 <div id="implementation-considerations-proxies-2" class="slide section level1">
 <h1>Implementation Considerations: Proxies (2)</h1>
 <h2 id="proxies-can-kill-1">Proxies can kill</h2>
-<p>Proxies, load balancers and other networking middleware can kill idle connections after a short while.</p>
+<p>Some proxies dislike idle connections &amp; will kill them quickly</p>
 <p>Two approaches to fix this:</p>
 <hr />
 <h2 id="heartbeat-event-client-aware">2/ Heartbeat event (client-aware)</h2>

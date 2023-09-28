@@ -46,6 +46,15 @@ export default function App() {
   }, [endpoint, counter]);
 
   const changeEndpoint = useCallback((endpoint) => () => {
+    if (endpoint === 'status') {
+      const code = prompt('What status code should the server to respond with?', 500);
+      const error = !code ? 'Cancelled' : isNaN(Number(code)) ? 'Cancelled: non-numeric status code' : null;
+      if (error) {
+        alert(error);
+        return;
+      }
+      endpoint += '?code=' + code;
+    }
     setEndpoint(endpoint);
     setCounter(n => n+1);
   }, []);
@@ -64,6 +73,7 @@ export default function App() {
         <button onClick={changeEndpoint('retry-flaky')}>Retry-flaky</button>
         <button onClick={changeEndpoint('notifications')}>Notifications</button>
         <button onClick={changeEndpoint('not-sse')}>Not SSE</button>
+        <button onClick={changeEndpoint('status')}>Status code</button>
       </header>
       <div className="container">
         { eventSource ? <p>Current eventSource.readyState: {READY_STATES[eventSource.readyState]}</p> : <Instructions /> }

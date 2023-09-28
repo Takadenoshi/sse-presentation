@@ -170,11 +170,11 @@ Yes (96.11%)
 
 ## Old enough to vote
 
+🧙 By Ian Hickson, while at Opera
+
 🥳 SSE is 19 years old
 
 🔧 13 years of mainstream support
-
-Originally by Ian Hickson, while at Opera
 
 :::
 ::: {.column width="60%"}
@@ -185,7 +185,7 @@ Originally by Ian Hickson, while at Opera
 - 2006 &middot; [Production] Opera browser implementation
 - 2009 &middot; [W3C Working Draft](https://www.w3.org/TR/2009/WD-eventsource-20090423/), Ian Hickson, Google Inc
 - 2010 &middot; [Production] Safari v5, Chrome v6
-- 2011 &middot; [Production] Firefox v6, 
+- 2011 &middot; [Production] Firefox v6
 - 2015 &middot; [W3C Recommendation](https://www.w3.org/TR/2015/REC-eventsource-20150203/)
 
 [W3C Publication History](https://www.w3.org/TR/2015/REC-eventsource-20150203/) &middot; [HTML Living Standard § 9.2](https://html.spec.whatwg.org/multipage/server-sent-events.html#server-sent-events) 
@@ -289,7 +289,7 @@ Data is encoded in UTF-8 (mandatory)
 
 # Simple EventSource consumer
 
-Server-sent events are consumed with `EventSource`:
+Client-side: SSE consumer API is `EventSource`
 
 ```{.javascript .numberLines}
 let i=0;
@@ -334,6 +334,27 @@ source.addEventListener("message", event => console.log(++i, event.data), false)
 
 ---
 
+# Named Events
+
+You can "namespace" your events using the `event` field with any custom name:
+
+```
+< event: goal
+< data: "ARS-LIV 1-1 45"\n\n
+
+< event: spectator-chat
+< data: "Did you see that ludicrous display just now"\n\n
+```
+
+. . .
+
+The `goal` and `spectator-chat` events are handled separately on the frontend
+
+- Allows multiplexing / routing events 
+  - no need for pattern matching on a shared data payload
+
+---
+
 # Interactive part - scan me!
 
 ![](assets/images/0xk.svg){.float-right}
@@ -359,33 +380,12 @@ Bottom right corner:
 
 ---
 
-# Named Events
-
-You can "namespace" your events using the `event` field with any custom name:
-
-```
-< event: goal
-< data: "ARS-LIV 1-1 45"\n\n
-
-< event: spectator-chat
-< data: "Did you see that ludicrous display just now"\n\n
-```
-
-. . .
-
-The `goal` and `spectator-chat` events are handled separately on the frontend
-
-- Allows multiplexing / routing events 
-  - no need for pattern matching on a shared data payload
-
----
-
-# Events: Live Demo
+# Named Events: Live Demo
 
 In the live reactions demo, we stream two types of things:
 
 - `clients` event: number of clients
-- `data` event: list of emoji enum values (1-8)
+- `data` event: array of emoji enum values (1-8)
 
 ```
 < event: clients
@@ -428,8 +428,6 @@ Emit a `retry:` field in any of the events:
 
 Events can include an `id` field with any UTF-8 string as value
 
-. . .
-
 Connection interrupted? Sets reconnection header `Last-Event-ID: x`
 
 ```
@@ -438,12 +436,12 @@ Connection interrupted? Sets reconnection header `Last-Event-ID: x`
 < data: Data Zero event\n
 ```
 
-💔 **Disconnects**
+. . .
 
-➡️  _5 seconds later_
+💔 **Disconnects** ➡️  _5 seconds later_
 
 ```
-> GET /stream/notifications HTTP/1.1
+> GET /stream/notifications
 > Last-Event-ID: data-0
 ```
 
@@ -473,7 +471,7 @@ Entire SSE gramar: 4+1 fields
 - Setting reconnection time `retry: 2000`
 - Event identifiers `id: 0`
 - Unnamed events `data: Hello\n\n`
-- Comment: starts with colon `:I am a ...`
+- Comment: starts with colon `:I am a comment`
 - Named events `event: status`
 
 
@@ -538,7 +536,7 @@ source.addEventListener(
   false
 );
 
-// on disconnection
+// on error or disconnection
 source.addEventListener(
   "error",
   (event) => { console.log("Connection error"); },
@@ -550,10 +548,9 @@ source.addEventListener(
 
 # The EventSource Interface
 
-- `constructor(url, { withCredentials: boolean })`
-  - `withCredentials`: instantiate with CORS credentials (default: false)
+- `constructor(url, { withCredentials })`
+  - `withCredentials: boolean` use CORS credentials (default: false)
 - Events: `open` | `error` | `message` | `<custom-name>`
-  - addEventListener, onmessage, onerror, ...
 - `close()`
 - `readyState`: State <u>intent</u> enum: `CONNECTING` (0) | `OPEN` (1) | `CLOSED`(2)
   - CONNECTING: also "waiting to reconnect"
@@ -673,8 +670,8 @@ Too much SSE without planning -> choke
 
 When a network error is encountered:
 
-- Firefox: Will **stop** retrying (standard compliant)
-- Chrome: Will **keep** retrying (actually helpful)
+- Firefox: **stops** retrying (standard compliant)
+- Chrome: **keeps** retrying (actually helpful)
 
 <hr />
 
@@ -682,8 +679,8 @@ When a network error is encountered:
 
 Test it out in the [playground repo](https://github.com/takadenoshi/sse-presentation):
 
-- Start react-app but not the server
-- Open react-app in Chrome and Firefox
+- Start react-playground but not the server
+- Open react-playground in Chrome and Firefox
 - Try to connect to any endpoint
 - Observe behavior of each browser
 
@@ -694,9 +691,9 @@ Test it out in the [playground repo](https://github.com/takadenoshi/sse-presenta
 A server can signal "do not reconnect":
 
 - with a `Content-Type` header other than `text/event-stream`
-- with a `2xx` response other than 200
-  - 301, 307 redirects to a 200 are OK
-- TODO 4xx / 5xx ?
+- with a status code other than:
+  - 200
+  - 3xx redirect to a 200
 
 <sup>[Playground](https://github.com/takadenoshi/sse-presentation): "Not SSE" scenario</sup>
 
@@ -704,7 +701,7 @@ A server can signal "do not reconnect":
 
 # Implementation Considerations: Reconnecting
 
-**Recommendation: consider handling reconnections explicitly**
+Recommendation: consider handling reconnections explicitly
 
 - Ensure uniform behavior
 - Option for exponential backoff strategies
@@ -717,7 +714,7 @@ A server can signal "do not reconnect":
 
 ## Proxies can kill
 
-Proxies, load balancers and other networking middleware can kill idle connections after a short while.
+Some proxies dislike idle connections & will kill them quickly
 
 Two approaches to fix this:
 
@@ -741,7 +738,7 @@ EventSource won't emit any event.
 
 ## Proxies can kill
 
-Proxies, load balancers and other networking middleware can kill idle connections after a short while.
+Some proxies dislike idle connections & will kill them quickly
 
 Two approaches to fix this:
 
