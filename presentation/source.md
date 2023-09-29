@@ -30,34 +30,13 @@ background: assets/images/bg.png
 
 . . .
 
+<div>
 - Developer @ [Kadena](https://kadena.io/) Developer Experience team
 
 ![](assets/images/github-mark-white.svg){.w32} [Takadenoshi](https://github.com/takadenoshi) 
 
 ![](assets/images/twitter-mark-white.svg){.w28} [\@Takadenoshi](https://x.com/takadenoshi)
-
-
-# `whois` "Kadena"
-
-![](./assets/icons/k-internal-icon-alpha.png){.float-right}
-
-- Scalabe PoW Blockchain
-
-. . .
-
-- Focus on:
-  - Scalability
-  - Secure smart contracts
-    - Formal verification
-    - Source available
-
-- DX Team
-  - Enable and empower our ecosystem developers
-
-![](assets/images/github-mark-white.svg){.w32} [Kadena-io](https://github.com/kadena-io) & [Kadena-community](https://github.com/kadena-community)
-
-![](assets/images/twitter-mark-white.svg){.w28} [\@Kadena_io](https://x.com/kadena_io) &middot; 🌐 [https://kadena.io](https://kadena.io)
-
+</div>
 
 ---
 
@@ -91,16 +70,6 @@ background: assets/images/bg.png
 
 ---
 
-# Like polling but better
-
-Best suited for UTF-8 updates
-
-. . .
-
-Especially for multiple update channels
-
----
-
 # Polling vs SSE
 
 ![](assets/images/diagram-SSE.png){.float-right}
@@ -109,20 +78,35 @@ Especially for multiple update channels
 
 ---
 
+# Like polling but better
+
+Best suited for UTF-8 updates
+
+Especially for multiple update channels
+
+. . .
+
+Tradeoff: more connections vs querying your data store
+
+---
+
 # Like WebSockets but -
+
+- Not really
 
 - Unidirectional & UTF-8
 
 . . .
 
-- Easy to debug
-  - just `curl` it ✅
-
-. . .
 
 - Is HTTP/REST -> easier integrated
   - Happy part of your RESTful server backend
     - vs WS the trying-to-fit-in cousin
+
+. . .
+
+- Easy to debug
+  - just `curl` it ✅
 
 . . .
 
@@ -135,9 +119,9 @@ Especially for multiple update channels
 
 ---
 
-# Use cases: Async job progress
+# Use cases: Notifications
 
-<div class="centered">![](./assets/images/use-job-status.png)</div>
+<div class="centered">![](./assets/images/use-notifications.png)</div>
 
 ---
 
@@ -145,11 +129,12 @@ Especially for multiple update channels
 
 <div class="centered">![](./assets/images/use-ticker.png)</div>
 
+
 ---
 
-# Use cases: Notifications
+# Use cases: Async job progress
 
-<div class="centered">![](./assets/images/use-notifications.png)</div>
+<div class="centered">![](./assets/images/use-job-status.png)</div>
 
 ---
 
@@ -170,9 +155,9 @@ Yes (96.11%)
 
 ## Old enough to vote
 
-🧙 By Ian Hickson, while at Opera
-
 🥳 SSE is 19 years old
+
+🧙 By Ian Hickson, while at Opera
 
 🔧 13 years of mainstream support
 
@@ -236,7 +221,9 @@ Yes (96.11%)
 
 Contemporary to Web sockets, HTML5, `<video>`, Web workers, Web storage
 
-Narrower use case
+Narrow use case
+
+. . .
 
 :::::::::::::: {.columns}
 ::: {.column width="66%"}
@@ -261,6 +248,15 @@ Narrower use case
 
 ---
 
+# Playground
+
+- Repo with example SSE server in express
+- Client in React
+- Explore various scenarios
+- [github.com/takadenoshi/sse-presentation/](https://github.com/takadenoshi/sse-presentation/)
+
+---
+
 # Minimum Viable SSE response
 
 
@@ -279,11 +275,13 @@ The simplest server-sent event stream specifies just `data` events.
 
 . . .
 
+<div>
 Events separated by two newline characters `\n\n`
 
 Data is encoded in UTF-8 (mandatory)
 
 <sup>[Playground](https://github.com/takadenoshi/sse-presentation): "simple" scenario</sup>
+</div>
 
 ---
 
@@ -348,10 +346,12 @@ You can "namespace" your events using the `event` field with any custom name:
 
 . . .
 
+<div>
 The `goal` and `spectator-chat` events are handled separately on the frontend
 
 - Allows multiplexing / routing events 
   - no need for pattern matching on a shared data payload
+</div>
 
 ---
 
@@ -363,20 +363,24 @@ Scan the QR to interact with this presentation directly
 
 . . .
 
+<div>
 Demo app:
 
 - Emote with 💖 👍 🎉 👏 😂 😲 🤔 👎
 - See SSE data
-- Link to SSE experiments playground & presentation
+- Link to SSE playground & presentation 📚
+</div>
 
 . . .
 
+<div>
 Bottom right corner:
 
-- Reaction emoji fountain
+- Fountain of emoji reactions
 - Connection status 🔌
 - Number of streaming clients
 - QR again (you can scan later)
+</div>
 
 ---
 
@@ -398,11 +402,9 @@ In the live reactions demo, we stream two types of things:
 
 # Reconnection (1)
 
-EventSource consumers will reconnect* if the connection is interrupted.
+EventSource will reconnect if the connection is interrupted.
 
 Default reconnection timeout ~ 3-5 s.
-
-<sup>\* _with implementation-specific caveats_</sup>
 
 ---
 
@@ -436,16 +438,18 @@ Connection interrupted? Sets reconnection header `Last-Event-ID: x`
 < data: Data Zero event\n
 ```
 
-. . .
-
 💔 **Disconnects** ➡️  _5 seconds later_
 
+. . .
+
+<div>
 ```
 > GET /stream/notifications
 > Last-Event-ID: data-0
 ```
 
 <sup>[Playground](https://github.com/takadenoshi/sse-presentation): "notifications" scenario</sup>
+</div>
 
 ---
 
@@ -488,7 +492,7 @@ Entire SSE gramar: 4+1 fields
 < id: 0
 < data: {"message":"Hello"}\n\n
 
-< :I am a comment line
+< :I am a comment
 
 < id: 1
 < event: status
@@ -500,7 +504,7 @@ Entire SSE gramar: 4+1 fields
 
 ---
 
-# EventSource: custom events
+# EventSource: named events
 
 You can subscribe to custom events with `.addEventListener`:
 
@@ -511,13 +515,6 @@ const source = new EventSource('/stream/hello');
 source.addEventListener(
   "status",
   ({ data }) => console.log("custom event: status", JSON.parse(data)),
-  false,
-);
-
-// as before, unnamed data events
-source.addEventListener(
-  "message", 
-  (event) => { console.log("data event", event.data); },
   false,
 );
 ```
@@ -558,6 +555,30 @@ source.addEventListener(
 
 ---
 
+# In React
+
+- Manage eventSource, which is stateful
+- Could use `useEffect` or a custom hook
+
+```javascript
+  useEffect(() => {
+    const eventSource = new EventSource(` http://localhost:3001/stream/${endpoint}` );
+
+    // connection mgmt
+    eventSource.addEventListener('open', () => console.log("Got open"));
+    eventSource.addEventListener('error', () => console.log("Got error"));
+
+    // data callbacks
+    eventSource.addEventListener('message', () => console.log("Got message"));
+    eventSource.addEventListener('custom', () => console.log("Got custom"));
+
+    // destroy when unloaded
+    return () => eventSource.close();
+  }, []);
+```
+
+---
+
 <div class="abs-centered big-font">
 ## To be clear
 
@@ -584,20 +605,18 @@ available
 
 # ~~You should definitely use it~~
 
-I don no u
+idk u
 
 . . .
 
 ## You should definitely know about it
 
-Including: warts and all
+Warts and all
 
 ---
 
 <div class="abs-centered big-font">
 ## Considerations
-
-. . .
 
 I ate some dog food for ~~you~~ science
 </div>
@@ -612,7 +631,11 @@ I ate some dog food for ~~you~~ science
   - `event.target` is instanceof `EventSource`
   - no reason / message / code
 
+. . .
+
 - Some disconnections can be "fatal", cancelling the reconnection policy
+
+. . .
 
 - Inspect `readyState` to find out EventSource's intent:
   - CONNECTING: will reconnect / waiting to reconnect / reconnecting
@@ -625,13 +648,13 @@ I ate some dog food for ~~you~~ science
 
 ## HTTP/1.1 connections quota
 
-. . .
-
 Max number of connections: 6
 
 Per-hostname quota
 
 Browser-wide enforcement (shared by all tabs)
+
+. . .
 
 Too much SSE without planning -> choke
 
@@ -677,12 +700,14 @@ When a network error is encountered:
 
 . . .
 
+<div>
 Test it out in the [playground repo](https://github.com/takadenoshi/sse-presentation):
 
 - Start react-playground but not the server
 - Open react-playground in Chrome and Firefox
 - Try to connect to any endpoint
 - Observe behavior of each browser
+</div>
 
 ---
 
@@ -701,12 +726,18 @@ A server can signal "do not reconnect":
 
 # Implementation Considerations: Reconnecting
 
-Recommendation: consider handling reconnections explicitly
+Important payload?
 
+Consider handling reconnections explicitly
+
+- `onerror` -> `evtSrc.close(); setTimeout() ...`
 - Ensure uniform behavior
+
+. . .
+
+- Rotate multiple backend endpoints
 - Option for exponential backoff strategies
 - Better connection timeout detection
-- Rotate multiple backend endpoints
 
 ---
 
@@ -714,18 +745,16 @@ Recommendation: consider handling reconnections explicitly
 
 ## Proxies can kill
 
-Some proxies dislike idle connections & will kill them quickly
-
-Two approaches to fix this:
+Some proxies dislike idle connections & will kill them quickly. Fix(es):
 
 <hr />
 
 ## 1/ Comment (not client-aware)
 
-You can emit a comment (any line starting with a colon `:`)
+You can emit a comment
 
 ```
-< :bump
+< :)
 ```
 
 Good enough to keep connection alive.
@@ -738,15 +767,13 @@ EventSource won't emit any event.
 
 ## Proxies can kill
 
-Some proxies dislike idle connections & will kill them quickly
-
-Two approaches to fix this:
+Some proxies dislike idle connections & will kill them quickly. Fix(es):
 
 <hr />
 
 ## 2/ Heartbeat event (client-aware)
 
-Emit a custom "heartbeat" or "ping" event every 15 seconds or so:
+Emit a custom event every ~15 seconds:
 
 ```
 < event: heartbeat
@@ -755,11 +782,7 @@ Emit a custom "heartbeat" or "ping" event every 15 seconds or so:
 
 (data field **must** be present)
 
-The client can listen to this event and use it to detect stale connections:
-
-**"expect heartbeats every N seconds, otherwise reconnect"**
-
-Preferred approach, especially for important payloads.
+Use it to detect stale connections: **"expect heartbeats every N seconds, otherwise reconnect"**
 
 ---
 
@@ -775,34 +798,56 @@ Future people can track the present validity of this statement [here](https://bu
 
 ---
 
-# Kadena use case
+# `whois` "Kadena"
 
-Blockchain stuff usually comes with lots of polling. E.g. determining finality
+![](./assets/icons/k-internal-icon-alpha.png){.float-right}
 
-Kadena's Chainweb is 20 "braided" chains -> 20x polling threads (worst case)
+- Scalabe PoW Blockchain: Chainweb
 
 . . .
 
+- Focus on:
+  - Scalability
+  - Secure smart contracts
+    - Formal verification
+    - Source available
+
+. . .
+
+<div>
+- DX Team
+  - Enable and empower our ecosystem developers
+
+![](assets/images/github-mark-white.svg){.w32} [Kadena-io](https://github.com/kadena-io) & [Kadena-community](https://github.com/kadena-community)
+
+![](assets/images/twitter-mark-white.svg){.w28} [\@Kadena_io](https://x.com/kadena_io) &middot; 🌐 [https://kadena.io](https://kadena.io)
+</div>
+
+---
+
+# Chainweb use case
+
+Blockchain stuff usually comes with lots of polling. E.g. determining finality
+
+. . .
+
+Kadena's Chainweb is 20 "braided" chains -> 20x polling threads (worst case)
+
+<div>
 [Chainweb-stream](https://github.com/kadena-io/chainweb-stream):
 
 - SSE Server
 - Streams transactions of a certain type (specific account or application/contract)
+</div>
 
+<div>
 [Chainweb-stream-client](https://github.com/kadena-community/kadena.js/tree/main/packages/libs/chainweb-stream-client):
-
-. . .
 
 - Client side lib (node, browser)
 - Detects stale connections (heartbeat events)
 - Detects initial connection timeouts
 - Custom reconnection (exponential backoffs)
-
----
-
-# Playground
-
-- Repo with example SSE server in express
-- Client in React with various scenarios
+</div>
 
 ---
 
