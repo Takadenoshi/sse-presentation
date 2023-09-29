@@ -51,6 +51,8 @@ background: assets/images/bg.png
 
 ![](assets/images/diagram-SSE.png){.float-right}
 
+- Streaming protocol
+
 - Essentially a streaming GET
   - Server writes more data as it becomes available
 
@@ -119,6 +121,12 @@ Tradeoff: more connections vs querying your data store
 
 ---
 
+<div class="abs-centered big-font">
+## Use cases
+</div>
+
+---
+
 # Use cases: Notifications
 
 <div class="centered">![](./assets/images/use-notifications.png)</div>
@@ -135,6 +143,12 @@ Tradeoff: more connections vs querying your data store
 # Use cases: Async job progress
 
 <div class="centered">![](./assets/images/use-job-status.png)</div>
+
+---
+
+# Use cases: Kadena
+
+<div class="centered">`// TODO`</div>
 
 ---
 
@@ -581,8 +595,18 @@ source.addEventListener(
 
 <div class="abs-centered big-font">
 ## To be clear
+</div>
 
-. . .
+---
+
+<div class="abs-centered big-font">
+![](assets/images/dog.jpg))
+</div>
+
+---
+
+<div class="abs-centered big-font">
+## To be clear
 
 I hold no $SSE stock
 </div>
@@ -594,20 +618,16 @@ I hold no $SSE stock
 
 . . .
 
-will not 
-
-be made
-
-available
+will not be made available
 </div>
 
 ---
 
 # ~~You should definitely use it~~
 
-idk u
-
 . . .
+
+idk u
 
 ## You should definitely know about it
 
@@ -803,6 +823,8 @@ Future people can track the present validity of this statement [here](https://bu
 ![](./assets/icons/k-internal-icon-alpha.png){.float-right}
 
 - Scalabe PoW Blockchain: Chainweb
+
+- 20x braided chains
 
 . . .
 

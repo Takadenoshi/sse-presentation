@@ -11,9 +11,9 @@ function validate(e) {
   return validEmojiValues.includes(e);
 }
 
-const connected = new Map();
+let connected = 0;
 
-const sse = new SSE(connected.size + 1, { initialEvent: 'clients' });
+const sse = new SSE();
 
 const keepAliveInt = setInterval(() => {
   console.log('bump');
@@ -21,8 +21,7 @@ const keepAliveInt = setInterval(() => {
 }, 15_000);
 
 const updateConnected = debounce(() => {
-  sse.send(connected.size, 'clients');
-  sse.updateInit(connected.size);
+  sse.send(connected, 'clients');
 }, 500);
 
 const outBuffer = [];
@@ -42,18 +41,12 @@ export default function register(server) {
       uuid = uuidv4();
       res.cookie('uuid', uuid, { maxAge: 86400000, httpOnly: true });
     }
-    connected.set(uuid, 1 + (connected.get(uuid) ?? 0));
+    connected += 1;
     updateConnected();
     sse.init(req, res);
     res.on('close', () => {
-      if (connected.get(uuid) < 2) {
-        console.log("removing last");
-        connected.delete(uuid);
-        updateConnected();
-      } else {
-        console.log("removing not last", uuid);
-        connected.set(uuid, (connected.get(uuid) ?? 0) - 1);
-      }
+      connected -= 1;
+      updateConnected();
     });
   });
   

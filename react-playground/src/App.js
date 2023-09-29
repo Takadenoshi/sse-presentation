@@ -8,7 +8,12 @@ function Instructions() {
     <p>Pair with the express server from the same <a href="https://github.com/takadenoshi/sse-presentation/">Repo</a>.</p>
     <p>Scenarios:</p>
     <ul>
-      <li></li>
+      <li> Simple: A route that sends two events after a delay </li>
+      <li> Flaky: A stream that will disconnect after 4 seconds </li>
+      <li> Retry-flaky: A stream that sets a custom `retry` timeout to 10_000 ms and disconnects after 4 seconds </li>
+      <li> Notifications: A stream that sends notifications from a list with set `id` fields, and randomly disconnects after 1.5 - 4 seconds. Reconnecting should resume from the last seen ID, until the notifications stream is consumed.  </li>
+      <li> Not SSE: Endpoint that returns a `200` without the correct Content-Type (not SSE) </li>
+      <li> Status code: stream that returns a custom, user-provided status code </li>
     </ul>
     <p>Try this out in different browsers to find out if things differ and break in interesting ways.</p>
     <p>Set env var `REACT_APP_ENDPOINT` to connect to a non default server (http://localhost:3001)</p>
