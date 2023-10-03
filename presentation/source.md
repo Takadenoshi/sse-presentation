@@ -595,18 +595,6 @@ source.addEventListener(
 
 <div class="abs-centered big-font">
 ## To be clear
-</div>
-
----
-
-<div class="abs-centered big-font">
-![](assets/images/dog.jpg))
-</div>
-
----
-
-<div class="abs-centered big-font">
-## To be clear
 
 I hold no $SSE stock
 </div>

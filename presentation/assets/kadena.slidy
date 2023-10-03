@@ -138,6 +138,7 @@ $if(duration)$
   animation: animoji 1s forwards;
   transform: translate(-50%, 0) scale(0.1);
   filter: grayscale(1);
+  font-size: 125%;
   transition-timing-function: ease-in;
     opacity: 0;
   }
